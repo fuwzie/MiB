@@ -73,7 +73,7 @@ public class HuvudFonster extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNamn))
-                        .addGap(143, 143, 143))))
+                        .addGap(138, 138, 138))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,6 +102,7 @@ public class HuvudFonster extends javax.swing.JFrame {
             String fraga = "SELECT Namn FROM mibdb.agent where AGENT_ID=" + id;
             String svar = idb.fetchSingle(fraga);
             String resultat = svar;
+            
             lblNamn.setText(resultat);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel");

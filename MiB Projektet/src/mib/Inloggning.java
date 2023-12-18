@@ -4,17 +4,23 @@
  */
 package mib;
 
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+import oru.inf.InfException;
+
 /**
  *
  * @author Otte
  */
 public class Inloggning extends javax.swing.JFrame {
+     private InfDB idb;
 
     /**
      * Creates new form Inloggning
      */
-    public Inloggning() {
+    public Inloggning(InfDB idb) {
         initComponents();
+         this.idb = idb;
     }
 
     /**
@@ -31,6 +37,7 @@ public class Inloggning extends javax.swing.JFrame {
         lblLosenord = new javax.swing.JLabel();
         pwLosenord = new javax.swing.JPasswordField();
         txtEpost = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +52,13 @@ public class Inloggning extends javax.swing.JFrame {
 
         txtEpost.setText("exempel@exempel.se");
 
+        jButton1.setText("Logga in");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -56,6 +70,7 @@ public class Inloggning extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(108, 108, 108)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLosenord)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -79,11 +94,39 @@ public class Inloggning extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLosenord)
                     .addComponent(pwLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jButton1)
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //Programmet tar emot två strängar, en som epost och en som password
+        //Sedan körs en SQL fråga som hämtar ut epost och lösenord om de stämmer överens
+        //Om det stämmer överens så stängs rutan och så loggas man in på rätt inloggningsruta
+        //Saknas validering i separat javafil och även validering för vilken användartyp som loggar in
+        try {
+
+        String id = txtEpost.getText();
+        String pw = new String(pwLosenord.getPassword());
+        String pwfinal = pw + "'";
+        String fraga = "SELECT EPOST FROM mibdb.agent where EPOST='" + id+"'";
+        String pwFraga = "SELECT LOSENORD FROM mibdb.agent WHERE LOSENORD ='"+pwfinal;
+        String svar = idb.fetchSingle(fraga);
+        String pwsvar = idb.fetchSingle(pwFraga);
+    if(svar.equals(id) && pwsvar.equals(pw)) {
+        new HuvudFonster(idb).setVisible(true);
+        this.setVisible(false);
+        };
+    }
+    catch (InfException ex) {
+        JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
+}
+// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -113,14 +156,11 @@ public class Inloggning extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Inloggning().setVisible(true);
-            }
-        });
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblLosenord;

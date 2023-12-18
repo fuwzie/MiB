@@ -23,7 +23,9 @@ public class Main {
         } catch (InfException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
-      new HuvudFonster(idb).setVisible(true);
+      new Inloggning(idb).setVisible(true);
+      
+      //new HuvudFonster(idb).setVisible(true);
     }
 }
 
