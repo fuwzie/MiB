@@ -42,7 +42,7 @@ public class HuvudFonster extends javax.swing.JFrame {
         lblHeader.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblHeader.setText("VISA FÖRNAMN");
 
-        txtID.setText("TEST");
+        txtID.setText("EPIC COOLE");
 
         lblId.setText("Ange id:");
 
@@ -60,7 +60,7 @@ public class HuvudFonster extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(91, Short.MAX_VALUE)
+                .addContainerGap(83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)

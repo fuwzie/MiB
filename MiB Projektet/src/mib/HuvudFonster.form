@@ -24,7 +24,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace pref="91" max="32767" attributes="0"/>
+              <EmptySpace pref="83" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="lblHeader" min="-2" pref="278" max="-2" attributes="0"/>
@@ -77,7 +77,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtID">
       <Properties>
-        <Property name="text" type="java.lang.String" value="TEST"/>
+        <Property name="text" type="java.lang.String" value="EPIC COOLE"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblId">
