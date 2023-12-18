@@ -42,7 +42,7 @@ public class HuvudFonster extends javax.swing.JFrame {
         lblHeader.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblHeader.setText("VISA FÖRNAMN");
 
-        txtID.setText("ID");
+        txtID.setText("TEST");
 
         lblId.setText("Ange id:");
 
