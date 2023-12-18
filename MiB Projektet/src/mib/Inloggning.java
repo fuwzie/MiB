@@ -37,7 +37,7 @@ public class Inloggning extends javax.swing.JFrame {
         lblLosenord = new javax.swing.JLabel();
         pwLosenord = new javax.swing.JPasswordField();
         txtEpost = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnLoggaIn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,10 +52,10 @@ public class Inloggning extends javax.swing.JFrame {
 
         txtEpost.setText("exempel@exempel.se");
 
-        jButton1.setText("Logga in");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLoggaIn.setText("Logga in");
+        btnLoggaIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLoggaInActionPerformed(evt);
             }
         });
 
@@ -70,7 +70,7 @@ public class Inloggning extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(108, 108, 108)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(btnLoggaIn)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblLosenord)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -95,38 +95,44 @@ public class Inloggning extends javax.swing.JFrame {
                     .addComponent(lblLosenord)
                     .addComponent(pwLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(jButton1)
+                .addComponent(btnLoggaIn)
                 .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //Programmet tar emot två strängar, en som epost och en som password
-        //Sedan körs en SQL fråga som hämtar ut epost och lösenord om de stämmer överens
+    private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
+        //Programmet tar emot två strängar, en som epost och en som password, för simplicitet så återanvänds strängen för epost för att kolla adminstatus
+        //Sedan körs 3 SQL frågor som hämtar ut epost och lösenord samt adminstatus om de stämmer överens
         //Om det stämmer överens så stängs rutan och så loggas man in på rätt inloggningsruta
         //Saknas validering i separat javafil och även validering för vilken användartyp som loggar in
         try {
 
-        String id = txtEpost.getText();
-        String pw = new String(pwLosenord.getPassword());
-        String pwfinal = pw + "'";
-        String fraga = "SELECT AGENT_ID FROM mibdb.agent where EPOST='" + id+"'";
-        String pwFraga = "SELECT AGENT_ID FROM mibdb.agent WHERE LOSENORD ='"+pwfinal;
-        String svar = idb.fetchSingle(fraga);
-        String pwsvar = idb.fetchSingle(pwFraga);
-    if(svar.equals(pwsvar)) {
-        new HuvudFonster(idb).setVisible(true);
-        this.setVisible(false);
-        };
+        String epost = txtEpost.getText();
+        String losenord = new String(pwLosenord.getPassword());
+        String losenordfinal = losenord + "'";
+            String fraga = "SELECT AGENT_ID FROM mibdb.agent where EPOST='" + epost+"'";
+            String pwFraga = "SELECT AGENT_ID FROM mibdb.agent WHERE LOSENORD ='"+losenordfinal;
+                String svar = idb.fetchSingle(fraga);
+                String losenSvar = idb.fetchSingle(pwFraga);
+                    String admin = "SELECT ADMINISTRATOR FROM mibdb.agent where EPOST='" + epost+"'";
+                        String adminSvar = idb.fetchSingle(admin);
+        if(svar.equals(losenSvar)) {
+            if(adminSvar.equals("J")) {
+                new AdminFonster(idb).setVisible(true); }
+                    else if(adminSvar.equals("N")) { 
+                        new AgentFonster(idb).setVisible(true);
+                        }
+                           this.setVisible(false);
+                        }
+        }
+        catch (InfException ex) {
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+                System.out.println("Internt felmeddelande: " + ex.getMessage());
     }
-    catch (InfException ex) {
-        JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
-}
 // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnLoggaInActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,7 +166,7 @@ public class Inloggning extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnLoggaIn;
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblLosenord;
