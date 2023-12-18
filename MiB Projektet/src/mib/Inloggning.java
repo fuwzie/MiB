@@ -112,11 +112,11 @@ public class Inloggning extends javax.swing.JFrame {
         String id = txtEpost.getText();
         String pw = new String(pwLosenord.getPassword());
         String pwfinal = pw + "'";
-        String fraga = "SELECT EPOST FROM mibdb.agent where EPOST='" + id+"'";
-        String pwFraga = "SELECT LOSENORD FROM mibdb.agent WHERE LOSENORD ='"+pwfinal;
+        String fraga = "SELECT AGENT_ID FROM mibdb.agent where EPOST='" + id+"'";
+        String pwFraga = "SELECT AGENT_ID FROM mibdb.agent WHERE LOSENORD ='"+pwfinal;
         String svar = idb.fetchSingle(fraga);
         String pwsvar = idb.fetchSingle(pwFraga);
-    if(svar.equals(id) && pwsvar.equals(pw)) {
+    if(svar.equals(pwsvar)) {
         new HuvudFonster(idb).setVisible(true);
         this.setVisible(false);
         };
