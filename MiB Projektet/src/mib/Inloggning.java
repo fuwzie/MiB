@@ -101,39 +101,83 @@ public class Inloggning extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //en kontroll för lyckat inlogg nedan
+    private boolean lyckadInloggning = false;
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
-        //Programmet tar emot två strängar, en som epost och en som password, för simplicitet så återanvänds strängen för epost för att kolla adminstatus
-        //Sedan körs 3 SQL frågor som hämtar ut epost och lösenord samt adminstatus om de stämmer överens
-        //Om det stämmer överens så stängs rutan och så loggas man in på rätt inloggningsruta
-        //Saknas validering i separat javafil och även validering för vilken användartyp som loggar in
-        try {
-
-        String epost = txtEpost.getText();
-        String losenord = new String(pwLosenord.getPassword());
-        String losenordfinal = losenord + "'";
-            String fraga = "SELECT AGENT_ID FROM mibdb.agent where EPOST='" + epost+"'";
-            String pwFraga = "SELECT AGENT_ID FROM mibdb.agent WHERE LOSENORD ='"+losenordfinal;
-                String svar = idb.fetchSingle(fraga);
-                String losenSvar = idb.fetchSingle(pwFraga);
-                    String admin = "SELECT ADMINISTRATOR FROM mibdb.agent where EPOST='" + epost+"'";
-                        String adminSvar = idb.fetchSingle(admin);
-        if(svar.equals(losenSvar)) {
-            if(adminSvar.equals("J")) {
-                new AdminFonster(idb).setVisible(true); }
-                    else if(adminSvar.equals("N")) { 
-                        new AgentFonster(idb).setVisible(true);
-                        }
-                           this.setVisible(false);
+        
+        //Valideringen ser till att textfälten epost och lösenord inte är tomma
+        if (InloggningValidering.textFaltHarVarde(txtEpost) && InloggningValidering.textFaltHarVarde(pwLosenord)) {
+            try {
+                //Programmet tar emot två strängar, en som epost och en som password.
+                String epost = txtEpost.getText();
+                String losenord = new String(pwLosenord.getPassword());
+                //programmet kollar om epostadressen är en "mibadress", om det är det så kollar den efter adminstatus
+                if(epost.endsWith("@mib.net")) {
+                    kollaAgentInloggning(epost, losenord);
+                    }
+                //Annars kollar den efter alla epostadresser som inte slutar med mib.net
+                else {
+                    kollaAlienInloggning(epost, losenord);
+                    }
+                if(lyckadInloggning) {
+                    //vid lyckad inloggning, stäng nuvarande ruta (och öppna relevant ruta)
+                    this.setVisible(false);
+        }
+            } catch (InfException ex) {
+                //Allmänt felmeddelande ifall alla andra kontroller "missar" felet, endast för att hålla programmet från att krascha.
+                    JOptionPane.showMessageDialog(null, "Något gick fel");
+                    System.out.println("Internt felmeddelande: " + ex.getMessage());
+                } 
+            } 
+    }//GEN-LAST:event_btnLoggaInActionPerformed
+        private void kollaAgentInloggning(String epost, String losenord) throws InfException {
+                    //Skapar en sql "mall" för alienfrågor, sedan kör den för både epost och lösenord.
+                    String agent = "SELECT AGENT_ID FROM mibdb.agent WHERE";
+                    String epostFraga = agent + " EPOST='" + epost + "'";
+                    String pwFraga = agent + " LOSENORD ='" + losenord + "'";
+                    
+                    //Hämtar ut svaren för de två sql-frågorna
+                    String svar = idb.fetchSingle(epostFraga);
+                    String losenSvar = idb.fetchSingle(pwFraga);
+                    
+                    //Gör en kontroll för att se om något av fälten returnerades tomma, sen jämför om deras slutvärde är densamma (vilket endast sker om epost och lösenord matchar samma användare)
+                    if (svar != null && losenSvar != null && svar.equals(losenSvar)) {
+                            //Skapar en fråga för att se om vår agent är en administrator
+                            String adminFraga = "SELECT ADMINISTRATOR FROM mibdb.agent where AGENT_ID=" + svar;
+                            String adminSvar = idb.fetchSingle(adminFraga);
+                            //Använder valideringsklassen för att kolla om strängen som returneras är "J" för Ja eller "N" för nej
+                            boolean adminStatus = InloggningValidering.kollaAdminStatus(adminSvar);
+                            //Ifall true ("J"), kör adminfönstret, annars vanliga agentfönstret
+                            if (adminStatus) {
+                                new AdminFonster(idb).setVisible(true);
+                            } else {
+                                new AgentFonster(idb).setVisible(true);
+                            }
+                            //Om inloggningen lyckades
+                            lyckadInloggning = true;
+                } else {
+                // Felaktiga inloggningsuppgifter för agent/administratör
+                    JOptionPane.showMessageDialog(null, "Antingen har du matat in fel uppgifter eller så finns användaren inte.");}
+                    }
+            
+        private void kollaAlienInloggning(String epost, String losenord) throws InfException {
+                    //Skapar en sql "mall" för alienfrågor, sedan kör den för både epost och lösenord.
+                    String alien = "SELECT ALIEN_ID FROM mibdb.alien WHERE ";
+                    String epostFraga = alien + "EPOST='" + epost + "'";
+                    String pwFraga = alien + "LOSENORD='" + losenord + "'";
+                    //Hämtar ut svaren för de två sql-frågorna
+                    String svar = idb.fetchSingle(epostFraga);
+                    String losenSvar = idb.fetchSingle(pwFraga);
+                    //Gör en kontroll för att se om något av fälten returnerades tomma, sen jämför om deras slutvärde är densamma (vilket endast sker om epost och lösenord matchar samma användare)
+                    if(svar != null && losenSvar != null && svar.equals(losenSvar)) {
+                       //Öppnar upp relevanta inloggningsrutan och ändrar lyckad inloggning till värdet true för att ha ökad validering
+                        new AlienFonster(idb).setVisible(true);
+                        lyckadInloggning = true;
+                    }   else {
+                // Felaktiga inloggningsuppgifter för agent/administratör
+                    JOptionPane.showMessageDialog(null, "Antingen har du matat in fel uppgifter eller så finns användaren inte.");
                         }
         }
-        catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-                System.out.println("Internt felmeddelande: " + ex.getMessage());
-    }
-// TODO add your handling code here:
-    }//GEN-LAST:event_btnLoggaInActionPerformed
-
     /**
      * @param args the command line arguments
      */
