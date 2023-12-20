@@ -121,7 +121,7 @@ public class Inloggning extends javax.swing.JFrame {
                     }
                 if(lyckadInloggning) {
                     //vid lyckad inloggning, stäng nuvarande ruta (och öppna relevant ruta)
-                    this.setVisible(false);
+                    dispose();
         }
             } catch (InfException ex) {
                 //Allmänt felmeddelande ifall alla andra kontroller "missar" felet, endast för att hålla programmet från att krascha.
