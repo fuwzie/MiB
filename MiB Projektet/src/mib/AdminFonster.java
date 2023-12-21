@@ -14,6 +14,7 @@ import oru.inf.InfException;
 public class AdminFonster extends javax.swing.JFrame {
 
      private InfDB idb;
+     //Sträng som används för att visa vem som är inloggad.
      private String id;
     /**
      * Creates new form HuvudFonster

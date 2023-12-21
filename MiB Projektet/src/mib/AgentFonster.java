@@ -14,6 +14,7 @@ import oru.inf.InfException;
  */
 public class AgentFonster extends javax.swing.JFrame {
         private static InfDB idb;
+        ////Sträng som används för att visa vem som är inloggad.
         private String id;
          
     /**
@@ -30,7 +31,10 @@ public class AgentFonster extends javax.swing.JFrame {
         String agentNamn = "SELECT namn FROM mibdb.agent WHERE agent_id =" + id;
         String agentNamnSvar = idb.fetchSingle(agentNamn);
         lblAgent.setText("Välkommen  "+agentNamnSvar);
-        } catch (InfException e) {
+        } 
+        catch (InfException e) {
+            //Om agenten inte returnerar ett namn korrekt så sätts labeln till ett felmeddelande + ett popupfönster som ber användare att kontakta admin
+            //Ska endast vara nödvändigt i fall då man kan lägga till en agent utan att sätta ett namn
             JOptionPane.showMessageDialog(null, "Kunde ej hitta ditt namn i systemet, kontakta administratör");
             lblAgent.setText("Välkommen, ditt namn kunde ej hittas");
             System.out.println("Internt felmeddelande: " + e.getMessage());

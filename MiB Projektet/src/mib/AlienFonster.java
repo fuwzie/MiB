@@ -14,6 +14,7 @@ import oru.inf.InfException;
  */
 public class AlienFonster extends javax.swing.JFrame {
     private InfDB idb;
+    //Sträng som används för att visa vem som är inloggad.
     private String id;
     /**
      * Creates new form AlienFonster
@@ -22,15 +23,18 @@ public class AlienFonster extends javax.swing.JFrame {
         this.idb = idb;
         this.id = id;
         initComponents();
-         try {
-        
+         
+        //Använder id:t som skapas under inloggningsprocessen för att hålla koll på vem som är inloggad
+        try {
+            //Med hjälp av föregående id, ta reda på vem som är ansvarig agent för denna alien och hämta ut deras id
              String omradesAnsvarigFraga = "SELECT ansvarig_agent FROM mibdb.alien WHERE alien_id =" + id;
              String omradesAnsvarigSvar = idb.fetchSingle(omradesAnsvarigFraga);
-       
+             //Använder id av den ansvariga agenten för att få tag på deras namn. Join sats hade funkat här också
              String omradesAnsvarigNamnFraga = "SELECT namn FROM mibdb.agent WHERE agent_id=" + omradesAnsvarigSvar;
              String omradesAnsvarigNamnSvar = idb.fetchSingle(omradesAnsvarigNamnFraga);
                 lblAnsvarig.setText("Din områdesansvariga är: "+omradesAnsvarigNamnSvar);
         } catch (InfException e) {
+            //Om någon av frågorna resulterar i fel så säger programmet att den områdesansvarige inte kunde hittas och att man ska kontakta admin.
             JOptionPane.showMessageDialog(null, "Områdesansvarige fanns ej");
             lblAnsvarig.setText("Kunde ej hitta din områdesansvariga, kontakta en administratör.");
             System.out.println("Internt felmeddelande: " + e.getMessage());

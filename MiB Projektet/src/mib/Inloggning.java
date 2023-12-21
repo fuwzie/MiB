@@ -149,8 +149,10 @@ public class Inloggning extends javax.swing.JFrame {
                             boolean adminStatus = Validering.kollaAdminStatus(adminSvar);
                             //Ifall true ("J"), kör adminfönstret, annars vanliga agentfönstret
                             if (adminStatus) {
+                                //Skapar en ny instans av AdminFonster och skickar med en sträng som beskriver vilken användare som är inloggad.
                                 new AdminFonster(idb, svar).setVisible(true);
                             } else {
+                                 //Skapar en ny instans av AgentFonster och skickar med en sträng som beskriver vilken användare som är inloggad.
                                 new AgentFonster(idb, svar).setVisible(true);
                             }
                             //Om inloggningen lyckades
@@ -170,7 +172,8 @@ public class Inloggning extends javax.swing.JFrame {
                     String losenSvar = idb.fetchSingle(pwFraga);
                     //Gör en kontroll för att se om något av fälten returnerades tomma, sen jämför om deras slutvärde är densamma (vilket endast sker om epost och lösenord matchar samma användare)
                     if(svar != null && losenSvar != null && svar.equals(losenSvar)) {
-                       //Öppnar upp relevanta inloggningsrutan och ändrar lyckad inloggning till värdet true för att ha ökad validering
+                        //Skapar en ny instans av AlienFonster och skickar med en sträng som beskriver vilken användare som är inloggad.
+                        //Skickar även vidare att inloggningen lyckades vilket stänger originalrutan.
                         new AlienFonster(idb, svar).setVisible(true);
                         lyckadInloggning = true;
                     }   else {
