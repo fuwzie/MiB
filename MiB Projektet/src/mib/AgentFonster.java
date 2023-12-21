@@ -23,12 +23,16 @@ public class AgentFonster extends javax.swing.JFrame {
         this.idb = idb;
         this.id = id;
         initComponents();
+        
+        //Använder id:t som skapas under inloggningsprocessen för att hålla koll på vem som är inloggad
         try {
+            //Med hjälp av föregående ID så hämtar den ut agentens namn och printar ut det i välkomstmeddelandet
         String agentNamn = "SELECT namn FROM mibdb.agent WHERE agent_id =" + id;
         String agentNamnSvar = idb.fetchSingle(agentNamn);
         lblAgent.setText("Välkommen  "+agentNamnSvar);
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel");
+            JOptionPane.showMessageDialog(null, "Kunde ej hitta ditt namn i systemet, kontakta administratör");
+            lblAgent.setText("Välkommen, ditt namn kunde ej hittas");
             System.out.println("Internt felmeddelande: " + e.getMessage());
         }
     }

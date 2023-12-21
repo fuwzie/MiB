@@ -31,7 +31,8 @@ public class AlienFonster extends javax.swing.JFrame {
              String omradesAnsvarigNamnSvar = idb.fetchSingle(omradesAnsvarigNamnFraga);
                 lblAnsvarig.setText("Din områdesansvariga är: "+omradesAnsvarigNamnSvar);
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något gick fel");
+            JOptionPane.showMessageDialog(null, "Områdesansvarige fanns ej");
+            lblAnsvarig.setText("Kunde ej hitta din områdesansvariga, kontakta en administratör.");
             System.out.println("Internt felmeddelande: " + e.getMessage());
         }
     }
