@@ -47,5 +47,20 @@ public class Validering {
         
         return resultat;
     }
+    
+    public static boolean kollaAdminStatus(String nyString) {
+        boolean admin = true;
+        if(nyString.equals("J")) {
+            admin = true;
+            
+        }
+        if(nyString.equals("N")) {
+            admin = false;
+        }
+        if(nyString.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Användaren fanns ej i registret.");
+        }
+        return admin;
+    }
 }
 

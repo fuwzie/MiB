@@ -106,7 +106,7 @@ public class Inloggning extends javax.swing.JFrame {
     private void btnLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaInActionPerformed
         
         //Valideringen ser till att textfälten epost och lösenord inte är tomma
-        if (InloggningValidering.textFaltHarVarde(txtEpost) && InloggningValidering.textFaltHarVarde(pwLosenord)) {
+        if (Validering.textFaltHarVarde(txtEpost) && Validering.textFaltHarVarde(pwLosenord)) {
             try {
                 //Programmet tar emot två strängar, en som epost och en som password.
                 String epost = txtEpost.getText();
@@ -146,7 +146,7 @@ public class Inloggning extends javax.swing.JFrame {
                             String adminFraga = "SELECT ADMINISTRATOR FROM mibdb.agent where AGENT_ID=" + svar;
                             String adminSvar = idb.fetchSingle(adminFraga);
                             //Använder valideringsklassen för att kolla om strängen som returneras är "J" för Ja eller "N" för nej
-                            boolean adminStatus = InloggningValidering.kollaAdminStatus(adminSvar);
+                            boolean adminStatus = Validering.kollaAdminStatus(adminSvar);
                             //Ifall true ("J"), kör adminfönstret, annars vanliga agentfönstret
                             if (adminStatus) {
                                 new AdminFonster(idb).setVisible(true);
