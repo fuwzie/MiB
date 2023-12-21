@@ -4,7 +4,9 @@
  */
 package mib;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -13,6 +15,7 @@ import oru.inf.InfDB;
 public class AgentFonster extends javax.swing.JFrame {
         private static InfDB idb;
         private String id;
+         
     /**
      * Creates new form AgentFonster
      */
@@ -20,6 +23,14 @@ public class AgentFonster extends javax.swing.JFrame {
         this.idb = idb;
         this.id = id;
         initComponents();
+        try {
+        String agentNamn = "Select NAMN from mibdb.agent WHERE agent_id =" + id;
+        String agentNamnSvar = idb.fetchSingle(agentNamn);
+        lblAgent.setText("Välkommen  "+agentNamnSvar);
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + e.getMessage());
+        }
     }
 
     /**
@@ -32,7 +43,7 @@ public class AgentFonster extends javax.swing.JFrame {
     private void initComponents() {
 
         btnLogOut = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblAgent = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -48,8 +59,8 @@ public class AgentFonster extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Välkommen Agent!");
+        lblAgent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAgent.setText("Välkommen Agent!");
 
         jButton1.setText("Ändra lösenord");
 
@@ -72,7 +83,7 @@ public class AgentFonster extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(96, 96, 96)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -97,7 +108,7 @@ public class AgentFonster extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1)
+                .addComponent(lblAgent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogOut))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -166,6 +177,6 @@ public class AgentFonster extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblAgent;
     // End of variables declaration//GEN-END:variables
 }
