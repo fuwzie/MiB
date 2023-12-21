@@ -121,7 +121,7 @@ public class Inloggning extends javax.swing.JFrame {
                     }
                 if(lyckadInloggning) {
                     //vid lyckad inloggning, stäng nuvarande ruta (och öppna relevant ruta)
-                    this.setVisible(false);
+                    dispose();
         }
             } catch (InfException ex) {
                 //Allmänt felmeddelande ifall alla andra kontroller "missar" felet, endast för att hålla programmet från att krascha.
@@ -149,9 +149,9 @@ public class Inloggning extends javax.swing.JFrame {
                             boolean adminStatus = Validering.kollaAdminStatus(adminSvar);
                             //Ifall true ("J"), kör adminfönstret, annars vanliga agentfönstret
                             if (adminStatus) {
-                                new AdminFonster(idb).setVisible(true);
+                                new AdminFonster(idb, svar).setVisible(true);
                             } else {
-                                new AgentFonster(idb).setVisible(true);
+                                new AgentFonster(idb, svar).setVisible(true);
                             }
                             //Om inloggningen lyckades
                             lyckadInloggning = true;
@@ -171,7 +171,7 @@ public class Inloggning extends javax.swing.JFrame {
                     //Gör en kontroll för att se om något av fälten returnerades tomma, sen jämför om deras slutvärde är densamma (vilket endast sker om epost och lösenord matchar samma användare)
                     if(svar != null && losenSvar != null && svar.equals(losenSvar)) {
                        //Öppnar upp relevanta inloggningsrutan och ändrar lyckad inloggning till värdet true för att ha ökad validering
-                        new AlienFonster(idb).setVisible(true);
+                        new AlienFonster(idb, svar).setVisible(true);
                         lyckadInloggning = true;
                     }   else {
                 // Felaktiga inloggningsuppgifter för agent/administratör

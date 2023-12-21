@@ -12,11 +12,13 @@ import oru.inf.InfDB;
  */
 public class AgentFonster extends javax.swing.JFrame {
         private static InfDB idb;
+        private String id;
     /**
      * Creates new form AgentFonster
      */
-    public AgentFonster(InfDB idb) {
+    public AgentFonster(InfDB idb, String id) {
         this.idb = idb;
+        this.id = id;
         initComponents();
     }
 

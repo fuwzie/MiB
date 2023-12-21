@@ -14,12 +14,14 @@ import oru.inf.InfException;
 public class AdminFonster extends javax.swing.JFrame {
 
      private InfDB idb;
+     private String id;
     /**
      * Creates new form HuvudFonster
      */
-    public AdminFonster(InfDB idb) {
+    public AdminFonster(InfDB idb, String id) {
         initComponents();
         this.idb = idb;
+        this.id = id;
     }
 
     /**
