@@ -24,7 +24,7 @@ public class AgentFonster extends javax.swing.JFrame {
         this.id = id;
         initComponents();
         try {
-        String agentNamn = "Select NAMN from mibdb.agent WHERE agent_id =" + id;
+        String agentNamn = "SELECT namn FROM mibdb.agent WHERE agent_id =" + id;
         String agentNamnSvar = idb.fetchSingle(agentNamn);
         lblAgent.setText("Välkommen  "+agentNamnSvar);
         } catch (InfException e) {

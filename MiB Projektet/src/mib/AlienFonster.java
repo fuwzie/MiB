@@ -23,11 +23,13 @@ public class AlienFonster extends javax.swing.JFrame {
         this.id = id;
         initComponents();
          try {
-        String omradesAnsvarigFraga = "Select ansvarig_agent from mibdb.alien WHERE alien_id =" + id;
-        String omradesAnsvarigSvar = idb.fetchSingle(omradesAnsvarigFraga);
-        String omradesAnsvarigNamnFraga = "Select namn from mibdb.agent WHERE agent_id=" + omradesAnsvarigSvar;
-        String omradesAnsvarigNamnSvar = idb.fetchSingle(omradesAnsvarigNamnFraga);
-        lblAnsvarig.setText("Din områdesansvariga är: "+omradesAnsvarigNamnSvar);
+        
+             String omradesAnsvarigFraga = "SELECT ansvarig_agent FROM mibdb.alien WHERE alien_id =" + id;
+             String omradesAnsvarigSvar = idb.fetchSingle(omradesAnsvarigFraga);
+       
+             String omradesAnsvarigNamnFraga = "SELECT namn FROM mibdb.agent WHERE agent_id=" + omradesAnsvarigSvar;
+             String omradesAnsvarigNamnSvar = idb.fetchSingle(omradesAnsvarigNamnFraga);
+                lblAnsvarig.setText("Din områdesansvariga är: "+omradesAnsvarigNamnSvar);
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println("Internt felmeddelande: " + e.getMessage());
