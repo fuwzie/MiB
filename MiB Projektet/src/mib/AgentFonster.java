@@ -77,6 +77,11 @@ public class AgentFonster extends javax.swing.JFrame {
         jButton3.setText("Registrera utrustning");
 
         jButton4.setText("Sök alien");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sök områdesansvarig", "X", "Y", "Z" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +150,10 @@ public class AgentFonster extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        new AlienRegister(idb).setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

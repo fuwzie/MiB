@@ -17,7 +17,8 @@ public class AlienRegister extends javax.swing.JFrame {
     /**
      * Creates new form AlienRegister
      */
-    public AlienRegister() {
+    public AlienRegister(InfDB idb) {
+        this.idb = idb;
         initComponents();
     }
 
@@ -157,11 +158,10 @@ public class AlienRegister extends javax.swing.JFrame {
 
     private void btnOmradeSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOmradeSokActionPerformed
         new OmradeRasSok(idb).setVisible(true);
-        
     }//GEN-LAST:event_btnOmradeSokActionPerformed
 
     private void btnRasSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRasSokActionPerformed
-        new OmradeRasSok(idb).setVisible(true);
+        
     }//GEN-LAST:event_btnRasSokActionPerformed
 
     /**
@@ -192,12 +192,8 @@ public class AlienRegister extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AlienRegister().setVisible(true);
-            }
-        });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
