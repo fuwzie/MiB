@@ -4,7 +4,13 @@
  */
 package mib;
 
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  *
@@ -30,9 +36,9 @@ public class OmradeRasSok extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtRasSok = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txtOmradeSok = new javax.swing.JTextArea();
         cbAlienOmraden = new javax.swing.JComboBox<>();
         cbAlienRas = new javax.swing.JComboBox<>();
 
@@ -43,17 +49,22 @@ public class OmradeRasSok extends javax.swing.JFrame {
 
         jLabel2.setText("Visa aliens efter ras");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtRasSok.setColumns(20);
+        txtRasSok.setRows(5);
+        jScrollPane1.setViewportView(txtRasSok);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        txtOmradeSok.setColumns(20);
+        txtOmradeSok.setRows(5);
+        jScrollPane2.setViewportView(txtOmradeSok);
 
-        cbAlienOmraden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAlienOmraden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Område", "Götaland", "Norrland", "Sveland" }));
+        cbAlienOmraden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAlienOmradenActionPerformed(evt);
+            }
+        });
 
-        cbAlienRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbAlienRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ras", "bblbl", "Squid", "Worm" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,6 +111,62 @@ public class OmradeRasSok extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbAlienOmradenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienOmradenActionPerformed
+                                              
+    txtOmradeSok.setText("");
+
+    try {
+        // Map the selected item in the combo box to the corresponding value in the "omrade" table
+        int selectedOmradeValue = mapOmradeComboBoxValue(cbAlienOmraden.getSelectedItem().toString());
+
+        // Update the query to fetch all columns and rows where plats corresponds to the selected omrade value
+        String sql = "SELECT * FROM alien WHERE plats IN (SELECT plats_id FROM plats WHERE finns_i = " + selectedOmradeValue + ")";
+        ArrayList<HashMap<String, String>> resultList = idb.fetchRows(sql);
+
+        if (!resultList.isEmpty()) {
+            // Get the column names
+            HashMap<String, String> firstRow = resultList.get(0);
+            Set<String> columnNames = firstRow.keySet();
+
+            // Append column names to the text area
+            for (String columnName : columnNames) {
+                txtOmradeSok.append(columnName + "\t");
+            }
+            txtOmradeSok.append("\n");
+
+            // Process the rows and append data for each row
+            for (HashMap<String, String> rowData : resultList) {
+                for (String columnName : columnNames) {
+                    String value = rowData.get(columnName);
+                    txtOmradeSok.append(value + "\t");
+                }
+                txtOmradeSok.append("\n");
+            }
+        }
+
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+    }
+}
+
+// Helper method to map combo box values to corresponding "omrade" table values
+private int mapOmradeComboBoxValue(String selectedOmrade) {
+    switch (selectedOmrade) {
+        case "Svealand":
+            return 1;
+        case "Götaland":
+            return 2;
+        case "Norrland":
+            return 4;
+        default:
+            return 0; // Handle unknown values
+    }
+
+
+
+    }//GEN-LAST:event_cbAlienOmradenActionPerformed
+        
     /**
      * @param args the command line arguments
      */
@@ -140,7 +207,13 @@ public class OmradeRasSok extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea txtOmradeSok;
+    private javax.swing.JTextArea txtRasSok;
     // End of variables declaration//GEN-END:variables
+
+    private static class infException {
+
+        public infException() {
+        }
+    }
 }
