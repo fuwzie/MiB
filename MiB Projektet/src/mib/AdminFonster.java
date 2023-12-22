@@ -48,10 +48,29 @@ public class AdminFonster extends javax.swing.JFrame {
         btnRedigeraAgent = new javax.swing.JButton();
         btnTaBortAgent = new javax.swing.JButton();
         btnBefordraAgent = new javax.swing.JButton();
-        btnAgentInfo = new javax.swing.JButton();
         btnBytOmradesChef = new javax.swing.JButton();
         btnBytKontorsChef = new javax.swing.JButton();
-        btnAlienInfo = new javax.swing.JButton();
+        txtAgentBorttagning = new javax.swing.JTextField();
+        txtAlienBorttagning = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        cbAgentID = new javax.swing.JComboBox<>();
+        cbAlienID = new javax.swing.JComboBox<>();
+        cbAgentAttribut = new javax.swing.JComboBox<>();
+        cbAlienAttribut = new javax.swing.JComboBox<>();
+        txtfldAlienInfo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cbAlienID1 = new javax.swing.JComboBox<>();
+        cbAlienAttribut1 = new javax.swing.JComboBox<>();
+        txtfldAlienInfo1 = new javax.swing.JTextField();
+        txtfldAlienInfo2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,24 +107,97 @@ public class AdminFonster extends javax.swing.JFrame {
         btnRedigeraAlien.setText("Redigera en alien");
 
         btnTaBortAlien.setText("Ta bort en alien");
+        btnTaBortAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortAlienActionPerformed(evt);
+            }
+        });
 
         btnTaBortUtrustning.setText("Ta bort utrustning");
+        btnTaBortUtrustning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortUtrustningActionPerformed(evt);
+            }
+        });
 
         btnRegistreraAgent.setText("Registrera ny agent");
 
         btnRedigeraAgent.setText("Redigera en agent");
 
         btnTaBortAgent.setText("Ta bort en agent");
+        btnTaBortAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortAgentActionPerformed(evt);
+            }
+        });
 
-        btnBefordraAgent.setText("Befordra agent till administratör");
+        btnBefordraAgent.setText("Befordra");
+        btnBefordraAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBefordraAgentActionPerformed(evt);
+            }
+        });
 
-        btnAgentInfo.setText("Hitta information om agent");
-
-        btnBytOmradesChef.setText("Byta områdeschef");
+        btnBytOmradesChef.setText("Byt områdeschef");
+        btnBytOmradesChef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBytOmradesChefActionPerformed(evt);
+            }
+        });
 
         btnBytKontorsChef.setText("Byta kontorschef");
 
-        btnAlienInfo.setText("Hitta information om alien");
+        txtAgentBorttagning.setText("13");
+
+        txtAlienBorttagning.setText("2");
+
+        jTextField3.setText("39");
+
+        jTextField4.setText("4");
+
+        jTextField6.setText("12");
+
+        jTextField8.setText("3");
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
+            }
+        });
+
+        cbAgentID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agent", "Item 2", "Item 3", "Item 4" }));
+
+        cbAlienID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Registreringsdatum", "Epost", "Losenord", "Namn", "Telefon", "Plats", "Ansvarig_Agent", "Ras" }));
+        cbAlienID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAlienIDActionPerformed(evt);
+            }
+        });
+
+        cbAgentAttribut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Namn", "Telefon", "Anstallningsdatum", "Administrator", "Epost", "Losenord", "Omrade" }));
+
+        cbAlienAttribut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Info att hitta", "Item 2", "Item 3", "Item 4" }));
+
+        txtfldAlienInfo.setText("jTextField9");
+
+        jLabel1.setText("Agent att ta bort:");
+
+        jLabel2.setText("Alien att ta bort:");
+
+        jLabel3.setText("Utrustning att ta bort:");
+
+        jLabel4.setText("Agent att befordra:");
+
+        cbAlienID1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Utrustning", "Item 2", "Item 3", "Item 4" }));
+
+        cbAlienAttribut1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Info att hitta", "Item 2", "Item 3", "Item 4" }));
+
+        txtfldAlienInfo1.setText("jTextField9");
+
+        txtfldAlienInfo2.setText("jTextField9");
+
+        jLabel5.setText("Agent att göra till områdeschef:");
+
+        jLabel6.setText("Agent att göra till kontorschef:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,54 +207,105 @@ public class AdminFonster extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnLogOut))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(btnBytOmradesChef)
-                                .addGap(23, 23, 23)
-                                .addComponent(btnBytKontorsChef)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBefordraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblId)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLogOut))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnVisaNamn)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblNamn))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(lblId)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 304, Short.MAX_VALUE)))
+                                        .addComponent(lblNamn)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTaBortAgent)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnTaBortAlien)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnTaBortUtrustning)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRedigeraAgent)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRedigeraAlien))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRegistreraAlien)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRegistreraAgent))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnAgentInfo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAlienInfo)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbAgentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbAgentAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtfldAlienInfo1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cbAlienID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbAlienAttribut1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(cbAlienID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbAlienAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnRegistreraAgent)
+                                        .addGap(47, 47, 47)
+                                        .addComponent(btnRegistreraAlien))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtfldAlienInfo2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(txtfldAlienInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(btnBytKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtAgentBorttagning, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(btnTaBortAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(33, 33, 33)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtAlienBorttagning, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(btnTaBortAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(24, 24, 24)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(btnTaBortUtrustning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(btnRedigeraAgent)
+                                        .addGap(49, 49, 49)
+                                        .addComponent(btnRedigeraAlien)))
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnBefordraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(51, 51, 51))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,35 +314,62 @@ public class AdminFonster extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblId)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogOut))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVisaNamn)
                     .addComponent(lblNamn))
-                .addGap(18, 18, 18)
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbAgentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbAgentAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbAlienID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbAlienAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtfldAlienInfo)
+                            .addComponent(txtfldAlienInfo1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbAlienID1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbAlienAttribut1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtfldAlienInfo2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistreraAlien)
-                    .addComponent(btnRegistreraAgent))
+                    .addComponent(btnRegistreraAgent)
+                    .addComponent(btnRedigeraAlien)
+                    .addComponent(btnRedigeraAgent))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAlienBorttagning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAgentBorttagning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBefordraAgent)
+                    .addComponent(btnTaBortUtrustning)
+                    .addComponent(btnTaBortAgent)
+                    .addComponent(btnTaBortAlien))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgentInfo)
-                    .addComponent(btnAlienInfo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRedigeraAgent)
-                    .addComponent(btnRedigeraAlien))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTaBortAgent)
-                    .addComponent(btnTaBortAlien)
-                    .addComponent(btnTaBortUtrustning))
-                .addGap(89, 89, 89)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBytOmradesChef)
                     .addComponent(btnBytKontorsChef)
-                    .addComponent(btnBefordraAgent))
-                .addGap(35, 35, 35)
-                .addComponent(btnLogOut)
+                    .addComponent(btnBytOmradesChef))
                 .addContainerGap())
         );
 
@@ -210,9 +380,9 @@ public class AdminFonster extends javax.swing.JFrame {
         if(Validering.textFaltHarVarde(txtID) && Validering.isHelTal(txtID)) {
           
         try {
-            String id = txtID.getText();
-            String fraga = "SELECT Namn FROM mibdb.agent where AGENT_ID=" + id;
-            String svar = idb.fetchSingle(fraga);
+            String fragaID = txtID.getText();
+            String fragaSvar = "SELECT Namn FROM mibdb.agent where AGENT_ID=" + fragaID;
+            String svar = idb.fetchSingle(fragaSvar);
             String resultat = svar;
             
             lblNamn.setText(resultat);
@@ -234,6 +404,81 @@ public class AdminFonster extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIDActionPerformed
 
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void btnBytOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytOmradesChefActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBytOmradesChefActionPerformed
+
+    private void btnTaBortUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortUtrustningActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTaBortUtrustningActionPerformed
+
+    private void btnTaBortAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAlienActionPerformed
+if (Validering.textFaltHarVarde(txtAlienBorttagning) && Validering.isHelTal(txtAlienBorttagning)){
+        try {
+                
+                String alienAttTaBort = txtAlienBorttagning.getText();
+                String finnsAlien = "SELECT alien_id from mibdb.alien where alien_id ="+alienAttTaBort;
+                String alienFanns = idb.fetchSingle(finnsAlien);
+                
+                if(alienFanns != null) {
+                    try {
+                        String alienBorttagning = "DELETE FROM mibdb.alien WHERE alien_id="+alienAttTaBort;
+                        idb.delete(alienBorttagning);
+                        JOptionPane.showMessageDialog(null, "Borttagning av alien lyckades"); }
+                       
+                    catch (InfException e) {
+                           JOptionPane.showMessageDialog(null, "Något gick fel"); }
+                }else {
+                            JOptionPane.showMessageDialog(null, "Användaren hittade inte i systemet");
+                }}
+            catch(InfException e) {
+                            JOptionPane.showMessageDialog(null, "Något gick fel");
+                            System.out.println("Internt felmeddelande: " + e.getMessage());  
+            } 
+        }
+    }//GEN-LAST:event_btnTaBortAlienActionPerformed
+
+    private void btnBefordraAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBefordraAgentActionPerformed
+        
+    }//GEN-LAST:event_btnBefordraAgentActionPerformed
+
+    private void cbAlienIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAlienIDActionPerformed
+
+    private void btnTaBortAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAgentActionPerformed
+       if (Validering.textFaltHarVarde(txtAgentBorttagning) && Validering.isHelTal(txtAgentBorttagning) && !txtAgentBorttagning.getText().equals(id)) {
+        
+            try {
+                
+                String agentAttTaBort = txtAgentBorttagning.getText();
+                String finnsAgent = "SELECT agent_id from mibdb.agent where agent_id ="+agentAttTaBort;
+                String agentFanns = idb.fetchSingle(finnsAgent);
+                
+                if(agentFanns != null) {
+                    try {
+                        String agentBorttagning = "DELETE FROM mibdb.agent WHERE agent_id="+agentAttTaBort;
+                        idb.delete(agentBorttagning);
+                        JOptionPane.showMessageDialog(null, "Borttagning av agent lyckades"); }
+                       
+                    catch (InfException e) {
+                           JOptionPane.showMessageDialog(null, "Något gick fel"); }
+                }else {
+                            JOptionPane.showMessageDialog(null, "Användaren hittade inte i systemet");
+                }}
+            catch(InfException e) {
+                            JOptionPane.showMessageDialog(null, "Något gick fel");
+                            System.out.println("Internt felmeddelande: " + e.getMessage());  
+            } 
+        } 
+       else { JOptionPane.showMessageDialog(null, "Du kan inte ta bort dig själv som användare.");
+       }  
+    }//GEN-LAST:event_btnTaBortAgentActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -241,8 +486,6 @@ public class AdminFonster extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgentInfo;
-    private javax.swing.JButton btnAlienInfo;
     private javax.swing.JButton btnBefordraAgent;
     private javax.swing.JButton btnBytKontorsChef;
     private javax.swing.JButton btnBytOmradesChef;
@@ -255,9 +498,30 @@ public class AdminFonster extends javax.swing.JFrame {
     private javax.swing.JButton btnTaBortAlien;
     private javax.swing.JButton btnTaBortUtrustning;
     private javax.swing.JButton btnVisaNamn;
+    private javax.swing.JComboBox<String> cbAgentAttribut;
+    private javax.swing.JComboBox<String> cbAgentID;
+    private javax.swing.JComboBox<String> cbAlienAttribut;
+    private javax.swing.JComboBox<String> cbAlienAttribut1;
+    private javax.swing.JComboBox<String> cbAlienID;
+    private javax.swing.JComboBox<String> cbAlienID1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNamn;
+    private javax.swing.JTextField txtAgentBorttagning;
+    private javax.swing.JTextField txtAlienBorttagning;
     private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtfldAlienInfo;
+    private javax.swing.JTextField txtfldAlienInfo1;
+    private javax.swing.JTextField txtfldAlienInfo2;
     // End of variables declaration//GEN-END:variables
 }
