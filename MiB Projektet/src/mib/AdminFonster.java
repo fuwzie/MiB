@@ -40,17 +40,18 @@ public class AdminFonster extends javax.swing.JFrame {
         btnVisaNamn = new javax.swing.JButton();
         lblNamn = new javax.swing.JLabel();
         btnLogOut = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        btnRegistreraAlien = new javax.swing.JButton();
+        btnRedigeraAlien = new javax.swing.JButton();
+        btnTaBortAlien = new javax.swing.JButton();
+        btnTaBortUtrustning = new javax.swing.JButton();
+        btnRegistreraAgent = new javax.swing.JButton();
+        btnRedigeraAgent = new javax.swing.JButton();
+        btnTaBortAgent = new javax.swing.JButton();
+        btnBefordraAgent = new javax.swing.JButton();
+        btnAgentInfo = new javax.swing.JButton();
+        btnBytOmradesChef = new javax.swing.JButton();
+        btnBytKontorsChef = new javax.swing.JButton();
+        btnAlienInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,27 +83,29 @@ public class AdminFonster extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Registrera ny alien");
+        btnRegistreraAlien.setText("Registrera ny alien");
 
-        jButton2.setText("Redigera en alien");
+        btnRedigeraAlien.setText("Redigera en alien");
 
-        jButton3.setText("Ta bort en alien");
+        btnTaBortAlien.setText("Ta bort en alien");
 
-        jButton4.setText("Ta bort utrustning");
+        btnTaBortUtrustning.setText("Ta bort utrustning");
 
-        jButton5.setText("Registrera ny agent");
+        btnRegistreraAgent.setText("Registrera ny agent");
 
-        jButton6.setText("Redigera en agent");
+        btnRedigeraAgent.setText("Redigera en agent");
 
-        jButton7.setText("Ta bort en agent");
+        btnTaBortAgent.setText("Ta bort en agent");
 
-        jButton8.setText("Befordra agent till administratör");
+        btnBefordraAgent.setText("Befordra agent till administratör");
 
-        jButton9.setText("Hitta information om agent");
+        btnAgentInfo.setText("Hitta information om agent");
 
-        jButton10.setText("Byta områdeschef");
+        btnBytOmradesChef.setText("Byta områdeschef");
 
-        jButton11.setText("Byta kontorschef");
+        btnBytKontorsChef.setText("Byta kontorschef");
+
+        btnAlienInfo.setText("Hitta information om alien");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,34 +120,15 @@ public class AdminFonster extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton10)
-                                    .addComponent(jButton5))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
-                                        .addComponent(jButton11)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton7)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton9)
-                                        .addGap(0, 51, Short.MAX_VALUE))))
+                                .addGap(6, 6, 6)
+                                .addComponent(btnBytOmradesChef)
+                                .addGap(23, 23, 23)
+                                .addComponent(btnBytKontorsChef)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnBefordraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton4))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnVisaNamn)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -154,8 +138,31 @@ public class AdminFonster extends javax.swing.JFrame {
                                         .addComponent(lblId)
                                         .addGap(18, 18, 18)
                                         .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                                .addGap(0, 304, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnTaBortAgent)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnTaBortAlien)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnTaBortUtrustning)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnRedigeraAgent)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRedigeraAlien))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnRegistreraAlien)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRegistreraAgent))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnAgentInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAlienInfo)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,23 +176,28 @@ public class AdminFonster extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVisaNamn)
                     .addComponent(lblNamn))
-                .addGap(41, 41, 41)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnRegistreraAlien)
+                    .addComponent(btnRegistreraAgent))
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
+                    .addComponent(btnAgentInfo)
+                    .addComponent(btnAlienInfo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10)
-                    .addComponent(jButton11)
-                    .addComponent(jButton8))
+                    .addComponent(btnRedigeraAgent)
+                    .addComponent(btnRedigeraAlien))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTaBortAgent)
+                    .addComponent(btnTaBortAlien)
+                    .addComponent(btnTaBortUtrustning))
+                .addGap(89, 89, 89)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBytOmradesChef)
+                    .addComponent(btnBytKontorsChef)
+                    .addComponent(btnBefordraAgent))
                 .addGap(35, 35, 35)
                 .addComponent(btnLogOut)
                 .addContainerGap())
@@ -229,19 +241,20 @@ public class AdminFonster extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgentInfo;
+    private javax.swing.JButton btnAlienInfo;
+    private javax.swing.JButton btnBefordraAgent;
+    private javax.swing.JButton btnBytKontorsChef;
+    private javax.swing.JButton btnBytOmradesChef;
     private javax.swing.JButton btnLogOut;
+    private javax.swing.JButton btnRedigeraAgent;
+    private javax.swing.JButton btnRedigeraAlien;
+    private javax.swing.JButton btnRegistreraAgent;
+    private javax.swing.JButton btnRegistreraAlien;
+    private javax.swing.JButton btnTaBortAgent;
+    private javax.swing.JButton btnTaBortAlien;
+    private javax.swing.JButton btnTaBortUtrustning;
     private javax.swing.JButton btnVisaNamn;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNamn;
