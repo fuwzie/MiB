@@ -118,7 +118,7 @@ public class AlienFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void btnLosenordsAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLosenordsAndringActionPerformed
-      new Losenordsandring(idb, id).setVisible(true);
+      new LosenordsandringAlien(idb, id).setVisible(true);
     }//GEN-LAST:event_btnLosenordsAndringActionPerformed
 
     /**
