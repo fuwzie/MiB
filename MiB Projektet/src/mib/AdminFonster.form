@@ -53,12 +53,15 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="cbAgentID" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="cbAgentAttribut" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtfldAlienInfo1" alignment="0" min="-2" pref="183" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              <Component id="txtfldAlienInfo1" min="-2" pref="183" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -72,18 +75,20 @@
                               <Component id="cbAlienAttribut" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                                       <Component id="btnRegistreraAgent" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                      <Component id="btnRegistreraAlien" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
                                       <Component id="txtfldAlienInfo2" min="-2" pref="183" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Component id="txtfldAlienInfo" min="-2" pref="183" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                                   </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtfldAlienInfo" min="-2" pref="183" max="-2" attributes="0"/>
+                                  <Component id="btnRegistreraAlien" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -102,41 +107,41 @@
                                   <Component id="btnBytOmradesChef" alignment="0" min="-2" pref="212" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jTextField8" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                                   <Component id="btnBytKontorsChef" min="-2" pref="198" max="-2" attributes="0"/>
                               </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jTextField8" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblTaBortAgent" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="txtAgentBorttagning" min="-2" pref="29" max="-2" attributes="0"/>
+                                              <Component id="txtTaBortAgent" min="-2" pref="29" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="btnTaBortAgent" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblTaBortAlien" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" max="-2" attributes="0"/>
-                                              <Component id="txtAlienBorttagning" min="-2" pref="27" max="-2" attributes="0"/>
+                                              <Component id="txtTaBortAlien" min="-2" pref="27" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="btnTaBortAlien" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblTaBortUtrustning" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jTextField3" min="-2" pref="34" max="-2" attributes="0"/>
+                                              <Component id="txtTaBortUtrustning" min="-2" pref="34" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="btnTaBortUtrustning" max="32767" attributes="0"/>
                                       </Group>
@@ -148,17 +153,17 @@
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnBefordraAgent" min="-2" pref="126" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblBefordraAgent" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField4" min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="txtBefordraAgent" min="-2" pref="33" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="btnBefordraAgent" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -212,14 +217,14 @@
               </Group>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField4" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtAlienBorttagning" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtAgentBorttagning" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTaBortAgent" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTaBortAlien" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTaBortUtrustning" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblBefordraAgent" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtBefordraAgent" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="txtTaBortUtrustning" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTaBortAlien" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTaBortAgent" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -353,22 +358,22 @@
         <Property name="text" type="java.lang.String" value="Byta kontorschef"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtAgentBorttagning">
+    <Component class="javax.swing.JTextField" name="txtTaBortAgent">
       <Properties>
         <Property name="text" type="java.lang.String" value="13"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtAlienBorttagning">
+    <Component class="javax.swing.JTextField" name="txtTaBortAlien">
       <Properties>
         <Property name="text" type="java.lang.String" value="2"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField3">
+    <Component class="javax.swing.JTextField" name="txtTaBortUtrustning">
       <Properties>
         <Property name="text" type="java.lang.String" value="39"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField4">
+    <Component class="javax.swing.JTextField" name="txtBefordraAgent">
       <Properties>
         <Property name="text" type="java.lang.String" value="4"/>
       </Properties>
@@ -461,22 +466,22 @@
         <Property name="text" type="java.lang.String" value="jTextField9"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lblTaBortAgent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agent att ta bort:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lblTaBortAlien">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alien att ta bort:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="lblTaBortUtrustning">
       <Properties>
         <Property name="text" type="java.lang.String" value="Utrustning att ta bort:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="lblBefordraAgent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agent att befordra:"/>
       </Properties>
