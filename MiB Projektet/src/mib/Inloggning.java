@@ -51,6 +51,11 @@ public class Inloggning extends javax.swing.JFrame {
         pwLosenord.setText("jPasswordField1");
 
         txtEpost.setText("exempel@exempel.se");
+        txtEpost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEpostActionPerformed(evt);
+            }
+        });
 
         btnLoggaIn.setText("Logga in");
         btnLoggaIn.addActionListener(new java.awt.event.ActionListener() {
@@ -72,13 +77,13 @@ public class Inloggning extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLoggaIn)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblLosenord)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pwLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblEpost)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEpost)
+                            .addComponent(lblLosenord))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pwLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -122,6 +127,7 @@ public class Inloggning extends javax.swing.JFrame {
                 if(lyckadInloggning) {
                     //vid lyckad inloggning, stäng nuvarande ruta (och öppna relevant ruta)
                     dispose();
+                    
         }
             } catch (InfException ex) {
                 //Allmänt felmeddelande ifall alla andra kontroller "missar" felet, endast för att hålla programmet från att krascha.
@@ -130,6 +136,10 @@ public class Inloggning extends javax.swing.JFrame {
                 } 
             } 
     }//GEN-LAST:event_btnLoggaInActionPerformed
+
+    private void txtEpostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEpostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEpostActionPerformed
         private void kollaAgentInloggning(String epost, String losenord) throws InfException {
                     //Skapar en sql "mall" för alienfrågor, sedan kör den för både epost och lösenord.
                     String agent = "SELECT AGENT_ID FROM mibdb.agent WHERE";
