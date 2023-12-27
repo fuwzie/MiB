@@ -73,6 +73,11 @@ public class AgentFonster extends javax.swing.JFrame {
         lblAgent.setText("Välkommen Agent!");
 
         jButton2.setText("Registrera alien");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Registrera utrustning");
 
@@ -190,6 +195,10 @@ public class AgentFonster extends javax.swing.JFrame {
     private void btnLosenordsAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLosenordsAndringActionPerformed
         new LosenordsandringAgent(idb, id).setVisible(true);
     }//GEN-LAST:event_btnLosenordsAndringActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new RegistreraAlien(idb).setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
