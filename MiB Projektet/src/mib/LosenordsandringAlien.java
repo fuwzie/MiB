@@ -4,7 +4,9 @@
  */
 package mib;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -136,7 +138,37 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
     }//GEN-LAST:event_pwGammaltLosenordActionPerformed
 
     private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
-        // TODO add your handling code here:
+        if (Validering.textFaltHarVarde(pwGammaltLosenord) && Validering.textFaltHarVarde(pwNyttLosenord) && Validering.textFaltHarVarde(pwNyttLosenordUpprepa))
+        { try {
+            String kollaLosenord = new String(pwGammaltLosenord.getPassword());
+            String sqlFraga = "SELECT losenord FROM alien where alien_id = " + id;
+            String sqlSvar = idb.fetchSingle(sqlFraga);
+            
+            if (sqlSvar.equals(kollaLosenord)) {
+                String nyttLosenord = new String(pwNyttLosenord.getPassword());
+                String nyttLosenordUpprepa = new String (pwNyttLosenordUpprepa.getPassword());
+                
+                if (!nyttLosenord.equals(kollaLosenord))
+                {
+                    //Kollar så nytt lösenord ej är samma som tidigare.
+                
+                if (nyttLosenord.equals(nyttLosenordUpprepa)){
+         
+                    String bytLosenord = "UPDATE alien set losenord = " + nyttLosenord + " where alien_id = " + id;
+                    idb.update(bytLosenord);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Nytt lösenord matchar inte upprepning!");
+                }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nytt lösenord kan inte vara samma som tidigare.");
+                } 
+            } }
+        
+        catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Ange rätt lösenord!");
+        }
+        }
     }//GEN-LAST:event_btnBytLosenordActionPerformed
 
     private void pwNyttLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwNyttLosenordActionPerformed
