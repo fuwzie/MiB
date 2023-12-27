@@ -16,6 +16,14 @@ public class AdminFonster extends javax.swing.JFrame {
      private InfDB idb;
      //Sträng som används för att visa vem som är inloggad.
      private String id;
+     int agent_id;
+     String namn;
+     String telefon;
+     String anstallningsdatum;
+     String administrator;
+     String epost;
+     String losenord;
+     int omrade;
     /**
      * Creates new form HuvudFonster
      */
@@ -98,6 +106,11 @@ public class AdminFonster extends javax.swing.JFrame {
         });
 
         btnRegistreraAlien.setText("Registrera ny alien");
+        btnRegistreraAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistreraAlienActionPerformed(evt);
+            }
+        });
 
         btnRedigeraAlien.setText("Redigera en alien");
 
@@ -116,6 +129,11 @@ public class AdminFonster extends javax.swing.JFrame {
         });
 
         btnRegistreraAgent.setText("Registrera ny agent");
+        btnRegistreraAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistreraAgentActionPerformed(evt);
+            }
+        });
 
         btnRedigeraAgent.setText("Redigera en agent");
         btnRedigeraAgent.addActionListener(new java.awt.event.ActionListener() {
@@ -286,10 +304,11 @@ public class AdminFonster extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblId)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogOut))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLogOut)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblId)
+                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVisaNamn)
@@ -510,6 +529,14 @@ public class AdminFonster extends javax.swing.JFrame {
     private void btnLosenordsAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLosenordsAndringActionPerformed
         new LosenordsandringAgent(idb, id).setVisible(true);
     }//GEN-LAST:event_btnLosenordsAndringActionPerformed
+
+    private void btnRegistreraAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAgentActionPerformed
+        new RegistreraAgent(idb).setVisible(true);
+    }//GEN-LAST:event_btnRegistreraAgentActionPerformed
+
+    private void btnRegistreraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAlienActionPerformed
+        new RegistreraAlien(idb).setVisible(true);
+    }//GEN-LAST:event_btnRegistreraAlienActionPerformed
 
     /**
      * @param args the command line arguments

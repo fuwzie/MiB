@@ -146,10 +146,12 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="lblHeader" min="-2" pref="55" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtID" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnLogOut" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -253,6 +255,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Registrera ny alien"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistreraAlienActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnRedigeraAlien">
       <Properties>
@@ -279,6 +284,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Registrera ny agent"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistreraAgentActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnRedigeraAgent">
       <Properties>
