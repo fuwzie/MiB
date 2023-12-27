@@ -193,14 +193,14 @@ public class RegistreraAlien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    String nyttAlien_id = jTextField1.getText();
+    String nyttAlien_id = (String) jTextField1.getText();
     String nyttRegistreringsdatum = jTextField2.getText();
     String nyEpost = jTextField3.getText();
     String nyttLosenord = jTextField4.getText();
     String nyttNamn = jTextField5.getText();
     String nyTelefon = jTextField6.getText();
-    String nyPlats = jTextField7.getText();
-    String nyAnsvarigAgent = jTextField8.getText();
+    String nyPlats = (String) jTextField7.getText();
+    String nyAnsvarigAgent = (String) jTextField8.getText();
     
     String sqlFraga = "INSERT INTO alien (alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent) VALUES ('" 
         + nyttAlien_id + "', '" + nyttRegistreringsdatum + "', '" + nyEpost + "', '" + nyttLosenord + "', '" 
@@ -209,7 +209,7 @@ public class RegistreraAlien extends javax.swing.JFrame {
         try {
             idb.insert(sqlFraga);
         } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
+            JOptionPane.showMessageDialog(null, "Något gick fel!" + ex.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -228,7 +228,7 @@ public class RegistreraAlien extends javax.swing.JFrame {
     } else if ("Worm".equals(valdRas)) {
         input = JOptionPane.showInputDialog(this, "Ange längd:");
         
-        sqlFraga = "INSERT INTO worm (alien_id, längd) VALUES ('" + nyttAlien_id + "', '" + input + "');";
+        sqlFraga = "INSERT INTO worm (alien_id, langd) VALUES ('" + nyttAlien_id + "', '" + input + "');";
     } else if ("Squid".equals(valdRas)) {
         input = JOptionPane.showInputDialog(this, "Ange antal armar:");
         
