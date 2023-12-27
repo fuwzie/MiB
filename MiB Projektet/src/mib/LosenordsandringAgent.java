@@ -41,7 +41,7 @@ public class LosenordsandringAgent extends javax.swing.JFrame {
         pwNyttLosenord = new javax.swing.JPasswordField();
         pwNyttLosenordUpprepa = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblRubrik.setText("Ändra ditt lösenord här");
 
@@ -133,13 +133,20 @@ public class LosenordsandringAgent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
+       //Kollar så alla textrutor har ett värde.
         if (Validering.textFaltHarVarde(pwGammaltLosenord) && Validering.textFaltHarVarde(pwNyttLosenord) && Validering.textFaltHarVarde(pwNyttLosenordUpprepa))
         { try {
+            
             String kollaLosenord = new String(pwGammaltLosenord.getPassword());
+           
+            //Hämtar ut användarens nuvarande lösenord
             String sqlFraga = "SELECT losenord FROM agent where agent_id = " + id;
             String sqlSvar = idb.fetchSingle(sqlFraga);
             
             if (sqlSvar.equals(kollaLosenord)) {
+                //Metoden jämför inmatade gamla lösenordet med svaret från databasen
+                
+                //Hämtar ut värden på de nya lösenorden som matats in
                 String nyttLosenord = new String(pwNyttLosenord.getPassword());
                 String nyttLosenordUpprepa = new String (pwNyttLosenordUpprepa.getPassword());
                 
@@ -148,14 +155,17 @@ public class LosenordsandringAgent extends javax.swing.JFrame {
                     //Kollar så nytt lösenord ej är samma som tidigare.
                 
                 if (nyttLosenord.equals(nyttLosenordUpprepa)){
-         
+                    //Om lösenordet upprepats korrekt och inget annat fel uppstått tidigare så uppdaterar den lösenordet.
                     String bytLosenord = "UPDATE agent SET losenord = '" + nyttLosenord + "' WHERE agent_id = " + id;
                     idb.update(bytLosenord);
+                    JOptionPane.showMessageDialog(null, "Ditt lösenord har ändrats.");
                 }
                 else {
+                    //Om nyttLosenord != nyttLosenordUpprepa
                     JOptionPane.showMessageDialog(null, "Nytt lösenord matchar inte upprepning!");
                 }
                 } else {
+                    //Om nyttLosenord = kollaLosenord
                     JOptionPane.showMessageDialog(null, "Nytt lösenord kan inte vara samma som tidigare.");
                 } 
             } else {
