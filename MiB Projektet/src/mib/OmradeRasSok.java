@@ -1,16 +1,16 @@
+package mib;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package mib;
 
-import com.mysql.cj.jdbc.result.ResultSetMetaData;
-import javax.swing.JOptionPane;
+
+
+
 import oru.inf.InfDB;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 /**
  *
@@ -111,47 +111,37 @@ public class OmradeRasSok extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+   
     private void cbAlienOmradenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienOmradenActionPerformed
-                                              
-    txtOmradeSok.setText("");
+    String selectedArea = cbAlienOmraden.getSelectedItem().toString();
+    txtOmradeSok.setText(""); // Rensa textområdet
 
-    try {
-        // Map the selected item in the combo box to the corresponding value in the "omrade" table
-        int selectedOmradeValue = mapOmradeComboBoxValue(cbAlienOmraden.getSelectedItem().toString());
+    if (!"Område".equals(selectedArea)) {
+        try {
+            int platsId = getPlatsIDByOmradeName(selectedArea);
 
-        // Update the query to fetch all columns and rows where plats corresponds to the selected omrade value
-        String sql = "SELECT * FROM alien WHERE plats IN (SELECT plats_id FROM plats WHERE finns_i = " + selectedOmradeValue + ")";
-        ArrayList<HashMap<String, String>> resultList = idb.fetchRows(sql);
+            String query = "SELECT * FROM alien WHERE Plats IN (SELECT Plats_ID FROM plats WHERE Finns_I = " + platsId + ")";
 
-        if (!resultList.isEmpty()) {
-            // Get the column names
-            HashMap<String, String> firstRow = resultList.get(0);
-            Set<String> columnNames = firstRow.keySet();
 
-            // Append column names to the text area
-            for (String columnName : columnNames) {
-                txtOmradeSok.append(columnName + "\t");
+            ArrayList<HashMap<String, String>> aliens = idb.fetchRows(query);
+            System.out.println("Antal hittade aliens: " + aliens.size()); // Felsökning: Utskrift för att verifiera datan
+
+            for (HashMap<String, String> alien : aliens) {
+                System.out.println("Alien ID: " + alien.get("Alien_ID")); // Felsökning: Utskrift för att verifiera loop och data
+                txtOmradeSok.append("Alien ID: " + alien.get("Alien_ID") + "\n");
+                txtOmradeSok.append("Namn: " + alien.get("Namn") + "\n");
+                // ...
             }
-            txtOmradeSok.append("\n");
-
-            // Process the rows and append data for each row
-            for (HashMap<String, String> rowData : resultList) {
-                for (String columnName : columnNames) {
-                    String value = rowData.get(columnName);
-                    txtOmradeSok.append(value + "\t");
-                }
-                txtOmradeSok.append("\n");
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            txtOmradeSok.setText("Ett fel uppstod när data skulle hämtas från databasen.");
         }
-
-    } catch (Exception ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
     }
 }
 
-// Helper method to map combo box values to corresponding "omrade" table values
-private int mapOmradeComboBoxValue(String selectedOmrade) {
+    
+private int getPlatsIDByOmradeName(String selectedOmrade) {
     switch (selectedOmrade) {
         case "Svealand":
             return 1;
@@ -160,8 +150,8 @@ private int mapOmradeComboBoxValue(String selectedOmrade) {
         case "Norrland":
             return 4;
         default:
-            return 0; // Handle unknown values
-    }
+            return 0; 
+}
 
 
 
