@@ -4,7 +4,12 @@
  */
 package mib;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -36,7 +41,7 @@ public class AlienRegister extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnOmradeSok = new javax.swing.JButton();
         txtDatum1 = new javax.swing.JTextField();
-        txtEnskildALienSok = new javax.swing.JTextField();
+        txtEnskildAlienSok = new javax.swing.JTextField();
         btnRasSok = new javax.swing.JButton();
         btnDatumSok = new javax.swing.JButton();
         btnEnskildAlienSok = new javax.swing.JButton();
@@ -46,6 +51,8 @@ public class AlienRegister extends javax.swing.JFrame {
         txtViktigtStreck = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,10 +68,10 @@ public class AlienRegister extends javax.swing.JFrame {
 
         txtDatum1.setText("2020-01-09");
 
-        txtEnskildALienSok.setText("Ange alien-ID");
-        txtEnskildALienSok.addActionListener(new java.awt.event.ActionListener() {
+        txtEnskildAlienSok.setText("Ange alien-ID");
+        txtEnskildAlienSok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEnskildALienSokActionPerformed(evt);
+                txtEnskildAlienSokActionPerformed(evt);
             }
         });
 
@@ -76,8 +83,18 @@ public class AlienRegister extends javax.swing.JFrame {
         });
 
         btnDatumSok.setText("Sök");
+        btnDatumSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDatumSokActionPerformed(evt);
+            }
+        });
 
         btnEnskildAlienSok.setText("Sök");
+        btnEnskildAlienSok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnskildAlienSokActionPerformed(evt);
+            }
+        });
 
         lblDatumSok.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblDatumSok.setText("Sök aliens registrerade mellan specifika datum");
@@ -93,6 +110,10 @@ public class AlienRegister extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,18 +128,19 @@ public class AlienRegister extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(148, 148, 148)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(171, 171, 171))
+                        .addGap(179, 179, 179))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblDatumSok)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                                .addComponent(lblEnskildAlienSok)))))
-                .addGap(14, 14, 14))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                                .addComponent(lblEnskildAlienSok))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtDatum1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,7 +151,7 @@ public class AlienRegister extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDatumSok)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtEnskildALienSok, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtEnskildAlienSok, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnEnskildAlienSok, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
@@ -154,26 +176,91 @@ public class AlienRegister extends javax.swing.JFrame {
                     .addComponent(txtViktigtStreck)
                     .addComponent(btnDatumSok)
                     .addComponent(btnEnskildAlienSok)
-                    .addComponent(txtEnskildALienSok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEnskildAlienSok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addGap(63, 63, 63))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtEnskildALienSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnskildALienSokActionPerformed
+    private void txtEnskildAlienSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnskildAlienSokActionPerformed
         // TODO  add your handling code here:
-    }//GEN-LAST:event_txtEnskildALienSokActionPerformed
+    }//GEN-LAST:event_txtEnskildAlienSokActionPerformed
 
     private void btnOmradeSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOmradeSokActionPerformed
-        new OmradeRasSok(idb).setVisible(true);
+        
     }//GEN-LAST:event_btnOmradeSokActionPerformed
 
     private void btnRasSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRasSokActionPerformed
         
     }//GEN-LAST:event_btnRasSokActionPerformed
+
+    private void btnDatumSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatumSokActionPerformed
+    String startDatum = txtDatum1.getText();
+    String slutDatum = txtDatum2.getText();
+    String sqlFraga = "SELECT * FROM alien WHERE registreringsdatum BETWEEN '" + startDatum + "' AND '" + slutDatum + "';";
+    
+    try {
+        ArrayList<HashMap<String, String>> alienDatumLista = idb.fetchRows(sqlFraga);
+        jTextArea1.setText("");
+        
+        // Iterera genom HashMap/ArrayList
+        for (HashMap<String, String> alien : alienDatumLista) {
+            // Hämta data från HashMap
+            String alienID = alien.get("Alien_ID");
+            String registreringsdatum = alien.get("Registreringsdatum");
+            String epost = alien.get("Epost");
+            String namn = alien.get("Namn");
+            String telefon = alien.get("Telefon");
+            String plats = alien.get("Plats");
+            String ansvarigAgent = alien.get("Ansvarig_Agent");
+            
+            //Formatering av output
+            String output = String.format("ID: %s, Datum: %s, Epost: %s, Namn: %s, Telefon: %s, Plats: %s, Agent: %s%n", 
+                    alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent);
+            
+            // Output skickas ut i textruta
+            jTextArea1.append(output);
+        }
+    } catch (InfException ex) {
+        JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnDatumSokActionPerformed
+
+    private void btnEnskildAlienSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnskildAlienSokActionPerformed
+        String id = txtEnskildAlienSok.getText();
+        String sqlFraga = "SELECT * FROM alien WHERE alien_id = '" + id + "'";
+    
+    try {
+        ArrayList<HashMap<String, String>> alienEnskildLista = idb.fetchRows(sqlFraga);
+        jTextArea2.setText("");
+        
+        //Iterera genom HashMap/ArrayList
+        for (HashMap<String, String> alien : alienEnskildLista) {
+            // Hämta data från HashMap
+            String alienID = alien.get("Alien_ID");
+            String registreringsdatum = alien.get("Registreringsdatum");
+            String epost = alien.get("Epost");
+            String namn = alien.get("Namn");
+            String telefon = alien.get("Telefon");
+            String plats = alien.get("Plats");
+            String ansvarigAgent = alien.get("Ansvarig_Agent");
+            
+            //Formatering av output
+            String output = String.format("ID: %s, Datum: %s, Epost: %s, Namn: %s, Telefon: %s, Plats: %s, Agent: %s%n", 
+                    alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent);
+            
+            // Formaterad output printas i textruta
+            jTextArea2.append(output);
+        }
+    } catch (InfException ex) {
+        JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnEnskildAlienSokActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,12 +303,14 @@ public class AlienRegister extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lblDatumSok;
     private javax.swing.JLabel lblEnskildAlienSok;
     private javax.swing.JTextField txtDatum1;
     private javax.swing.JTextField txtDatum2;
-    private javax.swing.JTextField txtEnskildALienSok;
+    private javax.swing.JTextField txtEnskildAlienSok;
     private javax.swing.JLabel txtViktigtStreck;
     // End of variables declaration//GEN-END:variables
 }
