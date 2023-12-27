@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package mib;
+import javax.swing.JOptionPane;
+import mib.Validering;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 /**
  *
  * @author Otte
@@ -130,7 +133,40 @@ public class LosenordsandringAgent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
-        // TODO add your handling code here:
+        if (Validering.textFaltHarVarde(pwGammaltLosenord) && Validering.textFaltHarVarde(pwNyttLosenord) && Validering.textFaltHarVarde(pwNyttLosenordUpprepa))
+        { try {
+            String kollaLosenord = new String(pwGammaltLosenord.getPassword());
+            String sqlFraga = "SELECT losenord FROM agent where agent_id = " + id;
+            String sqlSvar = idb.fetchSingle(sqlFraga);
+            
+            if (sqlSvar.equals(kollaLosenord)) {
+                String nyttLosenord = new String(pwNyttLosenord.getPassword());
+                String nyttLosenordUpprepa = new String (pwNyttLosenordUpprepa.getPassword());
+                
+                if (!nyttLosenord.equals(kollaLosenord))
+                {
+                    //Kollar så nytt lösenord ej är samma som tidigare.
+                
+                if (nyttLosenord.equals(nyttLosenordUpprepa)){
+         
+                    String bytLosenord = "UPDATE agent SET losenord = '" + nyttLosenord + "' WHERE agent_id = " + id;
+                    idb.update(bytLosenord);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Nytt lösenord matchar inte upprepning!");
+                }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nytt lösenord kan inte vara samma som tidigare.");
+                } 
+            } else {
+                JOptionPane.showMessageDialog(null, "Nuvarande lösenord stämmer inte.");
+            } 
+        }
+        
+        catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "!");
+        }
+        }                
     }//GEN-LAST:event_btnBytLosenordActionPerformed
 
     private void pwGammaltLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwGammaltLosenordActionPerformed
