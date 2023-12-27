@@ -134,7 +134,7 @@ public class Inloggning extends javax.swing.JFrame {
                     //Skapar en sql "mall" för alienfrågor, sedan kör den för både epost och lösenord.
                     String agent = "SELECT AGENT_ID FROM mibdb.agent WHERE";
                     String epostFraga = agent + " EPOST='" + epost + "'";
-                    String pwFraga = agent + " LOSENORD ='" + losenord + "'";
+                    String pwFraga = agent + " BINARY LOSENORD ='" + losenord + "'";
                     
                     //Hämtar ut svaren för de två sql-frågorna
                     String svar = idb.fetchSingle(epostFraga);
@@ -166,7 +166,7 @@ public class Inloggning extends javax.swing.JFrame {
                     //Skapar en sql "mall" för alienfrågor, sedan kör den för både epost och lösenord.
                     String alien = "SELECT ALIEN_ID FROM mibdb.alien WHERE ";
                     String epostFraga = alien + "EPOST='" + epost + "'";
-                    String pwFraga = alien + "LOSENORD='" + losenord + "'";
+                    String pwFraga = alien + "BINARY LOSENORD='" + losenord + "'";
                     //Hämtar ut svaren för de två sql-frågorna
                     String svar = idb.fetchSingle(epostFraga);
                     String losenSvar = idb.fetchSingle(pwFraga);

@@ -53,7 +53,7 @@ public class AlienFonster extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnLogOut = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnLosenordsAndring = new javax.swing.JButton();
         lblAnsvarig = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
@@ -69,14 +69,12 @@ public class AlienFonster extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Ändra lösenord");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLosenordsAndring.setText("Ändra lösenord");
+        btnLosenordsAndring.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLosenordsAndringActionPerformed(evt);
             }
         });
-
-        lblAnsvarig.setText("Områdesansvarig hittades ej.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,7 +82,7 @@ public class AlienFonster extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLosenordsAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogOut))
             .addGroup(layout.createSequentialGroup()
@@ -102,11 +100,11 @@ public class AlienFonster extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(lblAnsvarig)
                 .addGap(119, 119, 119)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnLosenordsAndring)
                     .addComponent(btnLogOut))
                 .addContainerGap())
         );
@@ -119,9 +117,9 @@ public class AlienFonster extends javax.swing.JFrame {
           dispose();
     }//GEN-LAST:event_btnLogOutActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnLosenordsAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLosenordsAndringActionPerformed
+      new LosenordsandringAlien(idb, id).setVisible(true);
+    }//GEN-LAST:event_btnLosenordsAndringActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,7 +154,7 @@ public class AlienFonster extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnLosenordsAndring;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAnsvarig;
