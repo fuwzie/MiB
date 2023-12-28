@@ -121,44 +121,55 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbUtrustningsTypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUtrustningsTypActionPerformed
+        //Kollar först så textfälten har värden och om nödvändigt, är heltal.
         if (Validering.textFaltHarVarde(txtUtrustningsID) && Validering.isHelTal(txtUtrustningsID) && Validering.textFaltHarVarde(txtBenamning)) {
+        //Sätter en maxlängd på utrustningens benämning för att stämma överens med databasstrukturen
         int benamningMaxLangd = 20;
         if (txtBenamning.getText().length() < benamningMaxLangd) {
             try {
+                //Hämtar värden från textrutor och combobox och deklarerar deras värden som strängar.
                 String nyttUtrustningsID = txtUtrustningsID.getText();
                 String nyttUtrustningsBenamning = txtBenamning.getText();
                 String valdTyp = (String) cbUtrustningsTyp.getSelectedItem();
-
+                //Deklarerar strängar för fråga och input för att kunna dynamiskt ändra dem vid switch case
                 String sqlFraga = "";
                 String input = "";
+                //Kollar så utrustningen vi försöker lägga till inte har ett ID som "krockar" med det i databasen.
                 String kollaUnikUtrustning = "SELECT utrustnings_id FROM utrustning WHERE utrustnings_id = " + nyttUtrustningsID;
 
                 String svarUnikUtrustning = idb.fetchSingle(kollaUnikUtrustning);
 
                 if (svarUnikUtrustning == null) {
+                    //Börjar med att lägga till ny utrustning i databasen
                     String sqlUnikUtrustningFraga = "INSERT INTO utrustning (utrustnings_id, benamning) VALUES (" + nyttUtrustningsID + ", '" + nyttUtrustningsBenamning + "')";
                     try {
                         idb.insert(sqlUnikUtrustningFraga);
-
+                        //Om en typ har valts i comboboxen
                         if (null != valdTyp) {
+                            //Vid varje valt case så bestämmer sqlfrågan vilken typ av utrustning det är, och bestämmer då rätt tabell för att lägga detta i.
                             switch (valdTyp) {
+                                 //När case är "Vapen", skapa en inputruta som frågar om kaliber
                                 case "Vapen":
                                     input = JOptionPane.showInputDialog(this, "Ange antal kaliber:");
                                     sqlFraga = "INSERT INTO vapen (utrustnings_id, kaliber) VALUES ('" + nyttUtrustningsID + "', '" + input + "');";
                                     break;
                                 case "Teknik":
+                                     //När case är "Teknik", skapa en inputruta som frågar om kraftkälla
                                     input = JOptionPane.showInputDialog(this, "Ange kraftkälla:");
                                     sqlFraga = "INSERT INTO teknik (utrustnings_id, kraftkalla) VALUES ('" + nyttUtrustningsID + "', '" + input + "');";
                                     break;
                                 case "Kommunikation":
+                                    //När case är "Kommunikation", skapa en inputruta som frågar om överföringsteknik
                                     input = JOptionPane.showInputDialog(this, "Ange överföringsteknik:");
                                     sqlFraga = "INSERT INTO kommunikation (utrustnings_id, overforingsteknik) VALUES ('" + nyttUtrustningsID + "', '" + input + "');";
                                     break;
                                 default:
                                     break;
                             }
+                            //Om användaren matade in ett värde på inputrutan som dök upp.
                             if (input != null && !input.trim().isEmpty()) {
                                 try {
+                                    //Matar in typen av utrustning i rätt tabell och ger ett övergripande meddelande som berättar att allt fungerade
                                     idb.insert(sqlFraga);
                                     JOptionPane.showMessageDialog(null, "Utrustning lades till i systemet.");
                                 } catch (InfException ex) {
@@ -166,6 +177,7 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
                                     System.out.println("Internt felmeddelande: " + ex.getMessage());
                                 }
                             } else {
+                                //Om "input" är tom
                                 JOptionPane.showMessageDialog(null, "Textfältet kan inte vara tomt!");
                             }
                         }
@@ -174,6 +186,7 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
                         System.out.println("Internt felmeddelande: " + ex.getMessage());
                     }
                 } else {
+                    //Om svarUnikUtrustning returnerade ett värde (krock i databasen)
                     JOptionPane.showMessageDialog(null, "UtrustningsID finns redan i systemet, vänligen välj ett annat.");
                 }
             } catch (InfException ex) {
@@ -181,6 +194,7 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
                 System.out.println("Internt felmeddelande: " + ex.getMessage());
             }
         } else {
+            //Om benämningsbeskrivningen överskred 20 tecken
             JOptionPane.showMessageDialog(null, "Benämningsbeskrivningen är för lång.");
         }
     }
