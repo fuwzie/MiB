@@ -30,7 +30,7 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblRubrik" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblAndraLosenord" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -40,7 +40,7 @@
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNyttLosenord" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="pwNyttLosenord" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -50,12 +50,12 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblGammaltLosenord" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pwGammaltLosenord" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNyttLosenordUpprepa" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pwNyttLosenordUpprepa" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -68,21 +68,21 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblRubrik" min="-2" max="-2" attributes="0"/>
+              <Component id="lblAndraLosenord" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblGammaltLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="pwGammaltLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblNyttLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="pwNyttLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="pwNyttLosenordUpprepa" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblNyttLosenordUpprepa" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="85" max="32767" attributes="0"/>
               <Component id="btnBytLosenord" min="-2" max="-2" attributes="0"/>
@@ -105,17 +105,17 @@
         <Property name="text" type="java.lang.String" value="jPasswordField2"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblRubrik">
+    <Component class="javax.swing.JLabel" name="lblAndraLosenord">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc4;ndra ditt l&#xf6;senord h&#xe4;r"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lblNyttLosenord">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ditt nya l&#xf6;senord:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lblNyttLosenordUpprepa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Upprepa l&#xf6;senordet:"/>
       </Properties>
@@ -128,7 +128,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pwGammaltLosenordActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="lblGammaltLosenord">
       <Properties>
         <Property name="text" type="java.lang.String" value="Skriv in ditt gamla l&#xf6;senord:"/>
       </Properties>

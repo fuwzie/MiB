@@ -51,7 +51,7 @@ public class AlienFonster extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblValkommenAlien = new javax.swing.JLabel();
         btnLogOut = new javax.swing.JButton();
         btnLosenordsAndring = new javax.swing.JButton();
         lblAnsvarig = new javax.swing.JLabel();
@@ -60,7 +60,7 @@ public class AlienFonster extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Välkommen!");
+        lblValkommenAlien.setText("Välkommen!");
 
         btnLogOut.setText("Logga ut");
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +89,7 @@ public class AlienFonster extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(176, 176, 176)
-                        .addComponent(jLabel1))
+                        .addComponent(lblValkommenAlien))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblAnsvarig)))
@@ -99,7 +99,7 @@ public class AlienFonster extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(jLabel1)
+                .addComponent(lblValkommenAlien)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(lblAnsvarig)
                 .addGap(119, 119, 119)
@@ -156,7 +156,7 @@ public class AlienFonster extends javax.swing.JFrame {
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnLosenordsAndring;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAnsvarig;
+    private javax.swing.JLabel lblValkommenAlien;
     // End of variables declaration//GEN-END:variables
 }

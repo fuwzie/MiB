@@ -30,13 +30,13 @@ public class AgentFonster extends javax.swing.JFrame {
             //Med hjälp av föregående ID så hämtar den ut agentens namn och printar ut det i välkomstmeddelandet
         String agentNamn = "SELECT namn FROM mibdb.agent WHERE agent_id =" + id;
         String agentNamnSvar = idb.fetchSingle(agentNamn);
-        lblAgent.setText("Välkommen  "+agentNamnSvar);
+        lblValkommenAgent.setText("Välkommen  "+agentNamnSvar);
         } 
         catch (InfException e) {
             //Om agenten inte returnerar ett namn korrekt så sätts labeln till ett felmeddelande + ett popupfönster som ber användare att kontakta admin
             //Ska endast vara nödvändigt i fall då man kan lägga till en agent utan att sätta ett namn
             JOptionPane.showMessageDialog(null, "Kunde ej hitta ditt namn i systemet, kontakta administratör");
-            lblAgent.setText("Välkommen, ditt namn kunde ej hittas");
+            lblValkommenAgent.setText("Välkommen, ditt namn kunde ej hittas");
             System.out.println("Internt felmeddelande: " + e.getMessage());
         }
     }
@@ -51,14 +51,14 @@ public class AgentFonster extends javax.swing.JFrame {
     private void initComponents() {
 
         btnLogOut = new javax.swing.JButton();
-        lblAgent = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        lblValkommenAgent = new javax.swing.JLabel();
+        btnRegistreraAlien = new javax.swing.JButton();
+        btnRegistreraUtrustning = new javax.swing.JButton();
+        btnSokAlien = new javax.swing.JButton();
         cbSokOmradesAnsvarig = new javax.swing.JComboBox<>();
         btnLosenordsAndring = new javax.swing.JButton();
         txtSokOmradesAnsvarig = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lblSokOmradesAnsvarig = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,27 +69,27 @@ public class AgentFonster extends javax.swing.JFrame {
             }
         });
 
-        lblAgent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAgent.setText("Välkommen Agent!");
+        lblValkommenAgent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblValkommenAgent.setText("Välkommen Agent!");
 
-        jButton2.setText("Registrera alien");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistreraAlien.setText("Registrera alien");
+        btnRegistreraAlien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRegistreraAlienActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Registrera utrustning");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistreraUtrustning.setText("Registrera utrustning");
+        btnRegistreraUtrustning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnRegistreraUtrustningActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Sök alien");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnSokAlien.setText("Sök alien");
+        btnSokAlien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnSokAlienActionPerformed(evt);
             }
         });
 
@@ -107,7 +107,7 @@ public class AgentFonster extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Sök områdesansvarig");
+        lblSokOmradesAnsvarig.setText("Sök områdesansvarig");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,7 +115,7 @@ public class AgentFonster extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(96, 96, 96)
-                .addComponent(lblAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblValkommenAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(btnLosenordsAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,21 +125,21 @@ public class AgentFonster extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(btnRegistreraUtrustning)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                         .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(btnSokAlien)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btnRegistreraAlien)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cbSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addComponent(lblSokOmradesAnsvarig)
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,20 +147,20 @@ public class AgentFonster extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addComponent(jButton2))
+                        .addComponent(btnRegistreraAlien))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(lblAgent)
+                        .addComponent(lblValkommenAgent)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addComponent(lblSokOmradesAnsvarig)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(btnRegistreraUtrustning)
                         .addGap(56, 56, 56)
-                        .addComponent(jButton4)
+                        .addComponent(btnSokAlien)
                         .addContainerGap(96, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,21 +193,21 @@ public class AgentFonster extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbSokOmradesAnsvarigActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnSokAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokAlienActionPerformed
         new AlienRegister(idb).setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnSokAlienActionPerformed
 
     private void btnLosenordsAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLosenordsAndringActionPerformed
         new LosenordsandringAgent(idb, id).setVisible(true);
     }//GEN-LAST:event_btnLosenordsAndringActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnRegistreraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAlienActionPerformed
         new RegistreraAlien(idb).setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnRegistreraAlienActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnRegistreraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraUtrustningActionPerformed
         new RegistreraUtrustning(idb).setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnRegistreraUtrustningActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,12 +244,12 @@ public class AgentFonster extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnLosenordsAndring;
+    private javax.swing.JButton btnRegistreraAlien;
+    private javax.swing.JButton btnRegistreraUtrustning;
+    private javax.swing.JButton btnSokAlien;
     private javax.swing.JComboBox<String> cbSokOmradesAnsvarig;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblAgent;
+    private javax.swing.JLabel lblSokOmradesAnsvarig;
+    private javax.swing.JLabel lblValkommenAgent;
     private javax.swing.JTextField txtSokOmradesAnsvarig;
     // End of variables declaration//GEN-END:variables
 }

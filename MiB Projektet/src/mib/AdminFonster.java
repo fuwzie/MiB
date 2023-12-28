@@ -35,7 +35,7 @@ public class AdminFonster extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblHeader = new javax.swing.JLabel();
+        lblValkommenAdmin = new javax.swing.JLabel();
         btnLogOut = new javax.swing.JButton();
         btnRegistreraAlien = new javax.swing.JButton();
         btnRedigeraAlien = new javax.swing.JButton();
@@ -44,34 +44,34 @@ public class AdminFonster extends javax.swing.JFrame {
         btnRegistreraAgent = new javax.swing.JButton();
         btnRedigeraAgent = new javax.swing.JButton();
         btnTaBortAgent = new javax.swing.JButton();
-        btnBefordraAgent = new javax.swing.JButton();
+        btnBefordraAgentTillAdministrator = new javax.swing.JButton();
         btnBytOmradesChef = new javax.swing.JButton();
         btnBytKontorsChef = new javax.swing.JButton();
         txtTaBortAgent = new javax.swing.JTextField();
         txtTaBortAlien = new javax.swing.JTextField();
         txtTaBortUtrustning = new javax.swing.JTextField();
-        txtBefordraAgent = new javax.swing.JTextField();
-        txtBefordraOmradesChef = new javax.swing.JTextField();
-        txtBefordraKontorsChef = new javax.swing.JTextField();
+        txtBefordraAgentTillAdministrator = new javax.swing.JTextField();
+        txtBytOmradesChef = new javax.swing.JTextField();
+        txtBytKontorsChef = new javax.swing.JTextField();
         cbAgentInfoAttribut = new javax.swing.JComboBox<>();
         lblTaBortAgent = new javax.swing.JLabel();
         lblTaBortAlien = new javax.swing.JLabel();
         lblTaBortUtrustning = new javax.swing.JLabel();
-        lblBefordraAgent = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblBefordraAgentTillAdministrator = new javax.swing.JLabel();
+        lblBytOmradesChef = new javax.swing.JLabel();
+        lblBytKontorsChef = new javax.swing.JLabel();
         btnLosenordsAndring = new javax.swing.JButton();
         txtAgentInfoID = new javax.swing.JTextField();
         lblAgentInfoID = new javax.swing.JLabel();
         lblAgentInfo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblAgentInfoAttribut = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtfldAgentInfo = new javax.swing.JTextArea();
+        txtareaAgentInfo = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblHeader.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        lblHeader.setText("Välkommen, administratör.");
+        lblValkommenAdmin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblValkommenAdmin.setText("Välkommen, administratör.");
 
         btnLogOut.setText("Logga ut");
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
@@ -124,10 +124,10 @@ public class AdminFonster extends javax.swing.JFrame {
             }
         });
 
-        btnBefordraAgent.setText("Befordra");
-        btnBefordraAgent.addActionListener(new java.awt.event.ActionListener() {
+        btnBefordraAgentTillAdministrator.setText("Gör till administratör");
+        btnBefordraAgentTillAdministrator.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBefordraAgentActionPerformed(evt);
+                btnBefordraAgentTillAdministratorActionPerformed(evt);
             }
         });
 
@@ -151,11 +151,11 @@ public class AdminFonster extends javax.swing.JFrame {
 
         txtTaBortUtrustning.setText("39");
 
-        txtBefordraAgent.setText("4");
+        txtBefordraAgentTillAdministrator.setText("4");
 
-        txtBefordraOmradesChef.setText("12");
+        txtBytOmradesChef.setText("12");
 
-        txtBefordraKontorsChef.setText("3");
+        txtBytKontorsChef.setText("3");
 
         cbAgentInfoAttribut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Information", "Namn", "Telefon", "Anstallningsdatum", "Administrator", "Epost", "Losenord", "Omrade" }));
         cbAgentInfoAttribut.addActionListener(new java.awt.event.ActionListener() {
@@ -170,11 +170,11 @@ public class AdminFonster extends javax.swing.JFrame {
 
         lblTaBortUtrustning.setText("Utrustning att ta bort:");
 
-        lblBefordraAgent.setText("Agent att befordra:");
+        lblBefordraAgentTillAdministrator.setText("Agent att göra till administratör:");
 
-        jLabel5.setText("Agent att göra till områdeschef:");
+        lblBytOmradesChef.setText("Agent att göra till områdeschef:");
 
-        jLabel6.setText("Agent att göra till kontorschef:");
+        lblBytKontorsChef.setText("Agent att göra till kontorschef:");
 
         btnLosenordsAndring.setText("Ändra lösenord");
         btnLosenordsAndring.addActionListener(new java.awt.event.ActionListener() {
@@ -190,11 +190,11 @@ public class AdminFonster extends javax.swing.JFrame {
         lblAgentInfo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblAgentInfo.setText("Hitta information om en agent");
 
-        jLabel1.setText("Attribut att hitta:");
+        lblAgentInfoAttribut.setText("Attribut att hitta:");
 
-        txtfldAgentInfo.setColumns(20);
-        txtfldAgentInfo.setRows(5);
-        jScrollPane1.setViewportView(txtfldAgentInfo);
+        txtareaAgentInfo.setColumns(20);
+        txtareaAgentInfo.setRows(5);
+        jScrollPane1.setViewportView(txtareaAgentInfo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,63 +204,52 @@ public class AdminFonster extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblTaBortAgent)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtTaBortAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnTaBortAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblTaBortAlien)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtTaBortAlien, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnTaBortAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(53, 53, 53)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblTaBortUtrustning)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtTaBortUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnTaBortUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnBefordraAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblBefordraAgent)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtBefordraAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(138, 138, 138)))
-                        .addGap(38, 38, 38))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblAgentInfo)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBefordraOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(lblTaBortAgent)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBefordraKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                            .addComponent(btnBytKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
+                                .addComponent(txtTaBortAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnTaBortAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblTaBortAlien)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTaBortAlien, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnTaBortAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblTaBortUtrustning)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTaBortUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnTaBortUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblBefordraAgentTillAdministrator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBefordraAgentTillAdministrator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBefordraAgentTillAdministrator, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(lblBytOmradesChef)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblBytKontorsChef)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtBytKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                                    .addComponent(btnBytKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addComponent(btnLosenordsAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,7 +258,7 @@ public class AdminFonster extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblAgentInfoID)
-                                    .addComponent(jLabel1))
+                                    .addComponent(lblAgentInfoAttribut))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -278,24 +267,26 @@ public class AdminFonster extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtAgentInfoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(btnRedigeraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnRegistreraAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(37, 37, 37)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnRegistreraAgent)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnRegistreraAlien))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnRedigeraAgent)
-                                                .addGap(49, 49, 49)
-                                                .addComponent(btnRedigeraAlien)))
+                                            .addComponent(btnRedigeraAlien, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnRegistreraAlien))
                                         .addGap(14, 14, 14)))))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAgentInfo)
+                            .addComponent(lblValkommenAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblValkommenAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRedigeraAlien)
                     .addComponent(btnRedigeraAgent))
@@ -317,19 +308,19 @@ public class AdminFonster extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtBefordraKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6))
+                                    .addComponent(txtBytKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblBytKontorsChef))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBytKontorsChef))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtBefordraOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
+                                    .addComponent(txtBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblBytOmradesChef))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnBytOmradesChef))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
+                            .addComponent(lblAgentInfoAttribut)
                             .addComponent(cbAgentInfoAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -338,14 +329,14 @@ public class AdminFonster extends javax.swing.JFrame {
                     .addComponent(lblTaBortAgent)
                     .addComponent(lblTaBortAlien)
                     .addComponent(lblTaBortUtrustning)
-                    .addComponent(lblBefordraAgent)
-                    .addComponent(txtBefordraAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBefordraAgentTillAdministrator)
+                    .addComponent(txtBefordraAgentTillAdministrator, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTaBortUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTaBortAlien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTaBortAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBefordraAgent)
+                    .addComponent(btnBefordraAgentTillAdministrator)
                     .addComponent(btnTaBortUtrustning)
                     .addComponent(btnTaBortAgent)
                     .addComponent(btnTaBortAlien))
@@ -367,12 +358,12 @@ public class AdminFonster extends javax.swing.JFrame {
 
     private void btnBytOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytOmradesChefActionPerformed
         
-        if(Validering.textFaltHarVarde(txtBefordraOmradesChef) && Validering.isHelTal(txtBefordraOmradesChef)) {
+        if(Validering.textFaltHarVarde(txtBytOmradesChef) && Validering.isHelTal(txtBytOmradesChef)) {
             
             try {
                 
                 //Hämtar ID på den agent som ska befordras och kollar om den redan är områdeschef på området (eller annat område)
-                String nyOmradesChefID = txtBefordraOmradesChef.getText();
+                String nyOmradesChefID = txtBytOmradesChef.getText();
                 String kollaOmAgentFinns = "SELECT agent_id FROM agent WHERE agent_id = "+nyOmradesChefID;
                 String svarOmAgentFinns = idb.fetchSingle(kollaOmAgentFinns);
                 if(svarOmAgentFinns != null) {
@@ -536,11 +527,11 @@ public class AdminFonster extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTaBortAlienActionPerformed
 
-    private void btnBefordraAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBefordraAgentActionPerformed
+    private void btnBefordraAgentTillAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBefordraAgentTillAdministratorActionPerformed
         //Standard validering för att se så fältet inte är tomt eller innehåller oväntade karaktärer
-        if(Validering.textFaltHarVarde(txtBefordraAgent) && Validering.isHelTal(txtBefordraAgent)) {
+        if(Validering.textFaltHarVarde(txtBefordraAgentTillAdministrator) && Validering.isHelTal(txtBefordraAgentTillAdministrator)) {
             try { //Basic SQL fråga för att se om adminstatus är 'N' eller 'J'
-            String agentID = txtBefordraAgent.getText();
+            String agentID = txtBefordraAgentTillAdministrator.getText();
             
             String kollaEfterAdmin = "SELECT administrator FROM agent WHERE agent_id = " + agentID; 
             String isAdmin = idb.fetchSingle(kollaEfterAdmin);
@@ -570,7 +561,7 @@ public class AdminFonster extends javax.swing.JFrame {
                System.out.println("Internt felmeddelande: " + ex.getMessage());  
             }}
         
-    }//GEN-LAST:event_btnBefordraAgentActionPerformed
+    }//GEN-LAST:event_btnBefordraAgentTillAdministratorActionPerformed
 
     private void btnTaBortAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAgentActionPerformed
        //Den sista metoden i valideringen används för att se så man inte tar bort sig själv som användare.
@@ -622,10 +613,10 @@ public class AdminFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistreraAlienActionPerformed
 
     private void btnBytKontorsChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytKontorsChefActionPerformed
-      if(Validering.textFaltHarVarde(txtBefordraKontorsChef) && Validering.isHelTal(txtBefordraKontorsChef)) {
+      if(Validering.textFaltHarVarde(txtBytKontorsChef) && Validering.isHelTal(txtBytKontorsChef)) {
           try {
               //Kollar om agenten vi vill befordra finns i systemet
-              String nyKontorsChefsID = txtBefordraKontorsChef.getText();
+              String nyKontorsChefsID = txtBytKontorsChef.getText();
               String kollaOmAgentFinns = "SELECT agent_id FROM agent WHERE agent_id = " +  nyKontorsChefsID;
               String svarOmAgentFinns = idb.fetchSingle(kollaOmAgentFinns);
               
@@ -717,7 +708,7 @@ public class AdminFonster extends javax.swing.JFrame {
                                      allInfo +=  attributNamn+": " + attributVarde + "\n";
                                     }
 
-                                    txtfldAgentInfo.setText(allInfo);
+                                    txtareaAgentInfo.setText(allInfo);
                                 } catch (InfException ex) {
                                     JOptionPane.showMessageDialog(null, "Något gick fel");
                                     System.out.println("Internt felmeddelande: " + ex.getMessage());
@@ -752,7 +743,7 @@ public class AdminFonster extends javax.swing.JFrame {
                         try {
                             if (!valdTyp.equals("All Information")) {
                                 String valdAgentInfo = idb.fetchSingle(sqlFraga);
-                                txtfldAgentInfo.setText(valdAgentInfo);
+                                txtareaAgentInfo.setText(valdAgentInfo);
                             }
                         } catch (InfException ex) {
                             JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -774,7 +765,7 @@ public class AdminFonster extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBefordraAgent;
+    private javax.swing.JButton btnBefordraAgentTillAdministrator;
     private javax.swing.JButton btnBytKontorsChef;
     private javax.swing.JButton btnBytOmradesChef;
     private javax.swing.JButton btnLogOut;
@@ -787,24 +778,24 @@ public class AdminFonster extends javax.swing.JFrame {
     private javax.swing.JButton btnTaBortAlien;
     private javax.swing.JButton btnTaBortUtrustning;
     private javax.swing.JComboBox<String> cbAgentInfoAttribut;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAgentInfo;
+    private javax.swing.JLabel lblAgentInfoAttribut;
     private javax.swing.JLabel lblAgentInfoID;
-    private javax.swing.JLabel lblBefordraAgent;
-    private javax.swing.JLabel lblHeader;
+    private javax.swing.JLabel lblBefordraAgentTillAdministrator;
+    private javax.swing.JLabel lblBytKontorsChef;
+    private javax.swing.JLabel lblBytOmradesChef;
     private javax.swing.JLabel lblTaBortAgent;
     private javax.swing.JLabel lblTaBortAlien;
     private javax.swing.JLabel lblTaBortUtrustning;
+    private javax.swing.JLabel lblValkommenAdmin;
     private javax.swing.JTextField txtAgentInfoID;
-    private javax.swing.JTextField txtBefordraAgent;
-    private javax.swing.JTextField txtBefordraKontorsChef;
-    private javax.swing.JTextField txtBefordraOmradesChef;
+    private javax.swing.JTextField txtBefordraAgentTillAdministrator;
+    private javax.swing.JTextField txtBytKontorsChef;
+    private javax.swing.JTextField txtBytOmradesChef;
     private javax.swing.JTextField txtTaBortAgent;
     private javax.swing.JTextField txtTaBortAlien;
     private javax.swing.JTextField txtTaBortUtrustning;
-    private javax.swing.JTextArea txtfldAgentInfo;
+    private javax.swing.JTextArea txtareaAgentInfo;
     // End of variables declaration//GEN-END:variables
 }

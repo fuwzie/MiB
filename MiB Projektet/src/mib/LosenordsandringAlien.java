@@ -35,11 +35,11 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
 
         pwNyttLosenord = new javax.swing.JPasswordField();
         pwNyttLosenordUpprepa = new javax.swing.JPasswordField();
-        lblRubrik = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblAndraLosenord = new javax.swing.JLabel();
+        lblNyttLosenord = new javax.swing.JLabel();
+        lblNyttLosenordUpprepa = new javax.swing.JLabel();
         pwGammaltLosenord = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
+        lblGammaltLosenord = new javax.swing.JLabel();
         btnBytLosenord = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -53,11 +53,11 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
 
         pwNyttLosenordUpprepa.setText("jPasswordField2");
 
-        lblRubrik.setText("Ändra ditt lösenord här");
+        lblAndraLosenord.setText("Ändra ditt lösenord här");
 
-        jLabel1.setText("Ditt nya lösenord:");
+        lblNyttLosenord.setText("Ditt nya lösenord:");
 
-        jLabel2.setText("Upprepa lösenordet:");
+        lblNyttLosenordUpprepa.setText("Upprepa lösenordet:");
 
         pwGammaltLosenord.setText("jPasswordField3");
         pwGammaltLosenord.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +66,7 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Skriv in ditt gamla lösenord:");
+        lblGammaltLosenord.setText("Skriv in ditt gamla lösenord:");
 
         btnBytLosenord.setText("Ändra lösenord");
         btnBytLosenord.addActionListener(new java.awt.event.ActionListener() {
@@ -86,24 +86,24 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblRubrik)
+                                .addComponent(lblAndraLosenord)
                                 .addGap(136, 136, 136))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnBytLosenord)
                                 .addGap(314, 314, 314))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblNyttLosenord)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pwNyttLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(lblGammaltLosenord)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pwGammaltLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lblNyttLosenordUpprepa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pwNyttLosenordUpprepa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -112,19 +112,19 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblRubrik)
+                .addComponent(lblAndraLosenord)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(lblGammaltLosenord)
                     .addComponent(pwGammaltLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(lblNyttLosenord)
                     .addComponent(pwNyttLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pwNyttLosenordUpprepa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(lblNyttLosenordUpprepa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(btnBytLosenord)
                 .addContainerGap())
@@ -219,10 +219,10 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBytLosenord;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel lblRubrik;
+    private javax.swing.JLabel lblAndraLosenord;
+    private javax.swing.JLabel lblGammaltLosenord;
+    private javax.swing.JLabel lblNyttLosenord;
+    private javax.swing.JLabel lblNyttLosenordUpprepa;
     private javax.swing.JPasswordField pwGammaltLosenord;
     private javax.swing.JPasswordField pwNyttLosenord;
     private javax.swing.JPasswordField pwNyttLosenordUpprepa;

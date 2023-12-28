@@ -38,7 +38,7 @@ public class AlienRegister extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
+        lblAlienRegister = new javax.swing.JLabel();
         btnOmradeSok = new javax.swing.JButton();
         txtDatum1 = new javax.swing.JTextField();
         txtEnskildAlienSok = new javax.swing.JTextField();
@@ -50,14 +50,14 @@ public class AlienRegister extends javax.swing.JFrame {
         lblEnskildAlienSok = new javax.swing.JLabel();
         txtViktigtStreck = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtareaDatumSok = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txtareaEnskildAlienSok = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Alienregister");
+        lblAlienRegister.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblAlienRegister.setText("Alienregister");
 
         btnOmradeSok.setText("Sök efter område");
         btnOmradeSok.addActionListener(new java.awt.event.ActionListener() {
@@ -106,13 +106,13 @@ public class AlienRegister extends javax.swing.JFrame {
 
         txtViktigtStreck.setText("-");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtareaDatumSok.setColumns(20);
+        txtareaDatumSok.setRows(5);
+        jScrollPane1.setViewportView(txtareaDatumSok);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        txtareaEnskildAlienSok.setColumns(20);
+        txtareaEnskildAlienSok.setRows(5);
+        jScrollPane2.setViewportView(txtareaEnskildAlienSok);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,7 +127,7 @@ public class AlienRegister extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(148, 148, 148)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblAlienRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(179, 179, 179))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -160,7 +160,7 @@ public class AlienRegister extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel1)
+                .addComponent(lblAlienRegister)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRasSok)
@@ -206,7 +206,7 @@ public class AlienRegister extends javax.swing.JFrame {
     
     try {
         ArrayList<HashMap<String, String>> alienDatumLista = idb.fetchRows(sqlFraga);
-        jTextArea1.setText("");
+        txtareaDatumSok.setText("");
         
         // Iterera genom HashMap/ArrayList
         for (HashMap<String, String> alien : alienDatumLista) {
@@ -224,7 +224,7 @@ public class AlienRegister extends javax.swing.JFrame {
                     alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent);
             
             // Output skickas ut i textruta
-            jTextArea1.append(output);
+            txtareaDatumSok.append(output);
         }
     } catch (InfException ex) {
         JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
@@ -237,7 +237,7 @@ public class AlienRegister extends javax.swing.JFrame {
     
     try {
         ArrayList<HashMap<String, String>> alienEnskildLista = idb.fetchRows(sqlFraga);
-        jTextArea2.setText("");
+        txtareaEnskildAlienSok.setText("");
         
         //Iterera genom HashMap/ArrayList
         for (HashMap<String, String> alien : alienEnskildLista) {
@@ -255,7 +255,7 @@ public class AlienRegister extends javax.swing.JFrame {
                     alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent);
             
             // Formaterad output printas i textruta
-            jTextArea2.append(output);
+            txtareaEnskildAlienSok.append(output);
         }
     } catch (InfException ex) {
         JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
@@ -301,16 +301,16 @@ public class AlienRegister extends javax.swing.JFrame {
     private javax.swing.JButton btnRasSok;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JLabel lblAlienRegister;
     private javax.swing.JLabel lblDatumSok;
     private javax.swing.JLabel lblEnskildAlienSok;
     private javax.swing.JTextField txtDatum1;
     private javax.swing.JTextField txtDatum2;
     private javax.swing.JTextField txtEnskildAlienSok;
     private javax.swing.JLabel txtViktigtStreck;
+    private javax.swing.JTextArea txtareaDatumSok;
+    private javax.swing.JTextArea txtareaEnskildAlienSok;
     // End of variables declaration//GEN-END:variables
 }

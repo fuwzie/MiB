@@ -33,29 +33,29 @@ public class OmradeRasSok extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblVisaAliensEfterOmrade = new javax.swing.JLabel();
+        lblVisaAliensEfterRas = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtRasSok = new javax.swing.JTextArea();
+        txtareaRasSok = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtOmradeSok = new javax.swing.JTextArea();
+        txtareaOmradeSok = new javax.swing.JTextArea();
         cbAlienOmraden = new javax.swing.JComboBox<>();
         cbAlienRas = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Visa aliens efter område");
+        lblVisaAliensEfterOmrade.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVisaAliensEfterOmrade.setText("Visa aliens efter område");
 
-        jLabel2.setText("Visa aliens efter ras");
+        lblVisaAliensEfterRas.setText("Visa aliens efter ras");
 
-        txtRasSok.setColumns(20);
-        txtRasSok.setRows(5);
-        jScrollPane1.setViewportView(txtRasSok);
+        txtareaRasSok.setColumns(20);
+        txtareaRasSok.setRows(5);
+        jScrollPane1.setViewportView(txtareaRasSok);
 
-        txtOmradeSok.setColumns(20);
-        txtOmradeSok.setRows(5);
-        jScrollPane2.setViewportView(txtOmradeSok);
+        txtareaOmradeSok.setColumns(20);
+        txtareaOmradeSok.setRows(5);
+        jScrollPane2.setViewportView(txtareaOmradeSok);
 
         cbAlienOmraden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Område", "Götaland", "Norrland", "Sveland" }));
         cbAlienOmraden.addActionListener(new java.awt.event.ActionListener() {
@@ -80,13 +80,13 @@ public class OmradeRasSok extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblVisaAliensEfterOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addComponent(cbAlienOmraden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblVisaAliensEfterRas, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbAlienRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
@@ -95,8 +95,8 @@ public class OmradeRasSok extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblVisaAliensEfterRas)
+                    .addComponent(lblVisaAliensEfterOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbAlienOmraden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,7 +115,7 @@ public class OmradeRasSok extends javax.swing.JFrame {
    
     private void cbAlienOmradenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienOmradenActionPerformed
     String selectedArea = cbAlienOmraden.getSelectedItem().toString();
-    txtOmradeSok.setText(""); // Rensa textområdet
+    txtareaOmradeSok.setText(""); // Rensa textområdet
 
     if (!"Område".equals(selectedArea)) {
         try {
@@ -129,13 +129,13 @@ public class OmradeRasSok extends javax.swing.JFrame {
 
             for (HashMap<String, String> alien : aliens) {
                 System.out.println("Alien ID: " + alien.get("Alien_ID")); // Felsökning: Utskrift för att verifiera loop och data
-                txtOmradeSok.append("Alien ID: " + alien.get("Alien_ID") + "\n");
-                txtOmradeSok.append("Namn: " + alien.get("Namn") + "\n");
+                txtareaOmradeSok.append("Alien ID: " + alien.get("Alien_ID") + "\n");
+                txtareaOmradeSok.append("Namn: " + alien.get("Namn") + "\n");
                 // ...
             }
         } catch (Exception e) {
             e.printStackTrace();
-            txtOmradeSok.setText("Ett fel uppstod när data skulle hämtas från databasen.");
+            txtareaOmradeSok.setText("Ett fel uppstod när data skulle hämtas från databasen.");
         }
     }
 }
@@ -193,12 +193,12 @@ private int getPlatsIDByOmradeName(String selectedOmrade) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbAlienOmraden;
     private javax.swing.JComboBox<String> cbAlienRas;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea txtOmradeSok;
-    private javax.swing.JTextArea txtRasSok;
+    private javax.swing.JLabel lblVisaAliensEfterOmrade;
+    private javax.swing.JLabel lblVisaAliensEfterRas;
+    private javax.swing.JTextArea txtareaOmradeSok;
+    private javax.swing.JTextArea txtareaRasSok;
     // End of variables declaration//GEN-END:variables
 
     private static class infException {
