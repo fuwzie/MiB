@@ -162,6 +162,11 @@ public class AdminFonster extends javax.swing.JFrame {
         txtTaBortAlien.setText("2");
 
         txtTaBortUtrustning.setText("39");
+        txtTaBortUtrustning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTaBortUtrustningActionPerformed(evt);
+            }
+        });
 
         txtBefordraAgent.setText("4");
 
@@ -350,7 +355,7 @@ public class AdminFonster extends javax.swing.JFrame {
           
         try {
             String fragaID = txtID.getText();
-            String fragaSvar = "SELECT Namn FROM mibdb.agent where AGENT_ID=" + fragaID;
+            String fragaSvar = "SELECT Namn FROM agent where AGENT_ID=" + fragaID;
             String svar = idb.fetchSingle(fragaSvar);
             String resultat = svar;
             
@@ -421,21 +426,51 @@ public class AdminFonster extends javax.swing.JFrame {
             try {
                 //Kör en sql-fråga som kollar om ID:t man matat in matchar en utrustning i databasen.
                 String utrustningAttTaBort = txtTaBortUtrustning.getText();
-                String finnsUtrustning = "SELECT utrustnings_id FROM mibdb.utrustning WHERE utrustnings_id ="+utrustningAttTaBort;
-                String utrustningFanns = idb.fetchSingle(finnsUtrustning);
+                String finnsUtrustning = "SELECT utrustnings_id FROM utrustning WHERE utrustnings_id ="+utrustningAttTaBort;
+                String utrustningFanns = idb.fetchSingle(finnsUtrustning);;
                 
                 //Om sql-frågan returnerar ett värde så tar den bort vald utrustning
                 if(utrustningFanns != null) {
+                    boolean utrustningsBorttagning = true;
                     try {
-                        String utrustningBorttagning = "DELETE FROM mibdb.utrustning WHERE utrustnings_id="+utrustningAttTaBort;
+                        //Sätter ihop strängar för sqlfrågorna för att undvika upprepning.
+                        String utrustningsTypKollFrom = "SELECT utrustnings_id FROM ";
+                        String utrustningsTypKollWhere = " WHERE utrustnings_id="+utrustningFanns;
+                        
+                        //Kollar om matchande resultat finns i någon av de tre undertabellerna
+                        String vapenKoll = utrustningsTypKollFrom + "vapen" + utrustningsTypKollWhere;
+                        String teknikKoll = utrustningsTypKollFrom + "teknik" + utrustningsTypKollWhere;
+                        String kommunikationKoll = utrustningsTypKollFrom + "kommunikation" + utrustningsTypKollWhere;
+                        
+                        String vapenSvar = idb.fetchSingle(vapenKoll);
+                        String teknikSvar = idb.fetchSingle(teknikKoll);
+                        String kommunikationSvar = idb.fetchSingle(kommunikationKoll);
+                        //Samma fråga med olika kriterier nedan, men de tre if-satserna kollar om nåt av värdena inte var null, stämmer det 
+                        if(vapenSvar != null) {
+                            String vapenBorttagning = "DELETE FROM vapen WHERE utrustnings_id=" + utrustningFanns;
+                            idb.delete(vapenBorttagning);
+                    }
+                        if(teknikSvar != null) {
+                            String teknikBorttagning = "DELETE FROM teknik WHERE utrustnings_id=" + utrustningFanns;
+                            idb.delete(teknikBorttagning);
+                        }
+                        
+                        if(kommunikationSvar != null) {
+                            String kommunikationBorttagning = "DELETE FROM kommunikation WHERE utrustnings_id=" + utrustningFanns;
+                            idb.delete(kommunikationBorttagning);
+                                    }
+                        //Denna metod körs först då alla utrustningstyper som utrustningen var associerad med är borttagna.
+                        if(utrustningsBorttagning) {
+                        String utrustningBorttagning = "DELETE FROM utrustning WHERE utrustnings_id= " + utrustningAttTaBort;
                         idb.delete(utrustningBorttagning);
                         JOptionPane.showMessageDialog(null, "Borttagning av utrustning lyckades"); }
+                    }
                        
                     catch (InfException e) {
                            JOptionPane.showMessageDialog(null, "Något gick fel"); }
                 }else {
                             //Om värdet som returneras från sql frågan returnerar null.
-                            JOptionPane.showMessageDialog(null, "Vald utrustning hittade inte i systemet");
+                            JOptionPane.showMessageDialog(null, "Vald utrustning hittades inte i systemet");
                 }}
             catch(InfException e) {
                             JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -493,7 +528,7 @@ public class AdminFonster extends javax.swing.JFrame {
                         
                         //När alla andra frågor / delete satser körts genom så tar den bort alien sist. Anledningen för att ta bort de andra fälten är för att de inte är självständiga entiteter.
                         if(alienRasBorttagning) {
-                            String alienBorttagning = "DELETE FROM mibdb.alien WHERE alien_id="+alienAttTaBort;
+                            String alienBorttagning = "DELETE FROM alien WHERE alien_id="+alienAttTaBort;
                             idb.delete(alienBorttagning);
                             JOptionPane.showMessageDialog(null, "Borttagning av alien lyckades"); }
                         }
@@ -516,7 +551,7 @@ public class AdminFonster extends javax.swing.JFrame {
             try { //Basic SQL fråga för att se om adminstatus är 'N' eller 'J'
             String agentID = txtBefordraAgent.getText();
             
-            String kollaEfterAdmin = "SELECT administrator FROM mibdb.agent WHERE agent_id = " + agentID; 
+            String kollaEfterAdmin = "SELECT administrator FROM agent WHERE agent_id = " + agentID; 
             String isAdmin = idb.fetchSingle(kollaEfterAdmin);
             
             //Egentligen en "ful lösning" som kollar om agenten finns genom att se om adminstatusen inte finns.
@@ -553,13 +588,13 @@ public class AdminFonster extends javax.swing.JFrame {
             try {
                 //Gör en enkel koll för att se så agenten finns i systemet
                 String agentAttTaBort = txtTaBortAgent.getText();
-                String finnsAgent = "SELECT agent_id from mibdb.agent where agent_id ="+agentAttTaBort;
+                String finnsAgent = "SELECT agent_id from agent where agent_id ="+agentAttTaBort;
                 String agentFanns = idb.fetchSingle(finnsAgent);
                 //Om fältet ej var tomt, kör nedanstående
                 if(agentFanns != null) {
                     try {
                         //Tar bort agenten helt o hållet baserat på dess ID genom idb delete funktionen.
-                        String agentBorttagning = "DELETE FROM mibdb.agent WHERE agent_id="+agentAttTaBort;
+                        String agentBorttagning = "DELETE FROM agent WHERE agent_id="+agentAttTaBort;
                         idb.delete(agentBorttagning);
                         JOptionPane.showMessageDialog(null, "Borttagning av agent lyckades"); }
                        
@@ -654,6 +689,10 @@ public class AdminFonster extends javax.swing.JFrame {
           }
       }
     }//GEN-LAST:event_btnBytKontorsChefActionPerformed
+
+    private void txtTaBortUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaBortUtrustningActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTaBortUtrustningActionPerformed
 
     /**
      * @param args the command line arguments
