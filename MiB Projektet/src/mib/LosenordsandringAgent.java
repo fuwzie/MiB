@@ -134,7 +134,7 @@ public class LosenordsandringAgent extends javax.swing.JFrame {
 
     private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
        //Kollar så alla textrutor har ett värde.
-        if (Validering.textFaltHarVarde(pwGammaltLosenord) && Validering.textFaltHarVarde(pwNyttLosenord) && Validering.textFaltHarVarde(pwNyttLosenordUpprepa))
+        if (Validering.kollaLosenordLangd(pwGammaltLosenord) && Validering.kollaLosenordLangd(pwNyttLosenord) && Validering.kollaLosenordLangd(pwNyttLosenordUpprepa))
         { try {
             
             String kollaLosenord = new String(pwGammaltLosenord.getPassword());
