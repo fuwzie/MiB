@@ -151,6 +151,11 @@ public class AdminFonster extends javax.swing.JFrame {
         });
 
         btnBytKontorsChef.setText("Byta kontorschef");
+        btnBytKontorsChef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBytKontorsChefActionPerformed(evt);
+            }
+        });
 
         txtTaBortAgent.setText("13");
 
@@ -365,13 +370,55 @@ public class AdminFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void btnBytOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytOmradesChefActionPerformed
-        // TODO add your handling code here:
+        
+        if(Validering.textFaltHarVarde(txtBefordraOmradesChef) && Validering.isHelTal(txtBefordraOmradesChef)) {
+            
+            try {
+                
+                //Hämtar ID på den agent som ska befordras och kollar om den redan är områdeschef på området (eller annat område)
+                String nyOmradesChefID = txtBefordraOmradesChef.getText();
+                String kollaOmAgentFinns = "SELECT agent_id FROM agent WHERE agent_id = "+nyOmradesChefID;
+                String svarOmAgentFinns = idb.fetchSingle(kollaOmAgentFinns);
+                if(svarOmAgentFinns != null) {
+                    String kollaChefsStatus = "SELECT agent_id FROM omradeschef WHERE agent_id = "+nyOmradesChefID;
+                    String svarChefsStatus = idb.fetchSingle(kollaChefsStatus);
+
+                    if(svarChefsStatus != null) {
+                        JOptionPane.showMessageDialog(null, "Användaren är redan områdeschef för ett område.");
+                    }
+
+                    if(svarChefsStatus == null) {
+                        //Om sql-frågan inte finner att agenten är en områdeschef över något område redan
+                        String kollaAgentensOmrade = "SELECT Omrade FROM agent WHERE agent_id = " + nyOmradesChefID;
+                        String svarAgentensOmrade = idb.fetchSingle(kollaAgentensOmrade);
+
+                        if(svarAgentensOmrade != null) {
+                            //Fail-safe för att kunna uppdatera rätt agent till rätt område. Gör rimligt antagande att en agent i denna organisation inte kan bli områdeschef i ett annat område utan att först vara därifrån.
+                            String uppdateraOmradesChef = "UPDATE omradeschef SET agent_id = " + nyOmradesChefID + " WHERE omrade = " + svarAgentensOmrade;
+                            idb.update(uppdateraOmradesChef);
+                            JOptionPane.showMessageDialog(null, "Agenten befordrades till områdeschef");
+                        }
+
+                        else{
+                            //Ifall agenten för någon anledning inte har ett tilldelat område till sig.
+                            JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till områdeschef, befintligt område för agent finns ej.");
+                        }
+                    
+                } }
+                else { 
+                    JOptionPane.showMessageDialog(null, "Vald agent finns inte i systemet.");
+                }
+            } catch(InfException ex) {
+                    JOptionPane.showMessageDialog(null, "Något gick fel");
+                    System.out.println("Internt felmeddelande: " + ex.getMessage());
+            }
+        }
     }//GEN-LAST:event_btnBytOmradesChefActionPerformed
 
     private void btnTaBortUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortUtrustningActionPerformed
             //Ser till så textfältet har ett värde + att värdet är ett heltal.
         if (Validering.textFaltHarVarde(txtTaBortUtrustning) && Validering.isHelTal(txtTaBortUtrustning)){
-        try {
+            try {
                 //Kör en sql-fråga som kollar om ID:t man matat in matchar en utrustning i databasen.
                 String utrustningAttTaBort = txtTaBortUtrustning.getText();
                 String finnsUtrustning = "SELECT utrustnings_id FROM mibdb.utrustning WHERE utrustnings_id ="+utrustningAttTaBort;
@@ -522,9 +569,9 @@ public class AdminFonster extends javax.swing.JFrame {
                             //Om agentFanns returnerar null.
                             JOptionPane.showMessageDialog(null, "Användaren hittade inte i systemet");
                 }}
-            catch(InfException e) {
-                            JOptionPane.showMessageDialog(null, "Något gick fel");
-                            System.out.println("Internt felmeddelande: " + e.getMessage());  
+            catch(InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel");
+                System.out.println("Internt felmeddelande: " + ex.getMessage());  
             } 
         } 
        else { //Om agentens ID matchar "sessions ID:t på vår användare" 
@@ -547,6 +594,66 @@ public class AdminFonster extends javax.swing.JFrame {
     private void btnRegistreraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAlienActionPerformed
         new RegistreraAlien(idb).setVisible(true);
     }//GEN-LAST:event_btnRegistreraAlienActionPerformed
+
+    private void btnBytKontorsChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytKontorsChefActionPerformed
+      if(Validering.textFaltHarVarde(txtBefordraKontorsChef) && Validering.isHelTal(txtBefordraKontorsChef)) {
+          try {
+              //Kollar om agenten vi vill befordra finns i systemet
+              String nyKontorsChefsID = txtBefordraKontorsChef.getText();
+              String kollaOmAgentFinns = "SELECT agent_id FROM agent WHERE agent_id = " +  nyKontorsChefsID;
+              String svarOmAgentFinns = idb.fetchSingle(kollaOmAgentFinns);
+              
+              if(svarOmAgentFinns != null) {
+                  
+                  String kollaAgentsChefStatus = "SELECT agent_id FROM kontorschef WHERE agent_id = " + nyKontorsChefsID;
+                  String svarAgentsChefStatus = idb.fetchSingle(kollaAgentsChefStatus);
+                  if(svarAgentsChefStatus == null) {
+                  //Kollar vilket område agenten tillhör, antagandet är att de som tillhör Svealand har Örebrokontoret, de som tillhör Götaland har Göteborgskontoret och de som tillhör Norrland har Kirunakontoret
+                  String kollaAgentensOmrade = "SELECT Omrade FROM agent WHERE agent_id = " + nyKontorsChefsID;
+                  String svarAgentensOmrade = idb.fetchSingle(kollaAgentensOmrade);
+                  
+                  if(svarAgentensOmrade != null) {
+                      String agentensKontor = "";
+                      switch (svarAgentensOmrade) {
+                        case "1":
+                            agentensKontor = "Örebrokontoret";
+                            break;
+                        case "2":
+                            agentensKontor = "Göteborgskontoret";
+                            break;
+                        case "4":
+                            agentensKontor = "Kirunakontoret";
+                            break;
+                        default:
+                            agentensKontor = "Okänt kontor"; // Ska inte kunna användas men finns som failsafe.
+                            break;
+                    } 
+                      try{
+                          //Använder try då inte alla databaser har tilldelat agenter till "Göteborgskontoret" eller "Kirunakontoret" 
+                      String uppdateraKontorsChef = "UPDATE kontorschef SET agent_id = " + nyKontorsChefsID + " WHERE kontorsbeteckning = '" + agentensKontor +"'";
+                      idb.update(uppdateraKontorsChef);
+                      JOptionPane.showMessageDialog(null, "Agenten befordrades till kontorschef.");
+                      } catch(InfException ex) {
+                          JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till kontorschef.");
+                          System.out.println("Internt felmeddelande: " + ex.getMessage());
+                      }
+                  }
+                  else {
+                      JOptionPane.showMessageDialog(null, "Agenten är inte tilldelad ett område och kan därför inte bli kontorschef.");
+                  }
+              }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Agenten är redan chef för ett kontor");
+                    }}
+              else{
+                  JOptionPane.showMessageDialog(null, "Agenten finns inte i systemet.");
+              }
+          } catch(InfException ex) {
+              JOptionPane.showMessageDialog(null, "Något gick fel");
+              System.out.println("Internt felmeddelande: " + ex.getMessage());
+          }
+      }
+    }//GEN-LAST:event_btnBytKontorsChefActionPerformed
 
     /**
      * @param args the command line arguments
