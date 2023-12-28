@@ -16,14 +16,6 @@ public class AdminFonster extends javax.swing.JFrame {
      private InfDB idb;
      //Sträng som används för att visa vem som är inloggad.
      private String id;
-     int agent_id;
-     String namn;
-     String telefon;
-     String anstallningsdatum;
-     String administrator;
-     String epost;
-     String losenord;
-     int omrade;
     /**
      * Creates new form HuvudFonster
      */
@@ -62,15 +54,15 @@ public class AdminFonster extends javax.swing.JFrame {
         txtTaBortAlien = new javax.swing.JTextField();
         txtTaBortUtrustning = new javax.swing.JTextField();
         txtBefordraAgent = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        txtBefordraOmradesChef = new javax.swing.JTextField();
+        txtBefordraKontorsChef = new javax.swing.JTextField();
         cbAgentID = new javax.swing.JComboBox<>();
         cbAgentAttribut = new javax.swing.JComboBox<>();
         lblTaBortAgent = new javax.swing.JLabel();
         lblTaBortAlien = new javax.swing.JLabel();
         lblTaBortUtrustning = new javax.swing.JLabel();
         lblBefordraAgent = new javax.swing.JLabel();
-        txtfldAlienInfo1 = new javax.swing.JTextField();
+        txtfldAgentInfo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnLosenordsAndring = new javax.swing.JButton();
@@ -81,11 +73,6 @@ public class AdminFonster extends javax.swing.JFrame {
         lblHeader.setText("Välkommen, administratör.");
 
         txtID.setText("1");
-        txtID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDActionPerformed(evt);
-            }
-        });
 
         lblId.setText("Ange id på agent:");
 
@@ -173,14 +160,9 @@ public class AdminFonster extends javax.swing.JFrame {
 
         txtBefordraAgent.setText("4");
 
-        jTextField6.setText("12");
+        txtBefordraOmradesChef.setText("12");
 
-        jTextField8.setText("3");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
-            }
-        });
+        txtBefordraKontorsChef.setText("3");
 
         cbAgentID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agent", "Item 2", "Item 3", "Item 4" }));
 
@@ -194,7 +176,7 @@ public class AdminFonster extends javax.swing.JFrame {
 
         lblBefordraAgent.setText("Agent att befordra:");
 
-        txtfldAlienInfo1.setText("jTextField9");
+        txtfldAgentInfo.setText("jTextField9");
 
         jLabel5.setText("Agent att göra till områdeschef:");
 
@@ -228,14 +210,14 @@ public class AdminFonster extends javax.swing.JFrame {
                                         .addGap(4, 4, 4)
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtBefordraOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(btnBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                                        .addComponent(txtBefordraKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                                     .addComponent(btnBytKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,7 +267,7 @@ public class AdminFonster extends javax.swing.JFrame {
                                 .addComponent(cbAgentAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(246, 246, 246))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtfldAlienInfo1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtfldAgentInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(258, 258, 258))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,7 +301,7 @@ public class AdminFonster extends javax.swing.JFrame {
                     .addComponent(cbAgentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbAgentAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtfldAlienInfo1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                .addComponent(txtfldAgentInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistreraAlien)
@@ -344,8 +326,8 @@ public class AdminFonster extends javax.swing.JFrame {
                     .addComponent(btnTaBortAlien))
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBefordraOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBefordraKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -381,14 +363,6 @@ public class AdminFonster extends javax.swing.JFrame {
         new Inloggning(idb).setVisible(true);
         dispose();
     }//GEN-LAST:event_btnLogOutActionPerformed
-
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void btnBytOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytOmradesChefActionPerformed
         // TODO add your handling code here:
@@ -427,23 +401,60 @@ public class AdminFonster extends javax.swing.JFrame {
        //Hela metoden fungerar på samma sätt som den ovan, men kommenterar för klarhetens skull.
         if (Validering.textFaltHarVarde(txtTaBortAlien) && Validering.isHelTal(txtTaBortAlien)){
         try {
+                
                 //Kollar så vår alien i fråga finns i systemet.
                 String alienAttTaBort = txtTaBortAlien.getText();
-                String finnsAlien = "SELECT alien_id from mibdb.alien where alien_id ="+alienAttTaBort;
+                String finnsAlien = "SELECT alien_id from alien where alien_id ="+alienAttTaBort;
                 String alienFanns = idb.fetchSingle(finnsAlien);
+               
                 
-                //Om frågan returnerar ett värde så tar den bort vald alien ur databasen.
+                
+                
+                //Om frågan returnerar ett värde så följs det av en koll på vilken ras vår alien är.
                 if(alienFanns != null) {
+                    //Egentligen lite osäker på varför jag la in denna men principen är bara att inkapsla borttagningen av vår "huvudalien"
+                    boolean alienRasBorttagning = true;
                     try {
-                        String alienBorttagning = "DELETE FROM mibdb.alien WHERE alien_id="+alienAttTaBort;
-                        idb.delete(alienBorttagning);
-                        JOptionPane.showMessageDialog(null, "Borttagning av alien lyckades"); }
-                       
+                        //Sätter ihop strängar för sqlfrågorna för att undvika upprepning.
+                        String alienRasKollFrom = "SELECT alien_id FROM ";
+                        String alienRasKollWhere = " WHERE alien_id="+alienFanns;
+                        
+                        //Kollar om matchande resultat finns i någon av de tre undertabellerna
+                        String bogloKoll = alienRasKollFrom + "boglodite" + alienRasKollWhere;
+                        String squidKoll = alienRasKollFrom + "squid" + alienRasKollWhere;
+                        String wormKoll = alienRasKollFrom + "squid" + alienRasKollWhere;
+                        
+                        String bogloSvar = idb.fetchSingle(bogloKoll);
+                        String squidSvar = idb.fetchSingle(squidKoll);
+                        String wormSvar = idb.fetchSingle(wormKoll);
+                        
+                        
+                        //Samma fråga med olika kriterier nedan, men de tre if-satserna kollar om nåt av värdena inte var null, stämmer det 
+                        if(bogloSvar != null) {
+                            String bogloBorttagning = "DELETE FROM boglodite WHERE alien_id="+alienFanns;
+                            idb.delete(bogloBorttagning);
+                    }
+                        if(squidSvar != null) {
+                            String squidBorttagning = "DELETE FROM squid WHERE alien_id=" +alienFanns;
+                            idb.delete(squidBorttagning);
+                        }
+                        
+                        if(wormSvar != null) {
+                            String wormBorttagning = "DELETE FROM worm WHERE alien_id="+alienFanns;
+                            idb.delete(wormBorttagning);
+                                    }
+                        
+                        //När alla andra frågor / delete satser körts genom så tar den bort alien sist. Anledningen för att ta bort de andra fälten är för att de inte är självständiga entiteter.
+                        if(alienRasBorttagning) {
+                            String alienBorttagning = "DELETE FROM mibdb.alien WHERE alien_id="+alienAttTaBort;
+                            idb.delete(alienBorttagning);
+                            JOptionPane.showMessageDialog(null, "Borttagning av alien lyckades"); }
+                        }
                     catch (InfException e) {
                            JOptionPane.showMessageDialog(null, "Något gick fel"); }
                 }else {
                             //Om frågan returnerar null på aliens id.
-                            JOptionPane.showMessageDialog(null, "Användaren hittade inte i systemet");
+                            JOptionPane.showMessageDialog(null, "Användaren hittades inte i systemet");
                 }}
             catch(InfException e) {
                             JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -497,7 +508,6 @@ public class AdminFonster extends javax.swing.JFrame {
                 String agentAttTaBort = txtTaBortAgent.getText();
                 String finnsAgent = "SELECT agent_id from mibdb.agent where agent_id ="+agentAttTaBort;
                 String agentFanns = idb.fetchSingle(finnsAgent);
-                
                 //Om fältet ej var tomt, kör nedanstående
                 if(agentFanns != null) {
                     try {
@@ -562,8 +572,6 @@ public class AdminFonster extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbAgentID;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel lblBefordraAgent;
     private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblId;
@@ -572,10 +580,12 @@ public class AdminFonster extends javax.swing.JFrame {
     private javax.swing.JLabel lblTaBortAlien;
     private javax.swing.JLabel lblTaBortUtrustning;
     private javax.swing.JTextField txtBefordraAgent;
+    private javax.swing.JTextField txtBefordraKontorsChef;
+    private javax.swing.JTextField txtBefordraOmradesChef;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtTaBortAgent;
     private javax.swing.JTextField txtTaBortAlien;
     private javax.swing.JTextField txtTaBortUtrustning;
-    private javax.swing.JTextField txtfldAlienInfo1;
+    private javax.swing.JTextField txtfldAgentInfo;
     // End of variables declaration//GEN-END:variables
 }
