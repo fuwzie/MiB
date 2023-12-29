@@ -50,7 +50,7 @@ public class RedigeraAlienAgent extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Redigera alien");
@@ -62,7 +62,7 @@ public class RedigeraAlienAgent extends javax.swing.JFrame {
             }
         });
 
-        cbAndraAlien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Registreringsdatum", "E-post", "Lösenord", "Namn", "Telefonnummer", "Plats", "Ansvarig agent" }));
+        cbAndraAlien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Registreringsdatum", "Lösenord", "Namn", "Telefonnummer", "Plats", "Ansvarig agent" }));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Ange alien-ID");
@@ -85,7 +85,7 @@ public class RedigeraAlienAgent extends javax.swing.JFrame {
             }
         });
 
-        cbAndraAgent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Namn", "Telefonnummer", "Anställningsdatum", "Administratörsstatus", "E-post", "Lösenord", "Område" }));
+        cbAndraAgent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Namn", "Telefonnummer", "Anställningsdatum", "Administratörsstatus", "Lösenord", "Område" }));
 
         txtAngeAgentID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,10 +203,6 @@ public class RedigeraAlienAgent extends javax.swing.JFrame {
         
         sqlFraga = "UPDATE alien SET registreringsdatum = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
     }
-        else if ("E-post".equals(valdAndring)){
-        
-        sqlFraga = "UPDATE alien SET epost = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-    }
         else if ("Lösenord".equals(valdAndring)){
         
         sqlFraga = "UPDATE alien SET losenord = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
@@ -261,10 +257,7 @@ public class RedigeraAlienAgent extends javax.swing.JFrame {
         
         sqlFraga = "UPDATE agent SET administrator = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
     }
-        else if ("E-post".equals(valdAndring)){
         
-        sqlFraga = "UPDATE agent SET epost = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
-    }
         else if ("Lösenord".equals(valdAndring)){
         
         sqlFraga = "UPDATE agent SET losenord = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
