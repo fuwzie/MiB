@@ -107,13 +107,12 @@
                                       <Component id="txtAgentInfoID" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="btnRedigeraAgent" max="32767" attributes="0"/>
-                                          <Component id="btnRegistreraAgent" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btnRedigeraAlien" min="-2" pref="126" max="-2" attributes="0"/>
-                                          <Component id="btnRegistreraAlien" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="btnRegistreraAgent" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                              <Component id="btnRegistreraAlien" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="btnRedigeraAlien" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   </Group>
@@ -138,10 +137,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="lblValkommenAdmin" min="-2" pref="55" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnRedigeraAlien" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnRedigeraAgent" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnRedigeraAlien" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="0" attributes="0">
@@ -245,8 +241,11 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnRedigeraAlien">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Redigera en alien"/>
+        <Property name="text" type="java.lang.String" value="Redigera enskild alien eller agent"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRedigeraAlienActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTaBortAlien">
       <Properties>
@@ -270,14 +269,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistreraAgentActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnRedigeraAgent">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Redigera en agent"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRedigeraAgentActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTaBortAgent">
