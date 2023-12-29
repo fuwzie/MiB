@@ -29,12 +29,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Component id="btnOmradeSok" min="-2" pref="162" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="btnRasSok" min="-2" pref="162" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -75,6 +69,10 @@
               <Component id="btnEnskildAlienSok" min="-2" pref="56" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="btnOmradeRasSok" min="-2" pref="257" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -83,10 +81,7 @@
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="lblAlienRegister" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnRasSok" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnOmradeSok" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnOmradeRasSok" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblDatumSok" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -120,12 +115,12 @@
         <Property name="text" type="java.lang.String" value="Alienregister"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnOmradeSok">
+    <Component class="javax.swing.JButton" name="btnOmradeRasSok">
       <Properties>
-        <Property name="text" type="java.lang.String" value="S&#xf6;k efter omr&#xe5;de"/>
+        <Property name="text" type="java.lang.String" value="S&#xf6;k efter omr&#xe5;de eller ras"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOmradeSokActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOmradeRasSokActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDatum1">
@@ -139,14 +134,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEnskildAlienSokActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnRasSok">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="S&#xf6;k efter ras"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRasSokActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDatumSok">

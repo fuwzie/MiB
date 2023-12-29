@@ -39,10 +39,9 @@ public class AlienRegister extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         lblAlienRegister = new javax.swing.JLabel();
-        btnOmradeSok = new javax.swing.JButton();
+        btnOmradeRasSok = new javax.swing.JButton();
         txtDatum1 = new javax.swing.JTextField();
         txtEnskildAlienSok = new javax.swing.JTextField();
-        btnRasSok = new javax.swing.JButton();
         btnDatumSok = new javax.swing.JButton();
         btnEnskildAlienSok = new javax.swing.JButton();
         lblDatumSok = new javax.swing.JLabel();
@@ -59,10 +58,10 @@ public class AlienRegister extends javax.swing.JFrame {
         lblAlienRegister.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblAlienRegister.setText("Alienregister");
 
-        btnOmradeSok.setText("Sök efter område");
-        btnOmradeSok.addActionListener(new java.awt.event.ActionListener() {
+        btnOmradeRasSok.setText("Sök efter område eller ras");
+        btnOmradeRasSok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOmradeSokActionPerformed(evt);
+                btnOmradeRasSokActionPerformed(evt);
             }
         });
 
@@ -72,13 +71,6 @@ public class AlienRegister extends javax.swing.JFrame {
         txtEnskildAlienSok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEnskildAlienSokActionPerformed(evt);
-            }
-        });
-
-        btnRasSok.setText("Sök efter ras");
-        btnRasSok.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRasSokActionPerformed(evt);
             }
         });
 
@@ -118,11 +110,6 @@ public class AlienRegister extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btnOmradeSok, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(btnRasSok, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -155,6 +142,9 @@ public class AlienRegister extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnEnskildAlienSok, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnOmradeRasSok, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,9 +152,7 @@ public class AlienRegister extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(lblAlienRegister)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRasSok)
-                    .addComponent(btnOmradeSok))
+                .addComponent(btnOmradeRasSok)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDatumSok)
@@ -191,13 +179,9 @@ public class AlienRegister extends javax.swing.JFrame {
         // TODO  add your handling code here:
     }//GEN-LAST:event_txtEnskildAlienSokActionPerformed
 
-    private void btnOmradeSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOmradeSokActionPerformed
-        
-    }//GEN-LAST:event_btnOmradeSokActionPerformed
-
-    private void btnRasSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRasSokActionPerformed
-        
-    }//GEN-LAST:event_btnRasSokActionPerformed
+    private void btnOmradeRasSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOmradeRasSokActionPerformed
+        new OmradeRasSok(idb).setVisible(true);
+    }//GEN-LAST:event_btnOmradeRasSokActionPerformed
 
     private void btnDatumSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatumSokActionPerformed
     String startDatum = txtDatum1.getText();
@@ -297,8 +281,7 @@ public class AlienRegister extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDatumSok;
     private javax.swing.JButton btnEnskildAlienSok;
-    private javax.swing.JButton btnOmradeSok;
-    private javax.swing.JButton btnRasSok;
+    private javax.swing.JButton btnOmradeRasSok;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JScrollPane jScrollPane1;
