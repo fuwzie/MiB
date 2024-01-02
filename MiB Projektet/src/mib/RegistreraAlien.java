@@ -202,9 +202,34 @@ public class RegistreraAlien extends javax.swing.JFrame {
     String nyPlats = (String) txtAlienPlats.getText();
     String nyAnsvarigAgent = (String) txtAlienAnsvarigAgent.getText();
     
-    String sqlFraga = "INSERT INTO alien (alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent) VALUES ('" 
-        + nyttAlien_id + "', '" + nyttRegistreringsdatum + "', '" + nyEpost + "', '" + nyttLosenord + "', '" 
-        + nyttNamn + "', '" + nyTelefon + "', '" + nyPlats + "', '" + nyAnsvarigAgent + "')";
+        // Kolla så lösenord är max 6 tecken
+        if (nyttLosenord.length() > 6) {
+            JOptionPane.showMessageDialog(null, "Lösenordet får max vara 6 tecken!");
+            return;
+        }
+
+        // Kolla så alien/agent-id är integer med hjälp av metodanrop från isInteger
+        if (!isInteger(nyttAlien_id) || !isInteger(nyAnsvarigAgent)) {
+            JOptionPane.showMessageDialog(null, "Alien-ID och Ansvarig Agent måste vara heltal!");
+            return;
+        }
+
+        // Kolla så telefonnummer är siffror
+        if (!nyTelefon.matches("\\d+")) {
+            JOptionPane.showMessageDialog(null, "Telefonnummer måste vara siffror!");
+            return;
+        }
+
+        // Kolla emailformat
+        if (!nyEpost.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            JOptionPane.showMessageDialog(null, "Epostadressen är inte i rätt format!");
+            return;
+        }
+
+        // När alla villkor validerats, kör kod
+        String sqlFraga = "INSERT INTO alien (alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent) VALUES ('" 
+                + nyttAlien_id + "', '" + nyttRegistreringsdatum + "', '" + nyEpost + "', '" + nyttLosenord + "', '" 
+                + nyttNamn + "', '" + nyTelefon + "', '" + nyPlats + "', '" + nyAnsvarigAgent + "')";
 
         try {
             idb.insert(sqlFraga);
@@ -212,6 +237,14 @@ public class RegistreraAlien extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Något gick fel!" + ex.getMessage());
         }
     }//GEN-LAST:event_btnRegistreraAlienActionPerformed
+    private boolean isInteger(String s) {
+        try {
+            Integer.valueOf(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
     private void cbAlienRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienRasActionPerformed
     
