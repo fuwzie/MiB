@@ -274,14 +274,15 @@ public class RedigeraAlien extends javax.swing.JFrame {
        if(Validering.kollaOmAlienFinns(txtAngeAlienIDRas)) {
            
            String id = txtAngeAlienIDRas.getText().trim();
-           String nyRas = (String) cbTidigareRas.getSelectedItem();
+           String nyRas = (String) cbNyRas.getSelectedItem();
+           String tidigareRas = (String) cbTidigareRas.getSelectedItem();
            
 
            String input = null;
            String sqlDelete = "";
            String sqlInsert = "";
         
-         switch (nyRas) {
+         switch (tidigareRas) {
              case "Boglodite":
                sqlDelete = "DELETE FROM boglodite WHERE alien_id = '" + id + "'";
                break;
