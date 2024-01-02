@@ -15,12 +15,14 @@ import oru.inf.InfException;
 public class RedigeraAgent extends javax.swing.JFrame {
     
         private InfDB idb;
+        private String loginID;
     /**
      * Creates new form RedigeraAgent
      */
-    public RedigeraAgent(InfDB idb) {
+    public RedigeraAgent(InfDB idb, String loginID) {
         initComponents();
         this.idb = idb;
+        this.loginID = loginID;
     }
 
     /**
@@ -32,16 +34,25 @@ public class RedigeraAgent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblAgentID = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnVerkstallAgent = new javax.swing.JButton();
         cbAndraAgent = new javax.swing.JComboBox<>();
         txtAngeAgentID = new javax.swing.JTextField();
         txtNyttVardeAgent = new javax.swing.JTextField();
-        lblAgentID = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        lblAgentID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAgentID.setText("Ange agent-ID");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setText("Välj vad du vill ändra");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setText("Ange nytt värde");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Redigera agent");
@@ -54,21 +65,6 @@ public class RedigeraAgent extends javax.swing.JFrame {
         });
 
         cbAndraAgent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Namn", "Telefonnummer", "Anställningsdatum", "Administratörsstatus", "Lösenord", "Område" }));
-
-        txtAngeAgentID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAngeAgentIDActionPerformed(evt);
-            }
-        });
-
-        lblAgentID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblAgentID.setText("Ange agent-ID");
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setText("Välj vad du vill ändra");
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel8.setText("Ange nytt värde");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,7 +88,7 @@ public class RedigeraAgent extends javax.swing.JFrame {
                             .addComponent(txtNyttVardeAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnVerkstallAgent)))
-                    .addContainerGap(103, Short.MAX_VALUE)))
+                    .addContainerGap(104, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,48 +118,67 @@ public class RedigeraAgent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerkstallAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerkstallAgentActionPerformed
-        String sqlFraga = "";
-        String id = (String) txtAngeAgentID.getText();
-        String valdAndring = (String) cbAndraAgent.getSelectedItem();
-        String nyttVarde = (String) txtNyttVardeAgent.getText();
+        if(Validering.kollaOmAgentFinns(txtAngeAgentID)){
+            String sqlFraga = "";
+            String id = (String) txtAngeAgentID.getText();
+            String valdAndring = (String) cbAndraAgent.getSelectedItem();
+            String nyttVarde = (String) txtNyttVardeAgent.getText();
+            boolean valideringLyckad = false;
 
-        if ("Namn".equals(valdAndring)){
-            sqlFraga = "UPDATE agent SET namn = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
-        }
-        else if ("Telefonnummer".equals(valdAndring)){
-            sqlFraga = "UPDATE agent SET telefon = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
-        }
-        else if ("Anställningsdatum".equals(valdAndring)){
-
-            sqlFraga = "UPDATE agent SET anstallningsdatum = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
-        }
-        else if ("Administratörsstatus".equals(valdAndring)){
-
-            sqlFraga = "UPDATE agent SET administrator = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
-        }
-
-        else if ("Lösenord".equals(valdAndring)){
-
-            sqlFraga = "UPDATE agent SET losenord = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
-        }
-        else if ("Område".equals(valdAndring)){
-
-            sqlFraga = "UPDATE agent SET omrade = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
-        }
-        if (nyttVarde != null && !nyttVarde.trim().isEmpty()) {
-            try {
-                idb.update(sqlFraga);
-            } catch (InfException ex) {
-                JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+            if (null != valdAndring)switch (valdAndring) {
+                case "Namn":
+                if(Validering.kollaNamnFormat(txtNyttVardeAgent)) {
+                    sqlFraga = "UPDATE agent SET namn = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
+                    valideringLyckad = true;
+                }      break;
+                case "Telefonnummer":
+                if(Validering.kollaTelefonFormat(txtNyttVardeAgent)) {
+                    sqlFraga = "UPDATE agent SET telefon = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
+                    valideringLyckad = true;
+                }      break;
+                case "Anställningsdatum":
+                if(Validering.kollaDatumFormat(txtNyttVardeAgent)) {
+                    sqlFraga = "UPDATE agent SET anstallningsdatum = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
+                    valideringLyckad = true;
+                }          break;
+                case "Administratörsstatus":
+                if(!id.equals(loginID)) {
+                    if(nyttVarde.equals("J") || nyttVarde.equals("N")) {
+                        sqlFraga = "UPDATE agent SET administrator = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
+                        valideringLyckad = true;
+                    }
+                    else {
+                        nyttVarde = "";
+                        JOptionPane.showMessageDialog(null, "Ange endast J eller N som adminstatus.");
+                    } } else {
+                        JOptionPane.showMessageDialog(null, "Du kan inte redigera din egna administratörsstatus.");}          break;
+                    case "Lösenord":
+                    if(Validering.kollaLosenordLangd(txtNyttVardeAgent)) {
+                        sqlFraga = "UPDATE agent SET losenord = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
+                        valideringLyckad = true;
+                    }          break;
+                    case "Område":
+                    if(Validering.kollaOmOmradeFinns(txtNyttVardeAgent)) {
+                        sqlFraga = "UPDATE agent SET omrade = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
+                        valideringLyckad = true;
+                    }          break;
+                    default:
+                    break;
+                }
+                if(!valideringLyckad) {
+                    nyttVarde = "";
+                }
+                if (nyttVarde != null && !nyttVarde.trim().isEmpty()) {
+                    try {
+                        idb.update(sqlFraga);
+                        JOptionPane.showMessageDialog(null, "Uppdatering lyckades.");
+                    } catch (InfException ex) {
+                        JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+                        System.out.println("Internt felmeddelande:" + ex);
+                    }
+                }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Textfältet kan inte vara tomt!");
-        }
     }//GEN-LAST:event_btnVerkstallAgentActionPerformed
-
-    private void txtAngeAgentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAngeAgentIDActionPerformed
-
-    }//GEN-LAST:event_txtAngeAgentIDActionPerformed
 
     /**
      * @param args the command line arguments

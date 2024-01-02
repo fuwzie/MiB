@@ -210,77 +210,78 @@ public class RedigeraAlien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerkstallAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerkstallAlienActionPerformed
+        if(Validering.kollaOmAlienFinns(txtAngeAlienID)){
         String sqlFraga = "";
     String id = txtAngeAlienID.getText();
     String valdAndring = (String) cbAndraAlien.getSelectedItem();
     String nyttVarde = txtNyttVardeAlien.getText();
-    
+    boolean lyckadValidering = false;
+ 
     if (nyttVarde != null && !nyttVarde.trim().isEmpty()) {
-        if ("Lösenord".equals(valdAndring)) {
-            // Kontrollerar att lösenordet är max 6 tecken
-            if (nyttVarde.length() <= 6) {
-                sqlFraga = "UPDATE alien SET losenord = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-            } else {
-                JOptionPane.showMessageDialog(null, "Lösenord får vara max 6 tecken!");
-                return;
+        if (null != valdAndring) switch (valdAndring) {
+                case "Lösenord":
+                    // Kontrollerar att lösenordet är max 6 tecken
+                    if (Validering.kollaLosenordLangd(txtNyttVardeAlien)) {
+                        sqlFraga = "UPDATE alien SET losenord = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                        lyckadValidering = true;
+                    }       break;
+                case "Registreringsdatum":
+                    // Kontrollerar att datumet är i formatet ÅÅÅÅ-MM-DD
+                    if (Validering.kollaDatumFormat(txtNyttVardeAlien)) {
+                        sqlFraga = "UPDATE alien SET registreringsdatum = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                        lyckadValidering = true;
+                    }       break;
+                case "Telefonnummer":
+                    // Kontrollerar att telefonnumret endast innehåller siffror
+                    if (Validering.kollaTelefonFormat(txtNyttVardeAlien)) {
+                        sqlFraga = "UPDATE alien SET telefon = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                        lyckadValidering = true;
+                    }       break;
+                case "Ansvarig agent":
+                    // Kontrollerar att ansvarig agent finns i databasen
+                    if (Validering.kollaOmAgentFinns(txtNyttVardeAlien)) {
+                        sqlFraga = "UPDATE alien SET ansvarig_agent = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                        lyckadValidering = true;
+                    }       break;
+                case "Plats":
+                    //  Kontrollerar att platsen finns i databasen
+                    if(Validering.kollaOmPlatsFinns(txtNyttVardeAlien))
+                        sqlFraga = "UPDATE alien SET plats = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                    lyckadValidering = true;
+                    break;
+                case "Namn":
+                    //  Kontrollerar att namnet inte är för långt
+                    if(Validering.kollaNamnFormat(txtNyttVardeAlien))
+                        sqlFraga = "UPDATE alien SET namn = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                    lyckadValidering = true;
+                    break;
+                default:
+                    break;
             }
-        } else if ("Registreringsdatum".equals(valdAndring)) {
-            // Kontrollerar att datumet är i formatet ÅÅÅÅ-MM-DD
-            if (nyttVarde.matches("\\d{4}-\\d{2}-\\d{2}")) {
-                sqlFraga = "UPDATE alien SET registreringsdatum = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-            } else {
-                JOptionPane.showMessageDialog(null, "Datumet måste vara i formatet ÅÅÅÅ-MM-DD!");
-                return;
-            }
-        } else if ("Telefonnummer".equals(valdAndring)) {
-            // Kontrollerar att telefonnumret endast innehåller siffror
-            if (nyttVarde.matches("\\d+")) {
-                sqlFraga = "UPDATE alien SET telefon = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-            } else {
-                JOptionPane.showMessageDialog(null, "Telefonnummer måste vara siffror!");
-                return;
-            }
-        } else if ("Ansvarig agent".equals(valdAndring)) {
-            // Kontrollerar att ansvarig agent är ett heltal
-            if (isInteger(nyttVarde)) {
-                sqlFraga = "UPDATE alien SET ansvarig_agent = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-            } else {
-                JOptionPane.showMessageDialog(null, "Ansvarig agent måste vara ett heltal!");
-                return;
-            }
-        } else { // I det fall validering ej behövs
-            sqlFraga = "UPDATE alien SET " + valdAndring.toLowerCase() + " = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-        }
-
+        if(lyckadValidering = true) {
         try {
             idb.update(sqlFraga);
+            JOptionPane.showMessageDialog(null, "Uppdatering av uppgifter lyckades.");
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
         }
-    } else {
-        JOptionPane.showMessageDialog(null, "Textfältet kan inte vara tomt!");
-    }
-     }
-    private boolean isInteger(String s) {
-    try {
-        Integer.parseInt(s);
-        return true;
-    } catch (NumberFormatException e) {
-        return false;
-    }
+    }}}
+     
+    
     }//GEN-LAST:event_btnVerkstallAlienActionPerformed
 
     private void btnVerkstallRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerkstallRasActionPerformed
-       
+       if(Validering.kollaOmAlienFinns(txtAngeAlienIDRas)) {
+           
            String id = txtAngeAlienIDRas.getText().trim();
-           String tidigareRas = (String) cbTidigareRas.getSelectedItem();
-           String nyRas = (String) cbNyRas.getSelectedItem();
+           String nyRas = (String) cbTidigareRas.getSelectedItem();
+           
 
            String input = null;
            String sqlDelete = "";
            String sqlInsert = "";
-
-         switch (tidigareRas) {
+        
+         switch (nyRas) {
              case "Boglodite":
                sqlDelete = "DELETE FROM boglodite WHERE alien_id = '" + id + "'";
                break;
@@ -325,8 +326,7 @@ if (input != null && !input.isEmpty()) {
     }
 } else {
     JOptionPane.showMessageDialog(null, "Attributet kan inte vara tomt!");
-}
-
+}}
     }//GEN-LAST:event_btnVerkstallRasActionPerformed
 
     private void cbTidigareRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTidigareRasActionPerformed
