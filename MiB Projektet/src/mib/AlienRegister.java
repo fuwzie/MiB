@@ -68,11 +68,6 @@ public class AlienRegister extends javax.swing.JFrame {
         txtDatum1.setText("2020-01-09");
 
         txtEnskildAlienSok.setText("Ange alien-ID");
-        txtEnskildAlienSok.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEnskildAlienSokActionPerformed(evt);
-            }
-        });
 
         btnDatumSok.setText("Sök");
         btnDatumSok.addActionListener(new java.awt.event.ActionListener() {
@@ -174,10 +169,6 @@ public class AlienRegister extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtEnskildAlienSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnskildAlienSokActionPerformed
-        // TODO  add your handling code here:
-    }//GEN-LAST:event_txtEnskildAlienSokActionPerformed
 
     private void btnOmradeRasSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOmradeRasSokActionPerformed
         new OmradeRasSok(idb).setVisible(true);

@@ -132,9 +132,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ange alien-ID"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEnskildAlienSokActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDatumSok">
       <Properties>
