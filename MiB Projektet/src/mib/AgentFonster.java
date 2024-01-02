@@ -4,6 +4,8 @@
  */
 package mib;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -59,6 +61,9 @@ public class AgentFonster extends javax.swing.JFrame {
         btnLosenordsAndring = new javax.swing.JButton();
         txtSokOmradesAnsvarig = new javax.swing.JTextField();
         lblSokOmradesAnsvarig = new javax.swing.JLabel();
+        btnToppTre = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtToppTre = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,6 +114,17 @@ public class AgentFonster extends javax.swing.JFrame {
 
         lblSokOmradesAnsvarig.setText("Sök områdesansvarig");
 
+        btnToppTre.setText("Visa topp 3 agenter med flest aliens");
+        btnToppTre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToppTreActionPerformed(evt);
+            }
+        });
+
+        txtToppTre.setColumns(20);
+        txtToppTre.setRows(5);
+        jScrollPane1.setViewportView(txtToppTre);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,21 +141,27 @@ public class AgentFonster extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRegistreraUtrustning)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-                        .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSokAlien)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnRegistreraAlien)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                        .addComponent(cbSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRegistreraUtrustning)
+                            .addComponent(btnSokAlien))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblSokOmradesAnsvarig)
-                .addGap(14, 14, 14))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblSokOmradesAnsvarig)
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnToppTre, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,6 +186,10 @@ public class AgentFonster extends javax.swing.JFrame {
                         .addContainerGap(96, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnToppTre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnLogOut)
@@ -209,6 +235,40 @@ public class AgentFonster extends javax.swing.JFrame {
         new RegistreraUtrustning(idb).setVisible(true);
     }//GEN-LAST:event_btnRegistreraUtrustningActionPerformed
 
+    private void btnToppTreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToppTreActionPerformed
+        String sqlFraga = "SELECT Agent.Namn, COUNT(Alien.Alien_ID) AS Antal_Aliens " +
+                  "FROM Agent " +
+                  "JOIN Alien ON Agent.Agent_ID = Alien.Ansvarig_Agent " +
+                  "GROUP BY Agent.Agent_ID " +
+                  "ORDER BY Antal_Aliens DESC " +
+                  "LIMIT 3";
+
+try {
+    // Antag att idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMaps baserat på SQL-frågan
+    ArrayList<HashMap<String, String>> topAgentLista = idb.fetchRows(sqlFraga);
+    
+    // Rensa tidigare text i textrutan
+    txtToppTre.setText("");
+    
+    // Iterera genom listan och skriv ut agentnamn och antal ansvariga aliens
+    for (HashMap<String, String> agentData : topAgentLista) {
+        // Hämta data från HashMap
+        String agentNamn = agentData.get("Namn");
+        String antalAliens = agentData.get("Antal_Aliens");
+        
+        // Formatering av output
+        String output = String.format("Agentnamn: %s, Antal Aliens: %s%n", 
+                                      agentNamn, antalAliens);
+        
+        // Output skickas ut i textrutan
+        txtToppTre.append(output);
+    }
+} catch (InfException ex) {
+    JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+}
+   
+    }//GEN-LAST:event_btnToppTreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -247,9 +307,12 @@ public class AgentFonster extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistreraAlien;
     private javax.swing.JButton btnRegistreraUtrustning;
     private javax.swing.JButton btnSokAlien;
+    private javax.swing.JButton btnToppTre;
     private javax.swing.JComboBox<String> cbSokOmradesAnsvarig;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblSokOmradesAnsvarig;
     private javax.swing.JLabel lblValkommenAgent;
     private javax.swing.JTextField txtSokOmradesAnsvarig;
+    private javax.swing.JTextArea txtToppTre;
     // End of variables declaration//GEN-END:variables
 }
