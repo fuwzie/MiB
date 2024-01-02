@@ -192,10 +192,10 @@ public class RegistreraAlien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbAlienRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienRasActionPerformed
-       if (Validering.kollaUniktIDAlien(txtAlienID)
+       if (Validering.kollaUniktIDAlien(txtAlienID) && Validering.kollaOmPlatsFinns(txtAlienPlats)
             && Validering.kollaDatumFormat(txtAlienRegistreringsDatum) && Validering.kollaOmAgentFinns(txtAlienAnsvarigAgent)
             && Validering.kollaUnikEpostForAlien(txtAlienEpost) && Validering.kollaLosenordLangd(txtAlienLosenord)
-            && Validering.kollaNamn(txtAlienNamn) && Validering.kollaTelefonFormat(txtAlienTelefon)) {
+            && Validering.kollaNamnFormat(txtAlienNamn) && Validering.kollaTelefonFormat(txtAlienTelefon)) {
 
             String nyttAlien_id = (String) txtAlienID.getText();
             String nyttRegistreringsdatum = txtAlienRegistreringsDatum.getText();

@@ -195,10 +195,10 @@ public class Validering {
     
      public static boolean kollaUnikEpostForAlien(JTextField nyEpost) {
         //Sätter värdet på unik epost till sant som default
-         boolean epost = true;
+         boolean epost = false;
         if(textFaltHarVarde(nyEpost)) {
         String alienText = nyEpost.getText();
-        if(alienText.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+        if (alienText.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
         //Om strängen inte slutar med @mib.net (agenteposten), fortsätt med metod
         if(!alienText.endsWith("@mib.net")) {
         
@@ -209,8 +209,10 @@ public class Validering {
                 
                 if(alienSvar != null) {
                     //Om eposten fanns, sätt värde till false (inte unikt) och ge felmeddelande
-                    epost = false;
                     JOptionPane.showMessageDialog(null, "Eposten var inte unik"); }
+                else {
+                    epost = true;
+                }
         }   catch (InfException ex) {
                 JOptionPane.showMessageDialog(null, "Något gick fel.");
         }} 
@@ -225,10 +227,10 @@ public class Validering {
     }
      public static boolean kollaUnikEpostForAgent(JTextField nyEpost) {
         //Sätter värdet på unik epost till sant som default
-         boolean epost = true;
+         boolean epost = false;
         if(textFaltHarVarde(nyEpost)) {
         String agentText = nyEpost.getText();
-        if(!agentText.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+        if (agentText.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
         //Om strängen inte slutar med @mib.net (agenteposten), fortsätt med metod
         if(agentText.endsWith("@mib.net")) {
         
@@ -238,9 +240,11 @@ public class Validering {
                 String agentSvar = idb.fetchSingle(agentFraga);
                 
                 if(agentSvar != null) {
-                    //Om eposten fanns, sätt värde till false (inte unikt) och ge felmeddelande
-                    epost = false;
+                    //Om eposten fanns, ge felmeddelande
                     JOptionPane.showMessageDialog(null, "Eposten var inte unik"); }
+                else {
+                    epost = true;
+                }
         }   catch (InfException ex) {
                 JOptionPane.showMessageDialog(null, "Något gick fel.");
         }} 
@@ -270,11 +274,11 @@ public class Validering {
         return godkantLosenord;
     }
     public static boolean kollaTelefonFormat(JTextField telefonAttKolla) {
-        boolean formatStammer = true;
+        boolean formatStammer = false;
 
     // Hämtar ut värdet för att kunna kolla om det är tomt
     String telefonenAttKolla = telefonAttKolla.getText();
-
+    if(telefonenAttKolla.length() <= 30){
     if (telefonenAttKolla != null && !telefonenAttKolla.isEmpty()) {
         if (telefonenAttKolla.matches("\\d+-\\d+")) {
             // Om formatet är giltigt, returnera true
@@ -282,17 +286,19 @@ public class Validering {
         } else {
             // Om användaren inte använder siffror-siffror som format.
             JOptionPane.showMessageDialog(null, "Ogiltigt telefonnummerformat. Använd formatet: siffror-siffror");
-            formatStammer = false;
         }
     } else {
         // Om telefonnumret är tomt
         JOptionPane.showMessageDialog(null, "Telefonnumret får inte vara tomt");
-        formatStammer = false;
     }
-
+    }
+    else {
+        //Om telefonnumret är för långt
+        JOptionPane.showMessageDialog(null, "Angivet telefonnummer är för långt.");
+    }
     return formatStammer;
 }
-    public static boolean kollaNamn(JTextField namnAttKolla) {
+    public static boolean kollaNamnFormat(JTextField namnAttKolla) {
         boolean namnLangd = false;
         if(textFaltHarVarde(namnAttKolla)) {
             String namnet = namnAttKolla.getText();
@@ -378,6 +384,25 @@ public class Validering {
             }
         return utrustningFanns;
     }
+    public static boolean kollaOmPlatsFinns(JTextField platsAttKolla) {
+        boolean platsFanns = false;
+        String platsKoll = platsAttKolla.getText();
+        if(textFaltHarVarde(platsAttKolla) && isHelTal(platsAttKolla)) {
+            try {
+            String kollaOmplatsFinns = "SELECT plats_id FROM plats WHERE plats_id = " + platsKoll;
+            String fannsplats = idb.fetchSingle(kollaOmplatsFinns);
+            if(fannsplats != null) {
+                platsFanns = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Vald plats fanns inte i databasen.");
+            }
+        } catch(InfException ex) {
+            JOptionPane.showMessageDialog(null, "Vald plats fanns inte i databasen.");
+            System.out.println("Internt felmeddelande: " + ex);
+        }}
+        return platsFanns;
+    } 
 }
 
 

@@ -203,68 +203,16 @@ public class RegistreraAgent extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-        public  boolean kollaUniktIDAgent (JTextField idRuta) {
-       //Sätter värdet på unikt ID till true som default;
-        boolean uniktId = true;
-        if(Validering.textFaltHarVarde(idRuta) && Validering.isHelTal(idRuta)) {
-            
-        //Hämtar ut värdet på ID för att sedan kunna användas i sql-frågor
-        String idKoll = idRuta.getText();
         
-        try {
-            
-             //Kollar om inmatade ID finns i registret
-            String idFraga = "SELECT agent_id FROM agent WHERE agent_id = " + idKoll;
-            String idSvar = idb.fetchSingle(idFraga);
-            
-            if(idSvar != null) {
-                //Om ID returnerar värde, tala om för användare att ID inte är unikt.
-                uniktId = false;
-                JOptionPane.showMessageDialog(null, "Agentens ID måste vara unikt.");
-            }
-        } catch(InfException ex) {
-           JOptionPane.showMessageDialog(null, "Något gick fel");
-           System.out.println("Internt felmeddelande: " + ex);
-        }
-       }
-       return uniktId;
-    }
-        
-        public boolean kollaUnikEpostForAgent(JTextField txtAgentEpost) {
-        //Sätter värdet på unik epost till sant som default
-        boolean epost = true;
-        if(Validering.textFaltHarVarde(txtAgentEpost)) {
-        String agentText = txtAgentEpost.getText();
-        
-        //Om strängen slutar med @mib.net (agenteposten), fortsätt med metod
-        if(agentText.endsWith("@mib.net")) {
-       
-            try{
-                
-                //Kolla om eposten finns i registret redan.
-                String agentFraga = "SELECT epost from agent WHERE epost = '" + agentText +"'";
-                String agentSvar = idb.fetchSingle(agentFraga);
-        
-                if(agentSvar != null) {
-                    //Om matchande epost hittades, sätt värdet till false (inte unikt) och ge felmeddelande.
-                    epost = false;
-                    JOptionPane.showMessageDialog(null, "Agentens epost måste vara unik.");
-        }
-       } catch (InfException ex) {
-           JOptionPane.showMessageDialog(null, "Något gick fel.");
-           System.out.println("Internt felmeddelande: " + ex);
-       } }
-        else { 
-            //Om eposten inte är en "agentepost" dvs slutar med "@mib.net"
-            epost = false;
-            JOptionPane.showMessageDialog(null, "Eposten är inte giltig för en agent, måste sluta med @mib.net");
-        } }
-        return epost;
-    }
     
     private void btnRegistreraAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAgentActionPerformed
     //Massiv validering som kollar så alla textfält har värden, de som är int (id och område) valideras så att de är heltal, epost och id jämförs även i databasen för att se om de är unika.
-        if(kollaUniktIDAgent(txtAgentId) && Validering.textFaltHarVarde(txtAgentNamn) && Validering.textFaltHarVarde(txtAgentTelefon) && Validering.textFaltHarVarde(txtAgentAnstallningsDatum) && kollaUnikEpostForAgent(txtAgentEpost) && Validering.kollaLosenordLangd(txtAgentLosenord)) {
+        if (Validering.kollaUniktIDAgent(txtAgentId) 
+    && Validering.kollaNamnFormat(txtAgentNamn) 
+    && Validering.kollaTelefonFormat(txtAgentTelefon) 
+    && Validering.kollaDatumFormat(txtAgentAnstallningsDatum) 
+    && Validering.kollaUnikEpostForAgent(txtAgentEpost) 
+    && Validering.kollaLosenordLangd(txtAgentLosenord)) {
             String nyttAgent_id = txtAgentId.getText();
             String nyttNamn = txtAgentNamn.getText();
             String nyTelefon = txtAgentTelefon.getText();
