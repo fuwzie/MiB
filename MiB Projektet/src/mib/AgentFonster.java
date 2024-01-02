@@ -52,6 +52,8 @@ public class AgentFonster extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         btnLogOut = new javax.swing.JButton();
         lblValkommenAgent = new javax.swing.JLabel();
         btnRegistreraAlien = new javax.swing.JButton();
@@ -64,6 +66,14 @@ public class AgentFonster extends javax.swing.JFrame {
         btnToppTre = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtToppTre = new javax.swing.JTextArea();
+        jSeparator1 = new javax.swing.JSeparator();
+        btnVisaUtrustning = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtVisaUtrustning = new javax.swing.JTextArea();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +84,7 @@ public class AgentFonster extends javax.swing.JFrame {
             }
         });
 
+        lblValkommenAgent.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblValkommenAgent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblValkommenAgent.setText("Välkommen Agent!");
 
@@ -112,6 +123,7 @@ public class AgentFonster extends javax.swing.JFrame {
             }
         });
 
+        lblSokOmradesAnsvarig.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSokOmradesAnsvarig.setText("Sök områdesansvarig");
 
         btnToppTre.setText("Visa topp 3 agenter med flest aliens");
@@ -125,43 +137,66 @@ public class AgentFonster extends javax.swing.JFrame {
         txtToppTre.setRows(5);
         jScrollPane1.setViewportView(txtToppTre);
 
+        btnVisaUtrustning.setText("Visa min utrustning");
+        btnVisaUtrustning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaUtrustningActionPerformed(evt);
+            }
+        });
+
+        txtVisaUtrustning.setColumns(20);
+        txtVisaUtrustning.setRows(5);
+        jScrollPane3.setViewportView(txtVisaUtrustning);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(lblValkommenAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(btnLosenordsAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogOut))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRegistreraAlien)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
-                        .addComponent(cbSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRegistreraUtrustning)
-                            .addComponent(btnSokAlien))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblSokOmradesAnsvarig)
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnToppTre, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVisaUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnToppTre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnRegistreraAlien)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                                .addComponent(cbSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSokAlien)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(lblValkommenAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnRegistreraUtrustning)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,23 +212,26 @@ public class AgentFonster extends javax.swing.JFrame {
                         .addComponent(lblSokOmradesAnsvarig)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistreraUtrustning)
+                    .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSokAlien)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnToppTre)
+                    .addComponent(btnVisaUtrustning))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRegistreraUtrustning)
-                        .addGap(56, 56, 56)
-                        .addComponent(btnSokAlien)
-                        .addContainerGap(96, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnToppTre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnLogOut)
-                            .addComponent(btnLosenordsAndring)))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogOut)
+                    .addComponent(btnLosenordsAndring)))
         );
 
         pack();
@@ -269,6 +307,50 @@ try {
    
     }//GEN-LAST:event_btnToppTreActionPerformed
 
+    private void btnVisaUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaUtrustningActionPerformed
+       String sqlFraga = "SELECT u.Benamning, t.Kraftkalla, v.Kaliber "
+                    + "FROM innehar_utrustning iu "
+                    + "JOIN utrustning u ON iu.Utrustnings_ID = u.Utrustnings_ID "
+                    + "LEFT JOIN teknik t ON u.Utrustnings_ID = t.Utrustnings_ID "
+                    + "LEFT JOIN vapen v ON u.Utrustnings_ID = v.Utrustnings_ID "
+                    + "WHERE iu.Agent_ID = " + id;
+
+    try {
+        // Antag att idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMaps baserat på SQL-frågan
+        ArrayList<HashMap<String, String>> utrustningsLista = idb.fetchRows(sqlFraga);
+        
+        // Rensa tidigare text i textrutan
+        txtVisaUtrustning.setText("");
+        
+        // Iterera genom listan och skriv ut utrustningsinformation
+        for (HashMap<String, String> utrustning : utrustningsLista) {
+        // Hämta data från HashMap
+        String benamning = utrustning.get("Benamning");
+        String kraftkalla = utrustning.get("Kraftkalla");
+        String kaliber = utrustning.get("Kaliber");
+        
+        // Skapa en ny StringBuilder för output
+        StringBuilder output = new StringBuilder("Benämning: " + benamning);
+        
+        // Lägg endast till kraftkälla och kaliber i strängen om de inte är null
+        if (kraftkalla != null && !kraftkalla.isEmpty()) {
+            output.append(", Kraftkälla: ").append(kraftkalla);
+        }
+        if (kaliber != null && !kaliber.isEmpty()) {
+            output.append(", Kaliber: ").append(kaliber);
+        }
+        
+        // Lägg till en ny rad i output
+        output.append("\n");
+        
+        // Output skickas ut i textrutan
+        txtVisaUtrustning.append(output.toString());
+    }
+} catch (InfException ex) {
+    JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+}
+    }//GEN-LAST:event_btnVisaUtrustningActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -308,11 +390,17 @@ try {
     private javax.swing.JButton btnRegistreraUtrustning;
     private javax.swing.JButton btnSokAlien;
     private javax.swing.JButton btnToppTre;
+    private javax.swing.JButton btnVisaUtrustning;
     private javax.swing.JComboBox<String> cbSokOmradesAnsvarig;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblSokOmradesAnsvarig;
     private javax.swing.JLabel lblValkommenAgent;
     private javax.swing.JTextField txtSokOmradesAnsvarig;
     private javax.swing.JTextArea txtToppTre;
+    private javax.swing.JTextArea txtVisaUtrustning;
     // End of variables declaration//GEN-END:variables
 }
