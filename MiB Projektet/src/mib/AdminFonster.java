@@ -39,7 +39,7 @@ public class AdminFonster extends javax.swing.JFrame {
         lblValkommenAdmin = new javax.swing.JLabel();
         btnLogOut = new javax.swing.JButton();
         btnRegistreraAlien = new javax.swing.JButton();
-        btnRedigeraAlien = new javax.swing.JButton();
+        btnRedigeraAlienAgent = new javax.swing.JButton();
         btnTaBortAlien = new javax.swing.JButton();
         btnTaBortUtrustning = new javax.swing.JButton();
         btnRegistreraAgent = new javax.swing.JButton();
@@ -87,10 +87,10 @@ public class AdminFonster extends javax.swing.JFrame {
             }
         });
 
-        btnRedigeraAlien.setText("Redigera enskild alien eller agent");
-        btnRedigeraAlien.addActionListener(new java.awt.event.ActionListener() {
+        btnRedigeraAlienAgent.setText("Redigera enskild alien eller agent");
+        btnRedigeraAlienAgent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRedigeraAlienActionPerformed(evt);
+                btnRedigeraAlienAgentActionPerformed(evt);
             }
         });
 
@@ -270,7 +270,7 @@ public class AdminFonster extends javax.swing.JFrame {
                                                 .addComponent(btnRegistreraAgent)
                                                 .addGap(37, 37, 37)
                                                 .addComponent(btnRegistreraAlien))
-                                            .addComponent(btnRedigeraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(btnRedigeraAlienAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(14, 14, 14)))))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -284,7 +284,7 @@ public class AdminFonster extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblValkommenAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnRedigeraAlien)
+                .addComponent(btnRedigeraAlienAgent)
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -702,10 +702,10 @@ public class AdminFonster extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbAgentInfoAttributActionPerformed
 
-    private void btnRedigeraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAlienActionPerformed
+    private void btnRedigeraAlienAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAlienAgentActionPerformed
         new RedigeraAlienAgent(idb).setVisible(true);
         
-    }//GEN-LAST:event_btnRedigeraAlienActionPerformed
+    }//GEN-LAST:event_btnRedigeraAlienAgentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -719,7 +719,7 @@ public class AdminFonster extends javax.swing.JFrame {
     private javax.swing.JButton btnBytOmradesChef;
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnLosenordsAndring;
-    private javax.swing.JButton btnRedigeraAlien;
+    private javax.swing.JButton btnRedigeraAlienAgent;
     private javax.swing.JButton btnRegistreraAgent;
     private javax.swing.JButton btnRegistreraAlien;
     private javax.swing.JButton btnTaBortAgent;

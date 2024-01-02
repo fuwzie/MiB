@@ -112,7 +112,7 @@
                                               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                                               <Component id="btnRegistreraAlien" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="btnRedigeraAlien" max="32767" attributes="0"/>
+                                          <Component id="btnRedigeraAlienAgent" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                                   </Group>
@@ -137,7 +137,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="lblValkommenAdmin" min="-2" pref="55" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="btnRedigeraAlien" min="-2" max="-2" attributes="0"/>
+              <Component id="btnRedigeraAlienAgent" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="0" attributes="0">
@@ -239,12 +239,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistreraAlienActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnRedigeraAlien">
+    <Component class="javax.swing.JButton" name="btnRedigeraAlienAgent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Redigera enskild alien eller agent"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRedigeraAlienActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRedigeraAlienAgentActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTaBortAlien">

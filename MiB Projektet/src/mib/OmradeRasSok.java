@@ -40,14 +40,14 @@ public class OmradeRasSok extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtareaRasSok = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtareaOmradeSok = new javax.swing.JTextArea();
-        cbAlienOmraden = new javax.swing.JComboBox<>();
+        txtareaPlatsSok = new javax.swing.JTextArea();
+        cbAlienPlats = new javax.swing.JComboBox<>();
         cbAlienRas = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblVisaAliensEfterOmrade.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblVisaAliensEfterOmrade.setText("Visa aliens efter område");
+        lblVisaAliensEfterOmrade.setText("Visa alla aliens platser efter område");
 
         lblVisaAliensEfterRas.setText("Visa aliens efter ras");
 
@@ -55,14 +55,14 @@ public class OmradeRasSok extends javax.swing.JFrame {
         txtareaRasSok.setRows(5);
         jScrollPane1.setViewportView(txtareaRasSok);
 
-        txtareaOmradeSok.setColumns(20);
-        txtareaOmradeSok.setRows(5);
-        jScrollPane2.setViewportView(txtareaOmradeSok);
+        txtareaPlatsSok.setColumns(20);
+        txtareaPlatsSok.setRows(5);
+        jScrollPane2.setViewportView(txtareaPlatsSok);
 
-        cbAlienOmraden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Götaland", "Norrland", "Svealand" }));
-        cbAlienOmraden.addActionListener(new java.awt.event.ActionListener() {
+        cbAlienPlats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Götaland", "Norrland", "Svealand" }));
+        cbAlienPlats.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAlienOmradenActionPerformed(evt);
+                cbAlienPlatsActionPerformed(evt);
             }
         });
 
@@ -86,12 +86,13 @@ public class OmradeRasSok extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(lblVisaAliensEfterOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(57, 57, 57)
-                        .addComponent(cbAlienOmraden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbAlienPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(lblVisaAliensEfterOmrade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(78, 78, 78)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblVisaAliensEfterRas, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbAlienRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -106,7 +107,7 @@ public class OmradeRasSok extends javax.swing.JFrame {
                     .addComponent(lblVisaAliensEfterOmrade, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbAlienOmraden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbAlienPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbAlienRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,36 +121,34 @@ public class OmradeRasSok extends javax.swing.JFrame {
 
     
    
-    private void cbAlienOmradenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienOmradenActionPerformed
-    String valtOmrade = (String) cbAlienOmraden.getSelectedItem();
-    String sqlFraga = "SELECT * FROM alien WHERE plats in (SELECT plats_id FROM plats WHERE finns_i IN (SELECT omrades_id FROM omrade WHERE benamning = '" + valtOmrade + "'))";
+    private void cbAlienPlatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienPlatsActionPerformed
+    String valtPlats = (String) cbAlienPlats.getSelectedItem();
+    String sqlFraga = "SELECT alien.Alien_ID, alien.Namn, plats.benamning AS Plats " +
+                      "FROM alien " +
+                      "JOIN plats ON alien.Plats = plats.plats_id " +
+                      "WHERE plats.finns_i IN (SELECT omrades_id FROM omrade WHERE benamning = '" + valtPlats + "')";
     
     try {
-        ArrayList<HashMap<String, String>> alienOmradeLista = idb.fetchRows(sqlFraga);
+        ArrayList<HashMap<String, String>> alienPlatsLista = idb.fetchRows(sqlFraga);
         
         // Iterera genom HashMap/ArrayList
-        for (HashMap<String, String> alien : alienOmradeLista) {
+        for (HashMap<String, String> alien : alienPlatsLista) {
             // Hämta data från HashMap
             String alienID = alien.get("Alien_ID");
-            String registreringsdatum = alien.get("Registreringsdatum");
-            String epost = alien.get("Epost");
             String namn = alien.get("Namn");
-            String telefon = alien.get("Telefon");
-            String plats = alien.get("Plats");
-            String ansvarigAgent = alien.get("Ansvarig_Agent");
+            String plats = alien.get("Benamning");
             
-            //Formatering av output
-            String output = String.format("ID: %s, Datum: %s, Epost: %s, Namn: %s, Telefon: %s, Plats: %s, Agent: %s%n", 
-                    alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent);
+            // Formatering av output
+            String output = String.format("ID: %s, Namn: %s, Plats: %s%n", alienID, namn, plats);
             
             // Output skickas ut i textruta
-            txtareaOmradeSok.append(output);
+            txtareaPlatsSok.append(output);
         }
     } catch (InfException ex) {
         JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
     }
    
-    }//GEN-LAST:event_cbAlienOmradenActionPerformed
+    }//GEN-LAST:event_cbAlienPlatsActionPerformed
 
     private void cbAlienRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienRasActionPerformed
         txtareaRasSok.setText("");
@@ -287,13 +286,13 @@ public class OmradeRasSok extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cbAlienOmraden;
+    private javax.swing.JComboBox<String> cbAlienPlats;
     private javax.swing.JComboBox<String> cbAlienRas;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblVisaAliensEfterOmrade;
     private javax.swing.JLabel lblVisaAliensEfterRas;
-    private javax.swing.JTextArea txtareaOmradeSok;
+    private javax.swing.JTextArea txtareaPlatsSok;
     private javax.swing.JTextArea txtareaRasSok;
     // End of variables declaration//GEN-END:variables
 

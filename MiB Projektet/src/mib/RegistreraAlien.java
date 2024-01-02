@@ -33,7 +33,6 @@ public class RegistreraAlien extends javax.swing.JFrame {
     private void initComponents() {
 
         lblRegistreraAlien = new javax.swing.JLabel();
-        btnRegistreraAlien = new javax.swing.JButton();
         txtAlienID = new javax.swing.JTextField();
         txtAlienRegistreringsDatum = new javax.swing.JTextField();
         txtAlienEpost = new javax.swing.JTextField();
@@ -52,19 +51,13 @@ public class RegistreraAlien extends javax.swing.JFrame {
         lblAlienPlats = new javax.swing.JLabel();
         lblAlienAnsvarigAgent = new javax.swing.JLabel();
         lblValjRas = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblRegistreraAlien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblRegistreraAlien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRegistreraAlien.setText("Registrera alien");
-
-        btnRegistreraAlien.setText("Registrera");
-        btnRegistreraAlien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistreraAlienActionPerformed(evt);
-            }
-        });
 
         cbAlienRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boglodite", "Worm", "Squid" }));
         cbAlienRas.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +93,9 @@ public class RegistreraAlien extends javax.swing.JFrame {
         lblValjRas.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         lblValjRas.setText("Välj ras");
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("OBS: Alien registreras när rasinformationen valts");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,29 +125,33 @@ public class RegistreraAlien extends javax.swing.JFrame {
                             .addComponent(lblAlienPlats)
                             .addComponent(lblAlienAnsvarigAgent)
                             .addComponent(txtAlienAnsvarigAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbAlienRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRegistreraAlien))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbAlienRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(lblRegistreraAlien, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblAlienID)
                         .addGap(118, 118, 118)
-                        .addComponent(lblAliennamn)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblAliennamn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(lblRegistreraAlien, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(146, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(71, 71, 71))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(lblRegistreraAlien)
-                .addGap(22, 22, 22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAlienID)
                     .addComponent(lblAliennamn))
@@ -181,21 +181,19 @@ public class RegistreraAlien extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAlienLosenord)
                     .addComponent(lblAlienAnsvarigAgent))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAlienLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAlienAnsvarigAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistreraAlien))
-                .addGap(55, 55, 55))
+                    .addComponent(txtAlienAnsvarigAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistreraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAlienActionPerformed
-
-            if (Validering.kollaUniktIDAlien(txtAlienID)
-            && Validering.kollaDatumFormat(txtAlienRegistreringsDatum) && Validering.textFaltHarVarde(txtAlienAnsvarigAgent)
+    private void cbAlienRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienRasActionPerformed
+       if (Validering.kollaUniktIDAlien(txtAlienID)
+            && Validering.kollaDatumFormat(txtAlienRegistreringsDatum) && Validering.kollaOmAgentFinns(txtAlienAnsvarigAgent)
             && Validering.kollaUnikEpostForAlien(txtAlienEpost) && Validering.kollaLosenordLangd(txtAlienLosenord)
             && Validering.kollaNamn(txtAlienNamn) && Validering.kollaTelefonFormat(txtAlienTelefon)) {
 
@@ -212,27 +210,16 @@ public class RegistreraAlien extends javax.swing.JFrame {
             String sqlFraga = "INSERT INTO alien (alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent) VALUES ('" 
                     + nyttAlien_id + "', '" + nyttRegistreringsdatum + "', '" + nyEpost + "', '" + nyttLosenord + "', '" 
                     + nyttNamn + "', '" + nyTelefon + "', '" + nyPlats + "', '" + nyAnsvarigAgent + "')";
-
-            try {
-                idb.insert(sqlFraga);
-                JOptionPane.showMessageDialog(null, "Alien registrerades i systemet.");
-            } catch (InfException ex) {
-                JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
-            }
-        }
-    }//GEN-LAST:event_btnRegistreraAlienActionPerformed
-
-    private void cbAlienRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienRasActionPerformed
-      String nyttAlien_id = txtAlienID.getText();
+            
       String valdRas = (String) cbAlienRas.getSelectedItem();
 
-      String sqlFraga = "";
+      String nySQLFraga = "";
       String input = "";
 
       if ("Boglodite".equals(valdRas)) {
           input = JOptionPane.showInputDialog(this, "Ange antal boogies:");
           if (Validering.isHelTalInputDialog(input)) {
-              sqlFraga = "INSERT INTO boglodite (alien_id, antal_boogies) VALUES ('" + nyttAlien_id + "', '" + input + "');";
+              nySQLFraga = "INSERT INTO boglodite (alien_id, antal_boogies) VALUES ('" + nyttAlien_id + "', '" + input + "');";
           } else {
               JOptionPane.showMessageDialog(null, "Ogiltig inmatning för antal boogies"); 
               return;
@@ -240,7 +227,7 @@ public class RegistreraAlien extends javax.swing.JFrame {
       } else if ("Worm".equals(valdRas)) {
           input = JOptionPane.showInputDialog(this, "Ange längd:");
           if (Validering.isDoubleInputDialog(input)) {
-              sqlFraga = "INSERT INTO worm (alien_id, langd) VALUES ('" + nyttAlien_id + "', '" + input + "');";
+              nySQLFraga = "INSERT INTO worm (alien_id, langd) VALUES ('" + nyttAlien_id + "', '" + input + "');";
           } else {
               JOptionPane.showMessageDialog(null, "Ogiltig inmatning för längd"); 
               return;
@@ -248,7 +235,7 @@ public class RegistreraAlien extends javax.swing.JFrame {
       } else if ("Squid".equals(valdRas)) {
           input = JOptionPane.showInputDialog(this, "Ange antal armar:");
           if (Validering.isHelTalInputDialog(input)) {
-              sqlFraga = "INSERT INTO squid (alien_id, antal_armar) VALUES ('" + nyttAlien_id + "', '" + input + "');";
+              nySQLFraga = "INSERT INTO squid (alien_id, antal_armar) VALUES ('" + nyttAlien_id + "', '" + input + "');";
           } else {
               JOptionPane.showMessageDialog(null, "Ogiltig inmatning för antal armar"); 
               return;
@@ -257,10 +244,11 @@ public class RegistreraAlien extends javax.swing.JFrame {
 
       try {
           idb.insert(sqlFraga);
+          idb.insert(nySQLFraga);
           JOptionPane.showMessageDialog(null, "Alieninformation lades till i databasen.");
       } catch (InfException ex) {
           JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
-      }
+      } } 
     }//GEN-LAST:event_cbAlienRasActionPerformed
 
     /**
@@ -294,8 +282,8 @@ public class RegistreraAlien extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegistreraAlien;
     private javax.swing.JComboBox<String> cbAlienRas;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAlienAnsvarigAgent;
     private javax.swing.JLabel lblAlienEpost;
     private javax.swing.JLabel lblAlienID;

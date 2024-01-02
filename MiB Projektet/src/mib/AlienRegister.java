@@ -53,12 +53,12 @@ public class AlienRegister extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtareaEnskildAlienSok = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblAlienRegister.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblAlienRegister.setText("Alienregister");
 
-        btnOmradeRasSok.setText("Sök efter område eller ras");
+        btnOmradeRasSok.setText("Sök efter aliens baserat på plats eller ras");
         btnOmradeRasSok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOmradeRasSokActionPerformed(evt);
@@ -184,7 +184,8 @@ public class AlienRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOmradeRasSokActionPerformed
 
     private void btnDatumSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatumSokActionPerformed
-    String startDatum = txtDatum1.getText();
+    if(Validering.kollaDatumFormat(txtDatum1) && Validering.kollaDatumFormat(txtDatum2)) {
+        String startDatum = txtDatum1.getText();
     String slutDatum = txtDatum2.getText();
     String sqlFraga = "SELECT * FROM alien WHERE registreringsdatum BETWEEN '" + startDatum + "' AND '" + slutDatum + "';";
     
@@ -213,9 +214,11 @@ public class AlienRegister extends javax.swing.JFrame {
     } catch (InfException ex) {
         JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
     }
+    }
     }//GEN-LAST:event_btnDatumSokActionPerformed
 
     private void btnEnskildAlienSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnskildAlienSokActionPerformed
+        if(Validering.kollaOmAlienFinns(txtEnskildAlienSok)){
         String id = txtEnskildAlienSok.getText();
         String sqlFraga = "SELECT * FROM alien WHERE alien_id = '" + id + "'";
     
@@ -244,6 +247,7 @@ public class AlienRegister extends javax.swing.JFrame {
     } catch (InfException ex) {
         JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
     }
+        }
     }//GEN-LAST:event_btnEnskildAlienSokActionPerformed
 
     /**

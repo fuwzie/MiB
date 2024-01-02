@@ -55,7 +55,7 @@ public class RegistreraAgent extends javax.swing.JFrame {
         cbAgentOmrade = new javax.swing.JComboBox<>();
         cbAgentAdministrator = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtAgentId.setText("100");
 

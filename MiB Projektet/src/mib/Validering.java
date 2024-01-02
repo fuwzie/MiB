@@ -163,6 +163,35 @@ public class Validering {
         } }
         return uniktId; 
     }
+    public static boolean kollaUniktIDUtrustning (JTextField idRuta) {
+        //Sätter värdet på unikt ID till true som default;
+        boolean uniktId = false;
+        if(textFaltHarVarde(idRuta) && isHelTal(idRuta)) {
+        
+        //Hämtar ut värdet på ID för att sedan kunna användas i sql-frågor
+        String idKoll = idRuta.getText();
+        
+        try {
+            
+            //Kollar om inmatade ID finns i registret
+            String idFraga = "SELECT utrustnings_id FROM utrustning WHERE utrustnings_id = " + idKoll;
+            String idSvar = idb.fetchSingle(idFraga);
+            
+            if(idSvar != null) {
+                //Om ID returnerar värde, tala om för användare att ID inte är unikt.
+                uniktId = false;
+                JOptionPane.showMessageDialog(null, "ID på utrustning måste vara unikt.");
+            }
+            else {
+                //Om ID inte hittas i databasen
+                uniktId = true;
+            }
+            
+        } catch(InfException ex) {
+           JOptionPane.showMessageDialog(null, "Något gick fel");
+        } }
+        return uniktId; 
+    }
     
      public static boolean kollaUnikEpostForAlien(JTextField nyEpost) {
         //Sätter värdet på unik epost till sant som default
