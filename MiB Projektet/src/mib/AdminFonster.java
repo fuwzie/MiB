@@ -4,6 +4,7 @@
  */
 package mib;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
@@ -522,72 +523,88 @@ public class AdminFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaBortAlienActionPerformed
 
     private void btnBefordraAgentTillAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBefordraAgentTillAdministratorActionPerformed
-        //Standard validering för att se så fältet inte är tomt eller innehåller oväntade karaktärer
-        if(Validering.textFaltHarVarde(txtBefordraAgentTillAdministrator) && Validering.isHelTal(txtBefordraAgentTillAdministrator)) {
-            try { //Basic SQL fråga för att se om adminstatus är 'N' eller 'J'
-            String agentID = txtBefordraAgentTillAdministrator.getText();
-            
-            String kollaEfterAdmin = "SELECT administrator FROM agent WHERE agent_id = " + agentID; 
-            String isAdmin = idb.fetchSingle(kollaEfterAdmin);
-            
-            //Egentligen en "ful lösning" som kollar om agenten finns genom att se om adminstatusen inte finns.
-            //Hade varit mer korrekt att kolla efter en primärnyckel som agentens ID
-            //Även anledningen att köra if-satsen här istället för att kombinera den med adminStatus är för att få ett bättre felmeddelande.
-            if(isAdmin != null) {
-            
-            //Ifall valideringen kollaAdminStatus får in värdet 'N' så ska värdet vara false, så vi kollar om värdet är false
-            if(!Validering.kollaAdminStatus(isAdmin)) {
-                //Endast om värdet är false så uppdateras fältet till 'J' och meddelande bekräftar uppdateringen.
-                String uppdateraAgent = "UPDATE agent SET administrator='J' WHERE agent_id =" +agentID;
+        // Standard validering för att se så fältet inte är tomt eller innehåller oväntade karaktärer
+        if (Validering.textFaltHarVarde(txtBefordraAgentTillAdministrator) && Validering.isHelTal(txtBefordraAgentTillAdministrator)) {
+            try {
+                // Basic SQL fråga för att se om adminstatus är 'N' eller 'J'
+                String agentID = txtBefordraAgentTillAdministrator.getText();
+
+                String kollaEfterAdmin = "SELECT administrator FROM agent WHERE agent_id = " + agentID; 
+                String isAdmin = idb.fetchSingle(kollaEfterAdmin);
+
+                // Egentligen en "ful lösning" som kollar om agenten finns genom att se om adminstatusen inte finns.
+                // Hade varit mer korrekt att kolla efter en primärnyckel som agentens ID
+                // Även anledningen att köra if-satsen här istället för att kombinera den med adminStatus är för att få ett bättre felmeddelande.
+                if (isAdmin != null) {
+                    // Ifall valideringen kollaAdminStatus får in värdet 'N' så ska värdet vara false, så vi kollar om värdet är false
+                    if (!Validering.kollaAdminStatus(isAdmin)) {
+                        // Endast om värdet är false så uppdateras fältet till 'J' och meddelande bekräftar uppdateringen.
+                        String uppdateraAgent = "UPDATE agent SET administrator='J' WHERE agent_id =" + agentID;
                         idb.update(uppdateraAgent);
                         JOptionPane.showMessageDialog(null, "Befordran av agent lyckades.");
-            } else {
-                //Om agenten redan är admin så får man ett felmeddelande och så körs inte uppdateringsfrågan.
-             JOptionPane.showMessageDialog(null, "Kan inte befordra agent som redan är administratör.");   
+                    } else {
+                        // Om agenten redan är admin så får man ett felmeddelande och så körs inte uppdateringsfrågan.
+                        JOptionPane.showMessageDialog(null, "Kan inte befordra agent som redan är administratör.");   
+                    }
+                } else {
+                    // Om agentens ID inte returnerar en användare 
+                    JOptionPane.showMessageDialog(null, "Agent finns inte i systemet.");
+                }
+            } catch (InfException ex) { 
+                JOptionPane.showMessageDialog(null, "Något gick fel");
+                System.out.println("Internt felmeddelande: " + ex.getMessage());  
             }
-    
-            }//Om agentens ID inte returnerar en användare 
-            else {
-                JOptionPane.showMessageDialog(null, "Agent finns inte i systemet.");
-            }
-                } catch(InfException ex) { 
-               JOptionPane.showMessageDialog(null, "Något gick fel");
-               System.out.println("Internt felmeddelande: " + ex.getMessage());  
-            }}
-        
+        }    
     }//GEN-LAST:event_btnBefordraAgentTillAdministratorActionPerformed
 
     private void btnTaBortAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAgentActionPerformed
-       //Den sista metoden i valideringen används för att se så man inte tar bort sig själv som användare.
+        // Den sista metoden i valideringen används för att se så man inte tar bort sig själv som användare.
         if (Validering.textFaltHarVarde(txtTaBortAgent) && Validering.isHelTal(txtTaBortAgent) && !txtTaBortAgent.getText().equals(id)) {
-        
+
             try {
-                //Gör en enkel koll för att se så agenten finns i systemet
+                // Gör en enkel koll för att se så agenten finns i systemet
                 String agentAttTaBort = txtTaBortAgent.getText();
-                String finnsAgent = "SELECT agent_id from agent where agent_id ="+agentAttTaBort;
+                String finnsAgent = "SELECT agent_id from agent where agent_id =" + agentAttTaBort;
                 String agentFanns = idb.fetchSingle(finnsAgent);
-                //Om fältet ej var tomt, kör nedanstående
-                if(agentFanns != null) {
+
+                // Om fältet ej var tomt, kör nedanstående
+                if (agentFanns != null) {
                     try {
-                        //Tar bort agenten helt o hållet baserat på dess ID genom idb delete funktionen.
-                        String agentBorttagning = "DELETE FROM agent WHERE agent_id="+agentAttTaBort;
+                        // Hämtar ut aliens ur databasen som har vår agent som ansvarig agent
+                        String sqlAlienFraga = "SELECT alien_id FROM alien WHERE Ansvarig_Agent = " + agentFanns;
+
+                        // Lägger in varje matchande alien ur föregående fråga i en hashmap
+                        ArrayList<HashMap<String, String>> agentAnsvararFor = idb.fetchRows(sqlAlienFraga);
+
+                        for (HashMap<String, String> alien : agentAnsvararFor) {
+                            // För varje alien i hashmapen, hämta värdet på deras ID
+                            String alienID = alien.get("Alien_ID");
+
+                            // Uppdatera ansvarig agent på de aliens som påverkas till att vara samma som administratören som gjorde ändringen.
+                            // Anledning bakom det är att man ändå inte kan ta bort sig själv samt att administratören bör ha ansvaret att omplacera aliens.
+                            String uppdateraAnsvarigAgent = "UPDATE alien SET ansvarig_agent = " + id + " WHERE alien_id = " + alienID;
+                            idb.update(uppdateraAnsvarigAgent);
+                        }
+
+                        // Tar bort agenten helt o hållet baserat på dess ID genom idb delete funktionen.
+                        String agentBorttagning = "DELETE FROM agent WHERE agent_id=" + agentAttTaBort;
                         idb.delete(agentBorttagning);
-                        JOptionPane.showMessageDialog(null, "Borttagning av agent lyckades"); }
-                       
-                    catch (InfException e) {
-                           JOptionPane.showMessageDialog(null, "Något gick fel"); }
-                }else {
-                            //Om agentFanns returnerar null.
-                            JOptionPane.showMessageDialog(null, "Användaren hittade inte i systemet");
-                }}
-            catch(InfException ex) {
+                        JOptionPane.showMessageDialog(null, "Borttagning av agent lyckades");
+                    } catch (InfException e) {
+                        JOptionPane.showMessageDialog(null, "Något gick fel");
+                    }
+                } else {
+                    // Om agentFanns returnerar null.
+                    JOptionPane.showMessageDialog(null, "Användaren hittade inte i systemet");
+                }
+            } catch (InfException ex) {
                 JOptionPane.showMessageDialog(null, "Något gick fel");
-                System.out.println("Internt felmeddelande: " + ex.getMessage());  
-            } 
-        } 
-       else { //Om agentens ID matchar "sessions ID:t på vår användare" 
+                System.out.println("Internt felmeddelande: " + ex.getMessage());
+            }
+        } else {
+            // Om agentens ID matchar "sessions ID:t på vår användare"
             JOptionPane.showMessageDialog(null, "Du kan inte ta bort dig själv som användare.");
-       }  
+        }  
     }//GEN-LAST:event_btnTaBortAgentActionPerformed
 
     private void btnLosenordsAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLosenordsAndringActionPerformed
