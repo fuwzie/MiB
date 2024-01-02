@@ -403,6 +403,25 @@ public class Validering {
         }}
         return platsFanns;
     } 
+    public static boolean kollaOmOmradeFinns(JTextField OmradeAttKolla) {
+        boolean OmradeFanns = false;
+        String OmradeKoll = OmradeAttKolla.getText();
+        if(textFaltHarVarde(OmradeAttKolla) && isHelTal(OmradeAttKolla)) {
+            try {
+            String kollaOmOmradeFinns = "SELECT Omrades_id FROM Omrade WHERE Omrades_id = " + OmradeKoll;
+            String fannsOmrade = idb.fetchSingle(kollaOmOmradeFinns);
+            if(fannsOmrade != null) {
+                OmradeFanns = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Valt område fanns inte i databasen.");
+            }
+        } catch(InfException ex) {
+            JOptionPane.showMessageDialog(null, "Valt område fanns inte i databasen.");
+            System.out.println("Internt felmeddelande: " + ex);
+        }}
+        return OmradeFanns;
+    }
 }
 
 

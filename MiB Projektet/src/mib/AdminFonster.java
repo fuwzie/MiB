@@ -703,7 +703,7 @@ public class AdminFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_cbAgentInfoAttributActionPerformed
 
     private void btnRedigeraAlienAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAlienAgentActionPerformed
-        new RedigeraAlienAgent(idb).setVisible(true);
+        new RedigeraAlienAgent(idb, id).setVisible(true);
         
     }//GEN-LAST:event_btnRedigeraAlienAgentActionPerformed
 
