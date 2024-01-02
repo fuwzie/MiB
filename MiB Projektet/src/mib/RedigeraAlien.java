@@ -211,35 +211,47 @@ public class RedigeraAlien extends javax.swing.JFrame {
 
     private void btnVerkstallAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerkstallAlienActionPerformed
         String sqlFraga = "";
-        String id = txtAngeAlienID.getText();
-        String valdAndring = (String) cbAndraAlien.getSelectedItem();
-        String nyttVarde = txtNyttVardeAlien.getText();
-        
-        if ("Registreringsdatum".equals(valdAndring)){
-        
-        sqlFraga = "UPDATE alien SET registreringsdatum = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-    }
-        else if ("Lösenord".equals(valdAndring)){
-        
-        sqlFraga = "UPDATE alien SET losenord = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-    }
-        else if ("Namn".equals(valdAndring)){
-        
-        sqlFraga = "UPDATE alien SET namn = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-    }
-        else if ("Telefonnummer".equals(valdAndring)){
-        
-        sqlFraga = "UPDATE alien SET telefon = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-    }
-        else if ("Plats".equals(valdAndring)){
-        
-        sqlFraga = "UPDATE alien SET plats = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-    }
-        else if ("Ansvarig agent".equals(valdAndring)){
-        
-        sqlFraga = "UPDATE alien SET ansvarig_agent = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-    }
-        if (nyttVarde != null && !nyttVarde.trim().isEmpty()) {
+    String id = txtAngeAlienID.getText();
+    String valdAndring = (String) cbAndraAlien.getSelectedItem();
+    String nyttVarde = txtNyttVardeAlien.getText();
+    
+    if (nyttVarde != null && !nyttVarde.trim().isEmpty()) {
+        if ("Lösenord".equals(valdAndring)) {
+            // Kontrollerar att lösenordet är max 6 tecken
+            if (nyttVarde.length() <= 6) {
+                sqlFraga = "UPDATE alien SET losenord = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+            } else {
+                JOptionPane.showMessageDialog(null, "Lösenord får vara max 6 tecken!");
+                return;
+            }
+        } else if ("Registreringsdatum".equals(valdAndring)) {
+            // Kontrollerar att datumet är i formatet ÅÅÅÅ-MM-DD
+            if (nyttVarde.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                sqlFraga = "UPDATE alien SET registreringsdatum = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+            } else {
+                JOptionPane.showMessageDialog(null, "Datumet måste vara i formatet ÅÅÅÅ-MM-DD!");
+                return;
+            }
+        } else if ("Telefonnummer".equals(valdAndring)) {
+            // Kontrollerar att telefonnumret endast innehåller siffror
+            if (nyttVarde.matches("\\d+")) {
+                sqlFraga = "UPDATE alien SET telefon = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+            } else {
+                JOptionPane.showMessageDialog(null, "Telefonnummer måste vara siffror!");
+                return;
+            }
+        } else if ("Ansvarig agent".equals(valdAndring)) {
+            // Kontrollerar att ansvarig agent är ett heltal
+            if (isInteger(nyttVarde)) {
+                sqlFraga = "UPDATE alien SET ansvarig_agent = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+            } else {
+                JOptionPane.showMessageDialog(null, "Ansvarig agent måste vara ett heltal!");
+                return;
+            }
+        } else { // I det fall validering ej behövs
+            sqlFraga = "UPDATE alien SET " + valdAndring.toLowerCase() + " = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+        }
+
         try {
             idb.update(sqlFraga);
         } catch (InfException ex) {
@@ -248,8 +260,14 @@ public class RedigeraAlien extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(null, "Textfältet kan inte vara tomt!");
     }
-            
-        
+     }
+    private boolean isInteger(String s) {
+    try {
+        Integer.parseInt(s);
+        return true;
+    } catch (NumberFormatException e) {
+        return false;
+    }
     }//GEN-LAST:event_btnVerkstallAlienActionPerformed
 
     private void btnVerkstallRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerkstallRasActionPerformed
