@@ -193,88 +193,74 @@ public class RegistreraAlien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistreraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAlienActionPerformed
-    String nyttAlien_id = (String) txtAlienID.getText();
-    String nyttRegistreringsdatum = txtAlienRegistreringsDatum.getText();
-    String nyEpost = txtAlienEpost.getText();
-    String nyttLosenord = txtAlienLosenord.getText();
-    String nyttNamn = txtAlienNamn.getText();
-    String nyTelefon = txtAlienTelefon.getText();
-    String nyPlats = (String) txtAlienPlats.getText();
-    String nyAnsvarigAgent = (String) txtAlienAnsvarigAgent.getText();
-    
-        // Kolla så lösenord är max 6 tecken
-        if (nyttLosenord.length() > 6) {
-            JOptionPane.showMessageDialog(null, "Lösenordet får max vara 6 tecken!");
-            return;
-        }
 
-        // Kolla så alien/agent-id är integer med hjälp av metodanrop från isInteger
-        if (!isInteger(nyttAlien_id) || !isInteger(nyAnsvarigAgent)) {
-            JOptionPane.showMessageDialog(null, "Alien-ID och Ansvarig Agent måste vara heltal!");
-            return;
-        }
+            if (Validering.kollaUniktIDAlien(txtAlienID)
+            && Validering.kollaDatumFormat(txtAlienRegistreringsDatum) && Validering.textFaltHarVarde(txtAlienAnsvarigAgent)
+            && Validering.kollaUnikEpostForAlien(txtAlienEpost) && Validering.kollaLosenordLangd(txtAlienLosenord)
+            && Validering.kollaNamn(txtAlienNamn) && Validering.kollaTelefonFormat(txtAlienTelefon)) {
 
-        // Kolla så telefonnummer är siffror
-        if (!nyTelefon.matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "Telefonnummer måste vara siffror!");
-            return;
-        }
+            String nyttAlien_id = (String) txtAlienID.getText();
+            String nyttRegistreringsdatum = txtAlienRegistreringsDatum.getText();
+            String nyEpost = txtAlienEpost.getText();
+            String nyttLosenord = txtAlienLosenord.getText();
+            String nyttNamn = txtAlienNamn.getText();
+            String nyTelefon = txtAlienTelefon.getText();
+            String nyPlats = (String) txtAlienPlats.getText();
+            String nyAnsvarigAgent = (String) txtAlienAnsvarigAgent.getText();
 
-        // Kolla emailformat
-        if (!nyEpost.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
-            JOptionPane.showMessageDialog(null, "Epostadressen är inte i rätt format!");
-            return;
-        }
+            // När alla villkor har validerats, kör kod
+            String sqlFraga = "INSERT INTO alien (alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent) VALUES ('" 
+                    + nyttAlien_id + "', '" + nyttRegistreringsdatum + "', '" + nyEpost + "', '" + nyttLosenord + "', '" 
+                    + nyttNamn + "', '" + nyTelefon + "', '" + nyPlats + "', '" + nyAnsvarigAgent + "')";
 
-        // När alla villkor validerats, kör kod
-        String sqlFraga = "INSERT INTO alien (alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent) VALUES ('" 
-                + nyttAlien_id + "', '" + nyttRegistreringsdatum + "', '" + nyEpost + "', '" + nyttLosenord + "', '" 
-                + nyttNamn + "', '" + nyTelefon + "', '" + nyPlats + "', '" + nyAnsvarigAgent + "')";
-
-        try {
-            idb.insert(sqlFraga);
-        } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!" + ex.getMessage());
+            try {
+                idb.insert(sqlFraga);
+                JOptionPane.showMessageDialog(null, "Alien registrerades i systemet.");
+            } catch (InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+            }
         }
     }//GEN-LAST:event_btnRegistreraAlienActionPerformed
-    private boolean isInteger(String s) {
-        try {
-            Integer.valueOf(s);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 
     private void cbAlienRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienRasActionPerformed
-    
-    String nyttAlien_id = txtAlienID.getText();
-    String valdRas = (String) cbAlienRas.getSelectedItem();
+      String nyttAlien_id = txtAlienID.getText();
+      String valdRas = (String) cbAlienRas.getSelectedItem();
 
-    String sqlFraga = "";
-    String input = "";
+      String sqlFraga = "";
+      String input = "";
 
-    if ("Boglodite".equals(valdRas)) {
-        input = JOptionPane.showInputDialog(this, "Ange antal boogies:");
-        
-        sqlFraga = "INSERT INTO boglodite (alien_id, antal_boogies) VALUES ('" + nyttAlien_id + "', '" + input + "');";
-    } else if ("Worm".equals(valdRas)) {
-        input = JOptionPane.showInputDialog(this, "Ange längd:");
-        
-        sqlFraga = "INSERT INTO worm (alien_id, langd) VALUES ('" + nyttAlien_id + "', '" + input + "');";
-    } else if ("Squid".equals(valdRas)) {
-        input = JOptionPane.showInputDialog(this, "Ange antal armar:");
-        
-        sqlFraga = "INSERT INTO squid (alien_id, antal_armar) VALUES ('" + nyttAlien_id + "', '" + input + "');";
-    } if (input != null && !input.trim().isEmpty()) {
-        try {
-            idb.insert(sqlFraga);
-        } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
-        }
-    } else {
-        JOptionPane.showMessageDialog(null, "Textfältet kan inte vara tomt!");
-    }
+      if ("Boglodite".equals(valdRas)) {
+          input = JOptionPane.showInputDialog(this, "Ange antal boogies:");
+          if (Validering.isHelTalInputDialog(input)) {
+              sqlFraga = "INSERT INTO boglodite (alien_id, antal_boogies) VALUES ('" + nyttAlien_id + "', '" + input + "');";
+          } else {
+              JOptionPane.showMessageDialog(null, "Ogiltig inmatning för antal boogies"); 
+              return;
+          }
+      } else if ("Worm".equals(valdRas)) {
+          input = JOptionPane.showInputDialog(this, "Ange längd:");
+          if (Validering.isDoubleInputDialog(input)) {
+              sqlFraga = "INSERT INTO worm (alien_id, langd) VALUES ('" + nyttAlien_id + "', '" + input + "');";
+          } else {
+              JOptionPane.showMessageDialog(null, "Ogiltig inmatning för längd"); 
+              return;
+          }
+      } else if ("Squid".equals(valdRas)) {
+          input = JOptionPane.showInputDialog(this, "Ange antal armar:");
+          if (Validering.isHelTalInputDialog(input)) {
+              sqlFraga = "INSERT INTO squid (alien_id, antal_armar) VALUES ('" + nyttAlien_id + "', '" + input + "');";
+          } else {
+              JOptionPane.showMessageDialog(null, "Ogiltig inmatning för antal armar"); 
+              return;
+          }
+      } 
+
+      try {
+          idb.insert(sqlFraga);
+          JOptionPane.showMessageDialog(null, "Alieninformation lades till i databasen.");
+      } catch (InfException ex) {
+          JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+      }
     }//GEN-LAST:event_cbAlienRasActionPerformed
 
     /**

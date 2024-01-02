@@ -24,6 +24,8 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
       new Inloggning(idb).setVisible(true);
+      //Instansierar databasen för Valideringsklassen så den kan köra sqlfrågor
+      new Validering(idb);
     }
 }
 

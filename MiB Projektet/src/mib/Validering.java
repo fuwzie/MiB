@@ -8,6 +8,7 @@ package mib;
  *
  * @author Otte
  */
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oru.inf.InfException;
@@ -21,12 +22,24 @@ import oru.inf.InfDB;
  */
 public class Validering {
     private static InfDB idb;
-    public Validering() {
+    public Validering(InfDB idb) {
+        this.idb = idb;
     }
     public static boolean textFaltHarVarde(JTextField rutaAttKolla) {
         boolean resultat = true;
         
         if(rutaAttKolla.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Inmatningsrutan är tom!");
+            resultat = false;
+            rutaAttKolla.requestFocus();
+        }
+        
+        return resultat;
+    }
+    public static boolean textFaltHarVardeComboBox(JComboBox rutaAttKolla) {
+        boolean resultat = true;
+        
+        if(rutaAttKolla.getSelectedItem() == null || rutaAttKolla.getSelectedItem().toString().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Inmatningsrutan är tom!");
             resultat = false;
             rutaAttKolla.requestFocus();
@@ -51,6 +64,31 @@ public class Validering {
         
         return resultat;
     }
+    
+    public static boolean isDoubleInputDialog(String input) {
+        boolean resultat = true;
+
+        try {
+            Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Var god mata in ett tal.");
+            resultat = false;
+        }
+
+        return resultat;
+    }   
+    public static boolean isHelTalInputDialog(String input) {
+        boolean resultat = true;
+
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Var god mata in ett heltal");
+            resultat = false;
+        }
+
+        return resultat;
+    }   
     
     //Används för att logga in i korrekt ruta om man är agent
     //Denna metod jämför den inmatade strängen för att se om värdet "J" eller "N" returneras och sätter därefter en adminstatus som true eller false
@@ -96,12 +134,38 @@ public class Validering {
         } }
         return uniktId; 
     }
+    public static boolean kollaUniktIDAgent (JTextField idRuta) {
+        //Sätter värdet på unikt ID till true som default;
+        boolean uniktId = true;
+        if(textFaltHarVarde(idRuta) && isHelTal(idRuta)) {
+        
+        //Hämtar ut värdet på ID för att sedan kunna användas i sql-frågor
+        String idKoll = idRuta.getText();
+        
+        try {
+            
+            //Kollar om inmatade ID finns i registret
+            String idFraga = "SELECT agent_id FROM agent WHERE agent_id = " + idKoll;
+            String idSvar = idb.fetchSingle(idFraga);
+            
+            if(idSvar != null) {
+                //Om ID returnerar värde, tala om för användare att ID inte är unikt.
+                uniktId = false;
+                JOptionPane.showMessageDialog(null, "ID på Agent måste vara unikt.");
+            }
+            
+        } catch(InfException ex) {
+           JOptionPane.showMessageDialog(null, "Något gick fel");
+        } }
+        return uniktId; 
+    }
     
      public static boolean kollaUnikEpostForAlien(JTextField nyEpost) {
         //Sätter värdet på unik epost till sant som default
          boolean epost = true;
         if(textFaltHarVarde(nyEpost)) {
         String alienText = nyEpost.getText();
+        if(alienText.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
         //Om strängen inte slutar med @mib.net (agenteposten), fortsätt med metod
         if(!alienText.endsWith("@mib.net")) {
         
@@ -120,6 +184,39 @@ public class Validering {
         else {
             //Om epostadressen slutar med "@mib.net"
             JOptionPane.showMessageDialog(null, "Epost får ej sluta med @mib.net, endast reserverat för agenter.");
+        } } else {
+            //Om epostadressen är i felaktigt format
+            JOptionPane.showMessageDialog(null, "Eposten var skriven i felaktigt format.");
+        }}
+        return epost;
+    }
+     public static boolean kollaUnikEpostForAgent(JTextField nyEpost) {
+        //Sätter värdet på unik epost till sant som default
+         boolean epost = true;
+        if(textFaltHarVarde(nyEpost)) {
+        String agentText = nyEpost.getText();
+        if(!agentText.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+        //Om strängen inte slutar med @mib.net (agenteposten), fortsätt med metod
+        if(agentText.endsWith("@mib.net")) {
+        
+            try {
+                //Kolla om eposten finns i registret redan.
+                String agentFraga = "SELECT epost FROM agent WHERE epost = '" + agentText +"'";
+                String agentSvar = idb.fetchSingle(agentFraga);
+                
+                if(agentSvar != null) {
+                    //Om eposten fanns, sätt värde till false (inte unikt) och ge felmeddelande
+                    epost = false;
+                    JOptionPane.showMessageDialog(null, "Eposten var inte unik"); }
+        }   catch (InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel.");
+        }} 
+        else {
+            //Om epostadressen inte slutar med "@mib.net"
+            JOptionPane.showMessageDialog(null, "Epost måste sluta med @mib.net på grund av sekretesskäl.");
+        } } else {
+            //Om epostadressen är i felaktigt format
+            JOptionPane.showMessageDialog(null, "Eposten var skriven i felaktigt format.");
         }}
         return epost;
     }
@@ -139,5 +236,52 @@ public class Validering {
         
         return godkantLosenord;
     }
+    public static boolean kollaTelefonFormat(JTextField telefonAttKolla) {
+        boolean formatStammer = true;
+
+    // Hämtar ut värdet för att kunna kolla om det är tomt
+    String telefonenAttKolla = telefonAttKolla.getText();
+
+    if (telefonenAttKolla != null && !telefonenAttKolla.isEmpty()) {
+        if (telefonenAttKolla.matches("\\d+-\\d+")) {
+            // Om formatet är giltigt, returnera true
+            formatStammer = true;
+        } else {
+            // Om användaren inte använder siffror-siffror som format.
+            JOptionPane.showMessageDialog(null, "Ogiltigt telefonnummerformat. Använd formatet: siffror-siffror");
+            formatStammer = false;
+        }
+    } else {
+        // Om telefonnumret är tomt
+        JOptionPane.showMessageDialog(null, "Telefonnumret får inte vara tomt");
+        formatStammer = false;
+    }
+
+    return formatStammer;
+}
+    public static boolean kollaNamn(JTextField namnAttKolla) {
+        boolean namnLangd = false;
+        if(textFaltHarVarde(namnAttKolla)) {
+            String namnet = namnAttKolla.getText();
+            if(namnet.length() <= 20) {
+                namnLangd = true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Ditt namn är för långt. Ange annat namn eller förkortad version.");
+            }
+        }
+        return namnLangd;
+    }
+    public static boolean kollaDatumFormat(JTextField datumAttKolla) {
+        boolean formatStammer = false;
+        if(textFaltHarVarde(datumAttKolla)) {
+        String nyttVarde = datumAttKolla.getText();
+        if (nyttVarde.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            formatStammer = true;
+    }
+        else {
+            JOptionPane.showMessageDialog(null, "Datumet måste vara i formatet ÅÅÅÅ-MM-DD!");
+        }
+}return formatStammer; }
 }
 
