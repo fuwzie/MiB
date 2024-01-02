@@ -45,11 +45,6 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pwNyttLosenord.setText("jPasswordField1");
-        pwNyttLosenord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pwNyttLosenordActionPerformed(evt);
-            }
-        });
 
         pwNyttLosenordUpprepa.setText("jPasswordField2");
 
@@ -60,11 +55,6 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
         lblNyttLosenordUpprepa.setText("Upprepa lösenordet:");
 
         pwGammaltLosenord.setText("jPasswordField3");
-        pwGammaltLosenord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pwGammaltLosenordActionPerformed(evt);
-            }
-        });
 
         lblGammaltLosenord.setText("Skriv in ditt gamla lösenord:");
 
@@ -133,10 +123,6 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pwGammaltLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwGammaltLosenordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pwGammaltLosenordActionPerformed
-
     private void btnBytLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLosenordActionPerformed
         //Kollar så alla textrutor har ett värde.
         if (Validering.kollaLosenordLangd(pwGammaltLosenord) && Validering.kollaLosenordLangd(pwNyttLosenord) && Validering.kollaLosenordLangd(pwNyttLosenordUpprepa))
@@ -180,10 +166,6 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
         }
         }
     }//GEN-LAST:event_btnBytLosenordActionPerformed
-
-    private void pwNyttLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwNyttLosenordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pwNyttLosenordActionPerformed
 
     /**
      * @param args the command line arguments

@@ -213,8 +213,9 @@ public class Validering {
                 else {
                     epost = true;
                 }
-        }   catch (InfException ex) {
-                JOptionPane.showMessageDialog(null, "Något gick fel.");
+        }   catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
         }} 
         else {
             //Om epostadressen slutar med "@mib.net"
@@ -245,8 +246,9 @@ public class Validering {
                 else {
                     epost = true;
                 }
-        }   catch (InfException ex) {
-                JOptionPane.showMessageDialog(null, "Något gick fel.");
+        }   catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
         }} 
         else {
             //Om epostadressen inte slutar med "@mib.net"

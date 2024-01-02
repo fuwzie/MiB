@@ -96,9 +96,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jPasswordField1"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pwNyttLosenordActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="pwNyttLosenordUpprepa">
       <Properties>
@@ -124,9 +121,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jPasswordField3"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pwGammaltLosenordActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblGammaltLosenord">
       <Properties>

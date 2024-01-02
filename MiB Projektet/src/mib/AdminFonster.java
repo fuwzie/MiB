@@ -449,9 +449,9 @@ public class AdminFonster extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Borttagning av utrustning lyckades");
             }
 
-        } catch (InfException e) {
+        } catch (InfException ex){
             JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmeddelande: " + e.getMessage());
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
     }
     }//GEN-LAST:event_btnTaBortUtrustningActionPerformed

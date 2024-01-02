@@ -211,9 +211,10 @@ public class AlienRegister extends javax.swing.JFrame {
             // Output skickas ut i textruta
             txtareaDatumSok.append(output);
         }
-    } catch (InfException ex) {
-        JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
-    }
+    } catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
+        }
     }
     }//GEN-LAST:event_btnDatumSokActionPerformed
 
@@ -244,9 +245,10 @@ public class AlienRegister extends javax.swing.JFrame {
             // Formaterad output printas i textruta
             txtareaEnskildAlienSok.append(output);
         }
-    } catch (InfException ex) {
-        JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
-    }
+    } catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
+        }
         }
     }//GEN-LAST:event_btnEnskildAlienSokActionPerformed
 

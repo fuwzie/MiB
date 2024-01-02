@@ -34,12 +34,12 @@ public class AgentFonster extends javax.swing.JFrame {
         String agentNamnSvar = idb.fetchSingle(agentNamn);
         lblValkommenAgent.setText("Välkommen  "+agentNamnSvar);
         } 
-        catch (InfException e) {
+        catch (InfException ex) {
             //Om agenten inte returnerar ett namn korrekt så sätts labeln till ett felmeddelande + ett popupfönster som ber användare att kontakta admin
             //Ska endast vara nödvändigt i fall då man kan lägga till en agent utan att sätta ett namn
             JOptionPane.showMessageDialog(null, "Kunde ej hitta ditt namn i systemet, kontakta administratör");
             lblValkommenAgent.setText("Välkommen, ditt namn kunde ej hittas");
-            System.out.println("Internt felmeddelande: " + e.getMessage());
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
     }
 
@@ -265,8 +265,9 @@ public class AgentFonster extends javax.swing.JFrame {
             String svar = idb.fetchSingle(sqlFraga);
             idb.fetchRows(sqlFraga);
             txtSokOmradesAnsvarig.setText(svar);
-        } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+        } catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
     }//GEN-LAST:event_cbSokOmradesAnsvarigActionPerformed
 
@@ -314,9 +315,10 @@ try {
         // Output skickas ut i textrutan
         txtToppTre.append(output);
     }
-} catch (InfException ex) {
-    JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
-}
+} catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
+        }
    
     }//GEN-LAST:event_btnToppTreActionPerformed
 
@@ -359,9 +361,10 @@ try {
         // Output skickas ut i textrutan
         txtVisaUtrustning.append(output.toString());
     }
-} catch (InfException ex) {
-    JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
-}
+} catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
+        }
     }//GEN-LAST:event_btnVisaUtrustningActionPerformed
 
     private void btnRedigeraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAlienActionPerformed

@@ -33,11 +33,11 @@ public class AlienFonster extends javax.swing.JFrame {
              String omradesAnsvarigNamnFraga = "SELECT namn FROM mibdb.agent WHERE agent_id=" + omradesAnsvarigSvar;
              String omradesAnsvarigNamnSvar = idb.fetchSingle(omradesAnsvarigNamnFraga);
                 lblAnsvarig.setText("Din områdesansvariga är: "+omradesAnsvarigNamnSvar);
-        } catch (InfException e) {
+        } catch (InfException ex) {
             //Om någon av frågorna resulterar i fel så säger programmet att den områdesansvarige inte kunde hittas och att man ska kontakta admin.
             JOptionPane.showMessageDialog(null, "Områdesansvarige fanns ej");
             lblAnsvarig.setText("Kunde ej hitta din områdesansvariga, kontakta en administratör.");
-            System.out.println("Internt felmeddelande: " + e.getMessage());
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
     }
 

@@ -262,8 +262,9 @@ public class RedigeraAlien extends javax.swing.JFrame {
         try {
             idb.update(sqlFraga);
             JOptionPane.showMessageDialog(null, "Uppdatering av uppgifter lyckades.");
-        } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+        } catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
     }}}
      
@@ -298,10 +299,10 @@ public class RedigeraAlien extends javax.swing.JFrame {
        idb.delete(sqlDelete);
       }
       
-      catch (Exception ex) {
-         JOptionPane.showMessageDialog(null, "Något gick fel vid borttagning: " + ex.getMessage());
-         return;
-      }
+      catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
+        }
 
       switch (nyRas) {
        case "Boglodite":
@@ -322,9 +323,10 @@ if (input != null && !input.isEmpty()) {
     try {
         idb.insert(sqlInsert);
         JOptionPane.showMessageDialog(null, "Ras uppdaterad och tidigare ras borttagen!");
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(null, "Något gick fel vid insättning: " + ex.getMessage());
-    }
+    } catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
+        }
 } else {
     JOptionPane.showMessageDialog(null, "Attributet kan inte vara tomt!");
 }}

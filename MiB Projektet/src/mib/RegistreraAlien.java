@@ -246,9 +246,10 @@ public class RegistreraAlien extends javax.swing.JFrame {
           idb.insert(sqlFraga);
           idb.insert(nySQLFraga);
           JOptionPane.showMessageDialog(null, "Alieninformation lades till i databasen.");
-      } catch (InfException ex) {
-          JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
-      } } 
+      } catch (InfException ex){
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + ex.getMessage());
+        } } 
     }//GEN-LAST:event_cbAlienRasActionPerformed
 
     /**
