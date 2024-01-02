@@ -136,7 +136,7 @@ public class Validering {
     }
     public static boolean kollaUniktIDAgent (JTextField idRuta) {
         //Sätter värdet på unikt ID till true som default;
-        boolean uniktId = true;
+        boolean uniktId = false;
         if(textFaltHarVarde(idRuta) && isHelTal(idRuta)) {
         
         //Hämtar ut värdet på ID för att sedan kunna användas i sql-frågor
@@ -152,6 +152,10 @@ public class Validering {
                 //Om ID returnerar värde, tala om för användare att ID inte är unikt.
                 uniktId = false;
                 JOptionPane.showMessageDialog(null, "ID på Agent måste vara unikt.");
+            }
+            else {
+                //Om ID inte hittas i databasen
+                uniktId = true;
             }
             
         } catch(InfException ex) {
@@ -283,5 +287,68 @@ public class Validering {
             JOptionPane.showMessageDialog(null, "Datumet måste vara i formatet ÅÅÅÅ-MM-DD!");
         }
 }return formatStammer; }
+    
+    public static boolean kollaOmAgentFinns(JTextField agentAttKolla) {
+        boolean agentFanns = false;
+        if(textFaltHarVarde(agentAttKolla) && isHelTal(agentAttKolla)) {
+            try{
+            String valdAgentID = agentAttKolla.getText();
+                String kollaOmAgentFinns = "SELECT agent_id FROM agent WHERE agent_id = " + valdAgentID;
+                String svarOmAgentFinns = idb.fetchSingle(kollaOmAgentFinns);
+                if(svarOmAgentFinns != null) {
+                    agentFanns = true;
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Agenten fanns ej i databasen.");
+                }
+            } catch(InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel");
+                System.out.println("Internt felmeddelande: " +ex);
+            }
+            }
+        return agentFanns;
+    }
+    
+    public static boolean kollaOmAlienFinns(JTextField alienAttKolla) {
+        boolean alienFanns = false;
+        if(textFaltHarVarde(alienAttKolla) && isHelTal(alienAttKolla)) {
+            try{
+            String valdAlienID = alienAttKolla.getText();
+                String kollaOmAlienFinns = "SELECT alien_id FROM alien WHERE alien_id = " + valdAlienID;
+                String svarOmAlienFinns = idb.fetchSingle(kollaOmAlienFinns);
+                if(svarOmAlienFinns != null) {
+                    alienFanns = true;
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Vald alien fanns ej i databasen.");
+                }
+            } catch(InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel");
+                System.out.println("Internt felmeddelande: " +ex);
+            }
+            }
+        return alienFanns;
+    }
+    public static boolean kollaOmUtrustningFinns(JTextField utrustningAttKolla) {
+        boolean utrustningFanns = false;
+        if(textFaltHarVarde(utrustningAttKolla) && isHelTal(utrustningAttKolla)) {
+            try{
+            String valdUtrustningID = utrustningAttKolla.getText();
+                String kollaOmUtrustningFinns = "SELECT utrustnings_id FROM utrustning WHERE utrustnings_id = " + valdUtrustningID;
+                String svarOmUtrustningFinns = idb.fetchSingle(kollaOmUtrustningFinns);
+                if(svarOmUtrustningFinns != null) {
+                    utrustningFanns = true;
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Vald utrustning fanns ej i databasen.");
+                }
+            } catch(InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel");
+                System.out.println("Internt felmeddelande: " +ex);
+            }
+            }
+        return utrustningFanns;
+    }
 }
+
 

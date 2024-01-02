@@ -353,15 +353,12 @@ public class AdminFonster extends javax.swing.JFrame {
 
     private void btnBytOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytOmradesChefActionPerformed
         
-        if(Validering.textFaltHarVarde(txtBytOmradesChef) && Validering.isHelTal(txtBytOmradesChef)) {
+        if(Validering.kollaOmAgentFinns(txtBytOmradesChef)) {
             
             try {
                 
                 //Hämtar ID på den agent som ska befordras och kollar om den redan är områdeschef på området (eller annat område)
                 String nyOmradesChefID = txtBytOmradesChef.getText();
-                String kollaOmAgentFinns = "SELECT agent_id FROM agent WHERE agent_id = "+nyOmradesChefID;
-                String svarOmAgentFinns = idb.fetchSingle(kollaOmAgentFinns);
-                if(svarOmAgentFinns != null) {
                     String kollaChefsStatus = "SELECT agent_id FROM omradeschef WHERE agent_id = "+nyOmradesChefID;
                     String svarChefsStatus = idb.fetchSingle(kollaChefsStatus);
 
@@ -386,10 +383,8 @@ public class AdminFonster extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till områdeschef, befintligt område för agent finns ej.");
                         }
                     
-                } }
-                else { 
-                    JOptionPane.showMessageDialog(null, "Vald agent finns inte i systemet.");
-                }
+                } 
+                
             } catch(InfException ex) {
                     JOptionPane.showMessageDialog(null, "Något gick fel");
                     System.out.println("Internt felmeddelande: " + ex.getMessage());
@@ -399,84 +394,70 @@ public class AdminFonster extends javax.swing.JFrame {
 
     private void btnTaBortUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortUtrustningActionPerformed
             //Ser till så textfältet har ett värde + att värdet är ett heltal.
-        if (Validering.textFaltHarVarde(txtTaBortUtrustning) && Validering.isHelTal(txtTaBortUtrustning)){
-            try {
-                //Kör en sql-fråga som kollar om ID:t man matat in matchar en utrustning i databasen.
-                String utrustningAttTaBort = txtTaBortUtrustning.getText();
-                String finnsUtrustning = "SELECT utrustnings_id FROM utrustning WHERE utrustnings_id ="+utrustningAttTaBort;
-                String utrustningFanns = idb.fetchSingle(finnsUtrustning);;
-                
-                //Om sql-frågan returnerar ett värde så tar den bort vald utrustning
-                if(utrustningFanns != null) {
-                    boolean utrustningsBorttagning = true;
-                    try {
-                        //Sätter ihop strängar för sqlfrågorna för att undvika upprepning.
-                        String utrustningsTypKollFrom = "SELECT utrustnings_id FROM ";
-                        String utrustningsTypKollWhere = " WHERE utrustnings_id="+utrustningFanns;
-                        
-                        //Kollar om matchande resultat finns i någon av de tre undertabellerna
-                        String vapenKoll = utrustningsTypKollFrom + "vapen" + utrustningsTypKollWhere;
-                        String teknikKoll = utrustningsTypKollFrom + "teknik" + utrustningsTypKollWhere;
-                        String kommunikationKoll = utrustningsTypKollFrom + "kommunikation" + utrustningsTypKollWhere;
-                        
-                        String vapenSvar = idb.fetchSingle(vapenKoll);
-                        String teknikSvar = idb.fetchSingle(teknikKoll);
-                        String kommunikationSvar = idb.fetchSingle(kommunikationKoll);
-                        //Samma fråga med olika kriterier nedan, men de tre if-satserna kollar om nåt av värdena inte var null, stämmer det 
-                        if(vapenSvar != null) {
-                            String vapenBorttagning = "DELETE FROM vapen WHERE utrustnings_id=" + utrustningFanns;
-                            idb.delete(vapenBorttagning);
-                    }
-                        if(teknikSvar != null) {
-                            String teknikBorttagning = "DELETE FROM teknik WHERE utrustnings_id=" + utrustningFanns;
-                            idb.delete(teknikBorttagning);
-                        }
-                        
-                        if(kommunikationSvar != null) {
-                            String kommunikationBorttagning = "DELETE FROM kommunikation WHERE utrustnings_id=" + utrustningFanns;
-                            idb.delete(kommunikationBorttagning);
-                                    }
-                        //Denna metod körs först då alla utrustningstyper som utrustningen var associerad med är borttagna.
-                        if(utrustningsBorttagning) {
-                        String utrustningBorttagning = "DELETE FROM utrustning WHERE utrustnings_id= " + utrustningAttTaBort;
-                        idb.delete(utrustningBorttagning);
-                        JOptionPane.showMessageDialog(null, "Borttagning av utrustning lyckades"); }
-                    }
-                       
-                    catch (InfException e) {
-                           JOptionPane.showMessageDialog(null, "Något gick fel"); }
-                }else {
-                            //Om värdet som returneras från sql frågan returnerar null.
-                            JOptionPane.showMessageDialog(null, "Vald utrustning hittades inte i systemet");
-                }}
-            catch(InfException e) {
-                            JOptionPane.showMessageDialog(null, "Något gick fel");
-                            System.out.println("Internt felmeddelande: " + e.getMessage());  
-            } 
+        if (Validering.kollaOmUtrustningFinns(txtTaBortUtrustning)){
+              try {
+            // Kör en sql-fråga som kollar om ID:t man matat in matchar en utrustning i databasen.
+            String utrustningAttTaBort = txtTaBortUtrustning.getText();
+
+            boolean utrustningsBorttagning = true;
+
+            // Sätter ihop strängar för sql-frågorna för att undvika upprepning.
+            String utrustningsTypKollFrom = "SELECT utrustnings_id FROM ";
+            String utrustningsTypKollWhere = " WHERE utrustnings_id=" + utrustningAttTaBort;
+
+            // Kollar om matchande resultat finns i någon av de tre undertabellerna
+            String vapenKoll = utrustningsTypKollFrom + "vapen" + utrustningsTypKollWhere;
+            String teknikKoll = utrustningsTypKollFrom + "teknik" + utrustningsTypKollWhere;
+            String kommunikationKoll = utrustningsTypKollFrom + "kommunikation" + utrustningsTypKollWhere;
+
+            String vapenSvar = idb.fetchSingle(vapenKoll);
+            String teknikSvar = idb.fetchSingle(teknikKoll);
+            String kommunikationSvar = idb.fetchSingle(kommunikationKoll);
+
+            // Samma fråga med olika kriterier nedan, men de tre if-satserna kollar om nåt av värdena inte var null, stämmer det 
+            if (vapenSvar != null) {
+                String vapenBorttagning = "DELETE FROM vapen WHERE utrustnings_id=" + utrustningAttTaBort;
+                idb.delete(vapenBorttagning);
+            }
+
+            if (teknikSvar != null) {
+                String teknikBorttagning = "DELETE FROM teknik WHERE utrustnings_id=" + utrustningAttTaBort;
+                idb.delete(teknikBorttagning);
+            }
+
+            if (kommunikationSvar != null) {
+                String kommunikationBorttagning = "DELETE FROM kommunikation WHERE utrustnings_id=" + utrustningAttTaBort;
+                idb.delete(kommunikationBorttagning);
+            }
+
+            // Denna metod körs först då alla utrustningstyper som utrustningen var associerad med är borttagna.
+            if (utrustningsBorttagning) {
+                String utrustningBorttagning = "DELETE FROM utrustning WHERE utrustnings_id= " + utrustningAttTaBort;
+                idb.delete(utrustningBorttagning);
+                JOptionPane.showMessageDialog(null, "Borttagning av utrustning lyckades");
+            }
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något gick fel");
+            System.out.println("Internt felmeddelande: " + e.getMessage());
         }
+    }
     }//GEN-LAST:event_btnTaBortUtrustningActionPerformed
 
     private void btnTaBortAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAlienActionPerformed
        //Hela metoden fungerar på samma sätt som den ovan, men kommenterar för klarhetens skull.
-        if (Validering.textFaltHarVarde(txtTaBortAlien) && Validering.isHelTal(txtTaBortAlien)){
+        if (Validering.kollaOmAlienFinns(txtTaBortAlien)){
         try {
                 
                 //Kollar så vår alien i fråga finns i systemet.
                 String alienAttTaBort = txtTaBortAlien.getText();
-                String finnsAlien = "SELECT alien_id from alien where alien_id ="+alienAttTaBort;
-                String alienFanns = idb.fetchSingle(finnsAlien);
-               
                 
                 
-                
-                //Om frågan returnerar ett värde så följs det av en koll på vilken ras vår alien är.
-                if(alienFanns != null) {
                     //Egentligen lite osäker på varför jag la in denna men principen är bara att inkapsla borttagningen av vår "huvudalien"
                     boolean alienRasBorttagning = true;
-                    try {
                         //Sätter ihop strängar för sqlfrågorna för att undvika upprepning.
                         String alienRasKollFrom = "SELECT alien_id FROM ";
-                        String alienRasKollWhere = " WHERE alien_id="+alienFanns;
+                        String alienRasKollWhere = " WHERE alien_id="+alienAttTaBort;
                         
                         //Kollar om matchande resultat finns i någon av de tre undertabellerna
                         String bogloKoll = alienRasKollFrom + "boglodite" + alienRasKollWhere;
@@ -490,16 +471,16 @@ public class AdminFonster extends javax.swing.JFrame {
                         
                         //Samma fråga med olika kriterier nedan, men de tre if-satserna kollar om nåt av värdena inte var null, stämmer det 
                         if(bogloSvar != null) {
-                            String bogloBorttagning = "DELETE FROM boglodite WHERE alien_id="+alienFanns;
+                            String bogloBorttagning = "DELETE FROM boglodite WHERE alien_id="+alienAttTaBort;
                             idb.delete(bogloBorttagning);
                     }
                         if(squidSvar != null) {
-                            String squidBorttagning = "DELETE FROM squid WHERE alien_id=" +alienFanns;
+                            String squidBorttagning = "DELETE FROM squid WHERE alien_id=" +alienAttTaBort;
                             idb.delete(squidBorttagning);
                         }
                         
                         if(wormSvar != null) {
-                            String wormBorttagning = "DELETE FROM worm WHERE alien_id="+alienFanns;
+                            String wormBorttagning = "DELETE FROM worm WHERE alien_id="+alienAttTaBort;
                             idb.delete(wormBorttagning);
                                     }
                         
@@ -509,12 +490,6 @@ public class AdminFonster extends javax.swing.JFrame {
                             idb.delete(alienBorttagning);
                             JOptionPane.showMessageDialog(null, "Borttagning av alien lyckades"); }
                         }
-                    catch (InfException e) {
-                           JOptionPane.showMessageDialog(null, "Något gick fel"); }
-                }else {
-                            //Om frågan returnerar null på aliens id.
-                            JOptionPane.showMessageDialog(null, "Användaren hittades inte i systemet");
-                }}
             catch(InfException e) {
                             JOptionPane.showMessageDialog(null, "Något gick fel");
                             System.out.println("Internt felmeddelande: " + e.getMessage());  
@@ -524,7 +499,7 @@ public class AdminFonster extends javax.swing.JFrame {
 
     private void btnBefordraAgentTillAdministratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBefordraAgentTillAdministratorActionPerformed
         // Standard validering för att se så fältet inte är tomt eller innehåller oväntade karaktärer
-        if (Validering.textFaltHarVarde(txtBefordraAgentTillAdministrator) && Validering.isHelTal(txtBefordraAgentTillAdministrator)) {
+        if (Validering.kollaOmAgentFinns(txtBefordraAgentTillAdministrator)) {
             try {
                 // Basic SQL fråga för att se om adminstatus är 'N' eller 'J'
                 String agentID = txtBefordraAgentTillAdministrator.getText();
@@ -559,19 +534,12 @@ public class AdminFonster extends javax.swing.JFrame {
 
     private void btnTaBortAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAgentActionPerformed
         // Den sista metoden i valideringen används för att se så man inte tar bort sig själv som användare.
-        if (Validering.textFaltHarVarde(txtTaBortAgent) && Validering.isHelTal(txtTaBortAgent) && !txtTaBortAgent.getText().equals(id)) {
-
+        if (Validering.kollaOmAgentFinns(txtTaBortAgent)) {
+            if(!txtTaBortAgent.getText().equals(id)) {
             try {
-                // Gör en enkel koll för att se så agenten finns i systemet
                 String agentAttTaBort = txtTaBortAgent.getText();
-                String finnsAgent = "SELECT agent_id from agent where agent_id =" + agentAttTaBort;
-                String agentFanns = idb.fetchSingle(finnsAgent);
-
-                // Om fältet ej var tomt, kör nedanstående
-                if (agentFanns != null) {
-                    try {
                         // Hämtar ut aliens ur databasen som har vår agent som ansvarig agent
-                        String sqlAlienFraga = "SELECT alien_id FROM alien WHERE Ansvarig_Agent = " + agentFanns;
+                        String sqlAlienFraga = "SELECT alien_id FROM alien WHERE Ansvarig_Agent = " + agentAttTaBort;
 
                         // Lägger in varje matchande alien ur föregående fråga i en hashmap
                         ArrayList<HashMap<String, String>> agentAnsvararFor = idb.fetchRows(sqlAlienFraga);
@@ -590,13 +558,8 @@ public class AdminFonster extends javax.swing.JFrame {
                         String agentBorttagning = "DELETE FROM agent WHERE agent_id=" + agentAttTaBort;
                         idb.delete(agentBorttagning);
                         JOptionPane.showMessageDialog(null, "Borttagning av agent lyckades");
-                    } catch (InfException e) {
-                        JOptionPane.showMessageDialog(null, "Något gick fel");
-                    }
-                } else {
-                    // Om agentFanns returnerar null.
-                    JOptionPane.showMessageDialog(null, "Användaren hittade inte i systemet");
-                }
+                   
+                
             } catch (InfException ex) {
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex.getMessage());
@@ -604,7 +567,7 @@ public class AdminFonster extends javax.swing.JFrame {
         } else {
             // Om agentens ID matchar "sessions ID:t på vår användare"
             JOptionPane.showMessageDialog(null, "Du kan inte ta bort dig själv som användare.");
-        }  
+        } }
     }//GEN-LAST:event_btnTaBortAgentActionPerformed
 
     private void btnLosenordsAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLosenordsAndringActionPerformed
@@ -620,14 +583,10 @@ public class AdminFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistreraAlienActionPerformed
 
     private void btnBytKontorsChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytKontorsChefActionPerformed
-      if(Validering.textFaltHarVarde(txtBytKontorsChef) && Validering.isHelTal(txtBytKontorsChef)) {
+      if(Validering.kollaOmAgentFinns(txtBytKontorsChef)) {
           try {
               //Kollar om agenten vi vill befordra finns i systemet
               String nyKontorsChefsID = txtBytKontorsChef.getText();
-              String kollaOmAgentFinns = "SELECT agent_id FROM agent WHERE agent_id = " +  nyKontorsChefsID;
-              String svarOmAgentFinns = idb.fetchSingle(kollaOmAgentFinns);
-              
-              if(svarOmAgentFinns != null) {
                   
                   String kollaAgentsChefStatus = "SELECT agent_id FROM kontorschef WHERE agent_id = " + nyKontorsChefsID;
                   String svarAgentsChefStatus = idb.fetchSingle(kollaAgentsChefStatus);
@@ -638,27 +597,19 @@ public class AdminFonster extends javax.swing.JFrame {
                   
                   if(svarAgentensOmrade != null) {
                       String agentensKontor = "";
-                      switch (svarAgentensOmrade) {
-                        case "1":
-                            agentensKontor = "Örebrokontoret";
-                            break;
-                        case "2":
-                            agentensKontor = "Göteborgskontoret";
-                            break;
-                        case "4":
-                            agentensKontor = "Kirunakontoret";
-                            break;
-                        default:
-                            agentensKontor = "Okänt kontor"; // Ska inte kunna användas men finns som failsafe.
-                            break;
-                    } 
+                      agentensKontor = switch (svarAgentensOmrade) {
+                          case "1" -> "Örebrokontoret";
+                          case "2" -> "Göteborgskontoret";
+                          case "4" -> "Kirunakontoret";
+                          default -> "Okänt kontor";
+                      }; // Ska inte kunna användas men finns som failsafe.
                       try{
                           //Använder try då inte alla databaser har tilldelat agenter till "Göteborgskontoret" eller "Kirunakontoret" 
                       String uppdateraKontorsChef = "UPDATE kontorschef SET agent_id = " + nyKontorsChefsID + " WHERE kontorsbeteckning = '" + agentensKontor +"'";
                       idb.update(uppdateraKontorsChef);
                       JOptionPane.showMessageDialog(null, "Agenten befordrades till kontorschef.");
                       } catch(InfException ex) {
-                          JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till kontorschef.");
+                          JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till kontorschef. Kontrollera så att agenten tillhör ett kontor");
                           System.out.println("Internt felmeddelande: " + ex.getMessage());
                       }
                   }
@@ -668,11 +619,8 @@ public class AdminFonster extends javax.swing.JFrame {
               }
                     else {
                         JOptionPane.showMessageDialog(null, "Agenten är redan chef för ett kontor");
-                    }}
-              else{
-                  JOptionPane.showMessageDialog(null, "Agenten finns inte i systemet.");
-              }
-          } catch(InfException ex) {
+                    }}    
+           catch(InfException ex) {
               JOptionPane.showMessageDialog(null, "Något gick fel");
               System.out.println("Internt felmeddelande: " + ex.getMessage());
           }
@@ -680,19 +628,14 @@ public class AdminFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBytKontorsChefActionPerformed
 
     private void cbAgentInfoAttributActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAgentInfoAttributActionPerformed
-        if (Validering.textFaltHarVarde(txtAgentInfoID) && Validering.isHelTal(txtAgentInfoID)) {
+        if (Validering.kollaOmAgentFinns(txtAgentInfoID)) {
             try {
                 String valdAgentID = txtAgentInfoID.getText();
                 String valdTyp = (String) cbAgentInfoAttribut.getSelectedItem();
 
                 // Deklarerar sträng för fråga för att kunna dynamiskt ändra den vid switch case
                 String sqlFraga = "";
-
-                // Kollar så utrustningen vi försöker lägga till inte har ett ID som "krockar" med det i databasen.
-                String kollaOmAgentFinns = "SELECT agent_id FROM agent WHERE agent_id = " + valdAgentID;
-                String svarOmAgentFinns = idb.fetchSingle(kollaOmAgentFinns);
-
-                if (svarOmAgentFinns != null) {
+                
                     // Om en typ har valts i comboboxen
                     if (null != valdTyp) {
                         // Vid varje valt case så bestämmer sqlfrågan vilken typ av attribut användaren söker,
@@ -746,18 +689,12 @@ public class AdminFonster extends javax.swing.JFrame {
                             default:
                                 break;
                         }
-
-                        try {
                             if (!valdTyp.equals("All Information")) {
                                 String valdAgentInfo = idb.fetchSingle(sqlFraga);
                                 txtareaAgentInfo.setText(valdAgentInfo);
                             }
-                        } catch (InfException ex) {
-                            JOptionPane.showMessageDialog(null, "Något gick fel");
-                            System.out.println("Internt felmeddelande: " + ex.getMessage());
-                        }
                     }
-                }
+                
             } catch (InfException ex) {
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex.getMessage());
