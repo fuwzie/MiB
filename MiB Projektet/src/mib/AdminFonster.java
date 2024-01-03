@@ -11,10 +11,10 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
  *
- * @author Otte
+ * @author Gustav, Neryse, Oskar
  */
 public class AdminFonster extends javax.swing.JFrame {
-
+     //Deklarerar databasuppkoppling
      private InfDB idb;
      //Sträng som används för att visa vem som är inloggad.
      private String id;
@@ -398,6 +398,7 @@ public class AdminFonster extends javax.swing.JFrame {
                 } 
                 
             } catch(InfException ex) {
+                //Vid oväntat fel, visa felmeddelande
                     JOptionPane.showMessageDialog(null, "Något gick fel");
                     System.out.println("Internt felmeddelande: " + ex.getMessage());
             }
@@ -450,6 +451,7 @@ public class AdminFonster extends javax.swing.JFrame {
             }
 
         } catch (InfException ex){
+            //Vid oväntat fel, visa felmeddelande
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
@@ -503,6 +505,7 @@ public class AdminFonster extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Borttagning av alien lyckades"); }
                         }
             catch(InfException e) {
+                //Vid oväntat fel, visa felmeddelande
                             JOptionPane.showMessageDialog(null, "Något gick fel");
                             System.out.println("Internt felmeddelande: " + e.getMessage());  
             } 
@@ -538,6 +541,7 @@ public class AdminFonster extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Agent finns inte i systemet.");
                 }
             } catch (InfException ex) { 
+                //Vid oväntat fel, visa felmeddelande
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex.getMessage());  
             }
@@ -573,6 +577,7 @@ public class AdminFonster extends javax.swing.JFrame {
                    
                 
             } catch (InfException ex) {
+                //Vid oväntat fel, visa felmeddelande
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex.getMessage());
             }
@@ -583,14 +588,17 @@ public class AdminFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaBortAgentActionPerformed
 
     private void btnLosenordsAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLosenordsAndringActionPerformed
+        //Öppnat nytt fönster för lösenordsändring
         new LosenordsandringAgent(idb, id).setVisible(true);
     }//GEN-LAST:event_btnLosenordsAndringActionPerformed
 
     private void btnRegistreraAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAgentActionPerformed
+        //Öppnat nytt fönster för agentregistrering
         new RegistreraAgent(idb).setVisible(true);
     }//GEN-LAST:event_btnRegistreraAgentActionPerformed
 
     private void btnRegistreraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAlienActionPerformed
+        //Öppnat nytt fönster för alienregistrering
         new RegistreraAlien(idb).setVisible(true);
     }//GEN-LAST:event_btnRegistreraAlienActionPerformed
 
@@ -633,6 +641,7 @@ public class AdminFonster extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Agenten är redan chef för ett kontor");
                     }}    
            catch(InfException ex) {
+               //Vid oväntat fel, visa felmeddelande
               JOptionPane.showMessageDialog(null, "Något gick fel");
               System.out.println("Internt felmeddelande: " + ex.getMessage());
           }
@@ -672,6 +681,7 @@ public class AdminFonster extends javax.swing.JFrame {
 
                                     txtareaAgentInfo.setText(allInfo);
                                 } catch (InfException ex) {
+                                    //Vid oväntat fel, visa felmeddelande
                                     JOptionPane.showMessageDialog(null, "Något gick fel");
                                     System.out.println("Internt felmeddelande: " + ex.getMessage());
                                 }
@@ -708,6 +718,7 @@ public class AdminFonster extends javax.swing.JFrame {
                     }
                 
             } catch (InfException ex) {
+                //Vid oväntat fel, visa felmeddelande
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex.getMessage());
             }
@@ -715,11 +726,12 @@ public class AdminFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_cbAgentInfoAttributActionPerformed
 
     private void btnRedigeraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAlienActionPerformed
+        //Öppnat nytt fönster för alienredigering
         new RedigeraAlien(idb).setVisible(true);
-        
     }//GEN-LAST:event_btnRedigeraAlienActionPerformed
 
     private void btnRedigeraAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAgentActionPerformed
+        //Öppnat nytt fönster för agentredigering
         new RedigeraAgent(idb, id).setVisible(true);
     }//GEN-LAST:event_btnRedigeraAgentActionPerformed
 

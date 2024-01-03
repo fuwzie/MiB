@@ -10,11 +10,14 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Otte
+ * @author Gustav, Neryse, Oskar
  */
 public class LosenordsandringAlien extends javax.swing.JFrame {
-    private InfDB idb;
-    private String id;
+    //Deklarerar databasuppkoppling
+     private InfDB idb;
+     //Sträng som används för att visa vem som är inloggad.
+     private String id;
+     
     /**
      * Creates new form Losenordsandring
      */
@@ -161,6 +164,7 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
             } }
         
         catch (InfException ex){
+            //Vid oväntat fel, visa felmeddelande
             JOptionPane.showMessageDialog(null, "Ange rätt lösenord!");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
         }

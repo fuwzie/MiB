@@ -10,12 +10,14 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Otte
+ * @author Gustav, Neryse, Oskar
  */
 public class AlienFonster extends javax.swing.JFrame {
-    private InfDB idb;
-    //Sträng som används för att visa vem som är inloggad.
-    private String id;
+    //Deklarerar databasuppkoppling
+     private InfDB idb;
+     //Sträng som används för att visa vem som är inloggad.
+     private String id;
+     
     /**
      * Creates new form AlienFonster
      */
@@ -113,12 +115,14 @@ public class AlienFonster extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
+          //Loggar ut användare genom att öppna nytt inloggningsfönster och stänga det tidigare fönstret
           new Inloggning(idb).setVisible(true);
           dispose();
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void btnLosenordsAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLosenordsAndringActionPerformed
-      new LosenordsandringAlien(idb, id).setVisible(true);
+        //Öppnat nytt fönster för lösenordsändring
+        new LosenordsandringAlien(idb, id).setVisible(true);
     }//GEN-LAST:event_btnLosenordsAndringActionPerformed
 
     /**

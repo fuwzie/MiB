@@ -10,9 +10,10 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Otte
+ * @author Gustav, Neryse, Oskar
  */
 public class Inloggning extends javax.swing.JFrame {
+     //Deklarerar databasuppkoppling
      private InfDB idb;
 
     /**

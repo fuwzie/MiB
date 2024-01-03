@@ -13,11 +13,12 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Gustav
+ * @author Gustav, Neryse, Oskar
  */
 public class AlienRegister extends javax.swing.JFrame {
     
-    private InfDB idb;
+    //Deklarerar databasuppkoppling
+     private InfDB idb;
 
     /**
      * Creates new form AlienRegister
@@ -171,6 +172,7 @@ public class AlienRegister extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOmradeRasSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOmradeRasSokActionPerformed
+        //Öppnat nytt fönster för sökning efter område/ras
         new OmradeRasSok(idb).setVisible(true);
     }//GEN-LAST:event_btnOmradeRasSokActionPerformed
 
@@ -203,6 +205,7 @@ public class AlienRegister extends javax.swing.JFrame {
             txtareaDatumSok.append(output);
         }
     } catch (InfException ex){
+        //Vid oväntat fel, visa felmeddelande
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
         }

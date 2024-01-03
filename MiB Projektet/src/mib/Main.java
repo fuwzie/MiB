@@ -11,7 +11,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Otte
+ * @author Gustav, Neryse, Oskar
  */
 public class Main {
     
@@ -19,6 +19,7 @@ public class Main {
 
     public static void main(String[] args) throws InfException {
       try {
+          //Skapar databasuppkoppling med korrekta uppgifter som parametrar
             idb = new InfDB("mibdb", "3306", "mibdba", "mibkey");
         } catch (InfException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

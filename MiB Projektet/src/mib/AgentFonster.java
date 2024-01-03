@@ -12,12 +12,13 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Oskar
+ * @author Gustav, Neryse, Oskar
  */
 public class AgentFonster extends javax.swing.JFrame {
-        private static InfDB idb;
-        ////Sträng som används för att visa vem som är inloggad.
-        private String id;
+     //Deklarerar databasuppkoppling
+     private InfDB idb;
+     //Sträng som används för att visa vem som är inloggad.
+     private String id;
          
     /**
      * Creates new form AgentFonster
@@ -272,18 +273,22 @@ public class AgentFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_cbSokOmradesAnsvarigActionPerformed
 
     private void btnSokAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokAlienActionPerformed
+        //Öppnat nytt fönster för aliensökning
         new AlienRegister(idb).setVisible(true);
     }//GEN-LAST:event_btnSokAlienActionPerformed
 
     private void btnLosenordsAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLosenordsAndringActionPerformed
+        //Öppnat nytt fönster för lösenordsändring
         new LosenordsandringAgent(idb, id).setVisible(true);
     }//GEN-LAST:event_btnLosenordsAndringActionPerformed
 
     private void btnRegistreraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAlienActionPerformed
+        //Öppnat nytt fönster för alienregistrering
         new RegistreraAlien(idb).setVisible(true);
     }//GEN-LAST:event_btnRegistreraAlienActionPerformed
 
     private void btnRegistreraUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraUtrustningActionPerformed
+        //Öppnat nytt fönster för utrustningsregistrering
         new RegistreraUtrustning(idb).setVisible(true);
     }//GEN-LAST:event_btnRegistreraUtrustningActionPerformed
 
@@ -316,6 +321,7 @@ try {
         txtToppTre.append(output);
     }
 } catch (InfException ex){
+    //Vid oväntat fel, visa felmeddelande
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
@@ -362,12 +368,14 @@ try {
         txtVisaUtrustning.append(output.toString());
     }
 } catch (InfException ex){
+    //Vid oväntat fel, visa felmeddelande
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnVisaUtrustningActionPerformed
 
     private void btnRedigeraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAlienActionPerformed
+        //Öppnat nytt fönster alienredigering
         new RedigeraAlien(idb).setVisible(true);
 
     }//GEN-LAST:event_btnRedigeraAlienActionPerformed

@@ -9,11 +9,14 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
  *
- * @author Otte
+ * @author Gustav, Neryse, Oskar
  */
 public class LosenordsandringAgent extends javax.swing.JFrame {
+     //Deklarerar databasuppkoppling
      private InfDB idb;
+     //Sträng som används för att visa vem som är inloggad.
      private String id;
+     
     /**
      * Creates new form LosenordsandringAgent
      */
@@ -164,6 +167,7 @@ public class LosenordsandringAgent extends javax.swing.JFrame {
         }
         
         catch (InfException ex){
+            //Vid oväntat fel, visa felmeddelande
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
