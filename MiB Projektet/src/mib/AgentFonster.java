@@ -64,14 +64,15 @@ public class AgentFonster extends javax.swing.JFrame {
         btnLosenordsAndring = new javax.swing.JButton();
         txtSokOmradesAnsvarig = new javax.swing.JTextField();
         lblSokOmradesAnsvarig = new javax.swing.JLabel();
-        btnToppTre = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtToppTre = new javax.swing.JTextArea();
         jSeparator1 = new javax.swing.JSeparator();
         btnVisaUtrustning = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtVisaUtrustning = new javax.swing.JTextArea();
         btnRedigeraAlien = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtAgentRanking = new javax.swing.JTextArea();
+        cbAgentRanking = new javax.swing.JComboBox<>();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -128,17 +129,6 @@ public class AgentFonster extends javax.swing.JFrame {
         lblSokOmradesAnsvarig.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSokOmradesAnsvarig.setText("Sök områdesansvarig");
 
-        btnToppTre.setText("Visa topp 3 agenter med flest aliens");
-        btnToppTre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnToppTreActionPerformed(evt);
-            }
-        });
-
-        txtToppTre.setColumns(20);
-        txtToppTre.setRows(5);
-        jScrollPane1.setViewportView(txtToppTre);
-
         btnVisaUtrustning.setText("Visa min utrustning");
         btnVisaUtrustning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,95 +147,98 @@ public class AgentFonster extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Visa  agenter med flest aliens");
+
+        txtAgentRanking.setColumns(20);
+        txtAgentRanking.setRows(5);
+        jScrollPane4.setViewportView(txtAgentRanking);
+
+        cbAgentRanking.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Götaland", "Norrland", "Svealand" }));
+        cbAgentRanking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAgentRankingActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(btnLosenordsAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnLogOut))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblSokOmradesAnsvarig)
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnVisaUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnToppTre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblValkommenAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnRegistreraAlien)
-                                .addGap(5, 5, 5)
-                                .addComponent(btnRedigeraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnSokAlien)
-                                        .addGap(183, 183, 183)))
-                                .addGap(118, 118, 118))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(lblValkommenAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRedigeraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                .addGap(33, 33, 33)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbSokOmradesAnsvarig, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSokOmradesAnsvarig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnRegistreraUtrustning)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSokAlien)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLosenordsAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnVisaUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbAgentRanking, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRegistreraAlien)
-                            .addComponent(btnRedigeraAlien)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(lblValkommenAgent)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblSokOmradesAnsvarig)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblValkommenAgent)
+                    .addComponent(lblSokOmradesAnsvarig))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistreraAlien)
+                    .addComponent(btnRedigeraAlien)
+                    .addComponent(cbSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistreraUtrustning)
                     .addComponent(txtSokOmradesAnsvarig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSokAlien)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnToppTre)
-                    .addComponent(btnVisaUtrustning))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSokAlien)
+                    .addComponent(btnLosenordsAndring))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogOut)
-                    .addComponent(btnLosenordsAndring)))
+                    .addComponent(btnVisaUtrustning)
+                    .addComponent(cbAgentRanking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
+                .addGap(8, 8, 8)
+                .addComponent(btnLogOut))
         );
 
         pack();
@@ -291,42 +284,6 @@ public class AgentFonster extends javax.swing.JFrame {
         //Öppnat nytt fönster för utrustningsregistrering
         new RegistreraUtrustning(idb).setVisible(true);
     }//GEN-LAST:event_btnRegistreraUtrustningActionPerformed
-
-    private void btnToppTreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToppTreActionPerformed
-        String sqlFraga = "SELECT Agent.Namn, COUNT(Alien.Alien_ID) AS Antal_Aliens " +
-                  "FROM Agent " +
-                  "JOIN Alien ON Agent.Agent_ID = Alien.Ansvarig_Agent " +
-                  "GROUP BY Agent.Agent_ID " +
-                  "ORDER BY Antal_Aliens DESC " +
-                  "LIMIT 3";
-
-try {
-    // Antag att idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMaps baserat på SQL-frågan
-    ArrayList<HashMap<String, String>> topAgentLista = idb.fetchRows(sqlFraga);
-    
-    // Rensa tidigare text i textrutan
-    txtToppTre.setText("");
-    
-    // Iterera genom listan och skriv ut agentnamn och antal ansvariga aliens
-    for (HashMap<String, String> agentData : topAgentLista) {
-        // Hämta data från HashMap
-        String agentNamn = agentData.get("Namn");
-        String antalAliens = agentData.get("Antal_Aliens");
-        
-        // Formatering av output
-        String output = String.format("Agentnamn: %s, Antal Aliens: %s%n", 
-                                      agentNamn, antalAliens);
-        
-        // Output skickas ut i textrutan
-        txtToppTre.append(output);
-    }
-} catch (InfException ex){
-    //Vid oväntat fel, visa felmeddelande
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
-        }
-   
-    }//GEN-LAST:event_btnToppTreActionPerformed
 
     private void btnVisaUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaUtrustningActionPerformed
        String sqlFraga = "SELECT u.Benamning, t.Kraftkalla, v.Kaliber "
@@ -380,6 +337,52 @@ try {
 
     }//GEN-LAST:event_btnRedigeraAlienActionPerformed
 
+    private void cbAgentRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAgentRankingActionPerformed
+        //Deklarera valt område beroende på vilket område som väljs i combobox
+        String valtOmrade = (String) cbAgentRanking.getSelectedItem();
+        //Deklarera sql-fråga
+        String sqlFraga = "SELECT a.Namn, a.Agent_ID, COUNT(al.Alien_ID) AS Antal_Aliens, o.Benamning "
+                + "FROM agent a "
+                + "JOIN alien al ON a.Agent_ID = al.Ansvarig_Agent "
+                + "JOIN omrade o ON a.Omrade = o.Omrades_ID "
+                + "WHERE o.Benamning = '" + valtOmrade + "' "
+                + "GROUP BY a.Agent_ID "
+                + "ORDER BY Antal_Aliens DESC "
+                + "LIMIT 3";
+
+try {
+    // idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMaps baserat på SQL-frågan
+    ArrayList<HashMap<String, String>> agentLista = idb.fetchRows(sqlFraga);
+    
+    // Rensa tidigare text i textrutan
+    txtAgentRanking.setText("");
+    
+    // Iterera genom listan och skriv ut agentinformation
+    for (HashMap<String, String> agent : agentLista) {
+        // Hämta data från HashMap
+        String namn = agent.get("Namn");
+        String agentId = agent.get("Agent_ID");
+        String antalAliens = agent.get("Antal_Aliens");
+        
+        // Skapa en ny StringBuilder för output
+        StringBuilder output = new StringBuilder("Agent Namn: " + namn);
+        output.append(", Agent-ID: ").append(agentId);
+        output.append(", Antal Aliens: ").append(antalAliens);
+        
+        // Lägg till en ny rad i output
+        output.append("\n");
+        
+        // Output skickas ut i textrutan
+        txtAgentRanking.append(output.toString());
+    }
+} catch (InfException ex) {
+    // Vid oväntat fel, visa felmeddelande
+    JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av agentinformation.");
+    System.out.println("Internt felmeddelande: " + ex.getMessage());
+};
+        
+    }//GEN-LAST:event_cbAgentRankingActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -419,18 +422,19 @@ try {
     private javax.swing.JButton btnRegistreraAlien;
     private javax.swing.JButton btnRegistreraUtrustning;
     private javax.swing.JButton btnSokAlien;
-    private javax.swing.JButton btnToppTre;
     private javax.swing.JButton btnVisaUtrustning;
+    private javax.swing.JComboBox<String> cbAgentRanking;
     private javax.swing.JComboBox<String> cbSokOmradesAnsvarig;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblSokOmradesAnsvarig;
     private javax.swing.JLabel lblValkommenAgent;
+    private javax.swing.JTextArea txtAgentRanking;
     private javax.swing.JTextField txtSokOmradesAnsvarig;
-    private javax.swing.JTextArea txtToppTre;
     private javax.swing.JTextArea txtVisaUtrustning;
     // End of variables declaration//GEN-END:variables
 }
