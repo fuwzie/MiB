@@ -379,7 +379,7 @@ try {
     // Vid oväntat fel, visa felmeddelande
     JOptionPane.showMessageDialog(null, "Något gick fel vid hämtning av agentinformation.");
     System.out.println("Internt felmeddelande: " + ex.getMessage());
-};
+}
         
     }//GEN-LAST:event_cbAgentRankingActionPerformed
 
