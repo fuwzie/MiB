@@ -294,23 +294,23 @@ public class AgentFonster extends javax.swing.JFrame {
                     + "WHERE iu.Agent_ID = " + id;
 
     try {
-        // Antag att idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMaps baserat på SQL-frågan
+        // idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMap
         ArrayList<HashMap<String, String>> utrustningsLista = idb.fetchRows(sqlFraga);
         
-        // Rensa tidigare text i textrutan
+        // SÄtter textruta till tom
         txtVisaUtrustning.setText("");
         
-        // Iterera genom listan och skriv ut utrustningsinformation
+        //  Iterera genom arraylistan och skriver ut info
         for (HashMap<String, String> utrustning : utrustningsLista) {
         // Hämta data från HashMap
         String benamning = utrustning.get("Benamning");
         String kraftkalla = utrustning.get("Kraftkalla");
         String kaliber = utrustning.get("Kaliber");
         
-        // Skapa en ny StringBuilder för output
+        // Skapar en stringbuilder 
         StringBuilder output = new StringBuilder("Benämning: " + benamning);
         
-        // Lägg endast till kraftkälla och kaliber i strängen om de inte är null
+        // Lägg endast till kraftkälla och kaliber i strängen i de fall dessa inte är null
         if (kraftkalla != null && !kraftkalla.isEmpty()) {
             output.append(", Kraftkälla: ").append(kraftkalla);
         }
@@ -318,10 +318,10 @@ public class AgentFonster extends javax.swing.JFrame {
             output.append(", Kaliber: ").append(kaliber);
         }
         
-        // Lägg till en ny rad i output
+        // Radbrytning
         output.append("\n");
         
-        // Output skickas ut i textrutan
+        // Resultat printas i textruta
         txtVisaUtrustning.append(output.toString());
     }
 } catch (InfException ex){
@@ -332,7 +332,7 @@ public class AgentFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVisaUtrustningActionPerformed
 
     private void btnRedigeraAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraAlienActionPerformed
-        //Öppnat nytt fönster alienredigering
+        //Öppnat nytt fönster för alienredigering
         new RedigeraAlien(idb).setVisible(true);
 
     }//GEN-LAST:event_btnRedigeraAlienActionPerformed
@@ -351,28 +351,28 @@ public class AgentFonster extends javax.swing.JFrame {
                 + "LIMIT 3";
 
 try {
-    // idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMaps baserat på SQL-frågan
+    // idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMap
     ArrayList<HashMap<String, String>> agentLista = idb.fetchRows(sqlFraga);
     
-    // Rensa tidigare text i textrutan
+    // Sätter text i textrutan till tom
     txtAgentRanking.setText("");
     
-    // Iterera genom listan och skriv ut agentinformation
+    // Iterera genom arraylistan och skriver ut info
     for (HashMap<String, String> agent : agentLista) {
         // Hämta data från HashMap
         String namn = agent.get("Namn");
         String agentId = agent.get("Agent_ID");
         String antalAliens = agent.get("Antal_Aliens");
         
-        // Skapa en ny StringBuilder för output
+        // Skapar en stringbuilder 
         StringBuilder output = new StringBuilder("Agent Namn: " + namn);
         output.append(", Agent-ID: ").append(agentId);
         output.append(", Antal Aliens: ").append(antalAliens);
         
-        // Lägg till en ny rad i output
+        // Ny rad i output
         output.append("\n");
         
-        // Output skickas ut i textrutan
+        // Resultat skrivs ut i textruta
         txtAgentRanking.append(output.toString());
     }
 } catch (InfException ex) {
