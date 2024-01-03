@@ -10,14 +10,12 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Gustav
+ * @author Gustav, Neryse, Oskar
  */
 public class RedigeraAlien extends javax.swing.JFrame {
     
     private InfDB idb;
-    /**
-     * Creates new form RedigeraAlien
-     */
+    // Deklarerar och instansierar databasuppkoppling
     public RedigeraAlien(InfDB idb) {
         initComponents();
         this.idb = idb;
@@ -95,11 +93,6 @@ public class RedigeraAlien extends javax.swing.JFrame {
         });
 
         cbTidigareRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boglodite", "Squid", "Worm" }));
-        cbTidigareRas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTidigareRasActionPerformed(evt);
-            }
-        });
 
         cbNyRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boglodite", "Squid", "Worm" }));
 
@@ -210,131 +203,141 @@ public class RedigeraAlien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerkstallAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerkstallAlienActionPerformed
-        if(Validering.kollaOmAlienFinns(txtAngeAlienID)){
-        String sqlFraga = "";
-    String id = txtAngeAlienID.getText();
-    String valdAndring = (String) cbAndraAlien.getSelectedItem();
-    String nyttVarde = txtNyttVardeAlien.getText();
-    boolean lyckadValidering = false;
- 
-    if (nyttVarde != null && !nyttVarde.trim().isEmpty()) {
-        if (null != valdAndring) switch (valdAndring) {
-                case "Lösenord":
-                    // Kontrollerar att lösenordet är max 6 tecken
-                    if (Validering.kollaLosenordLangd(txtNyttVardeAlien)) {
-                        sqlFraga = "UPDATE alien SET losenord = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-                        lyckadValidering = true;
-                    }       break;
-                case "Registreringsdatum":
-                    // Kontrollerar att datumet är i formatet ÅÅÅÅ-MM-DD
-                    if (Validering.kollaDatumFormat(txtNyttVardeAlien)) {
-                        sqlFraga = "UPDATE alien SET registreringsdatum = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-                        lyckadValidering = true;
-                    }       break;
-                case "Telefonnummer":
-                    // Kontrollerar att telefonnumret endast innehåller siffror
-                    if (Validering.kollaTelefonFormat(txtNyttVardeAlien)) {
-                        sqlFraga = "UPDATE alien SET telefon = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-                        lyckadValidering = true;
-                    }       break;
-                case "Ansvarig agent":
-                    // Kontrollerar att ansvarig agent finns i databasen
-                    if (Validering.kollaOmAgentFinns(txtNyttVardeAlien)) {
-                        sqlFraga = "UPDATE alien SET ansvarig_agent = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-                        lyckadValidering = true;
-                    }       break;
-                case "Plats":
-                    //  Kontrollerar att platsen finns i databasen
-                    if(Validering.kollaOmPlatsFinns(txtNyttVardeAlien))
-                        sqlFraga = "UPDATE alien SET plats = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-                    lyckadValidering = true;
-                    break;
-                case "Namn":
-                    //  Kontrollerar att namnet inte är för långt
-                    if(Validering.kollaNamnFormat(txtNyttVardeAlien))
-                        sqlFraga = "UPDATE alien SET namn = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
-                    lyckadValidering = true;
-                    break;
-                default:
-                    break;
+        // Kollar först så den alien som ska redigeras finns i systemet.
+        if (Validering.kollaOmAlienFinns(txtAngeAlienID)) {
+           //Deklarerar en tom sträng för att kunna dynamiskt ändra beroende på switch case.
+            String sqlFraga = "";
+            // Deklarerar strängar till att vara värdet av våra textfält + comboboxval
+            String id = txtAngeAlienID.getText();
+            String valdAndring = (String) cbAndraAlien.getSelectedItem();
+            String nyttVarde = txtNyttVardeAlien.getText();
+            //En boolean som kollar om någon av valideringarna nedan lyckas.
+            boolean lyckadValidering = false;
+
+            if (nyttVarde != null && !nyttVarde.trim().isEmpty()) {
+                if (null != valdAndring) switch (valdAndring) {
+                    case "Lösenord":
+                        // Kontrollerar att lösenordet är max 6 tecken
+                        if (Validering.kollaLosenordLangd(txtNyttVardeAlien)) {
+                            sqlFraga = "UPDATE alien SET losenord = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                            lyckadValidering = true;
+                        }       
+                        break;
+                    case "Registreringsdatum":
+                        // Kontrollerar att datumet är i formatet ÅÅÅÅ-MM-DD
+                        if (Validering.kollaDatumFormat(txtNyttVardeAlien)) {
+                            sqlFraga = "UPDATE alien SET registreringsdatum = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                            lyckadValidering = true;
+                        }       
+                        break;
+                    case "Telefonnummer":
+                        // Kontrollerar att telefonnumret endast innehåller siffror
+                        if (Validering.kollaTelefonFormat(txtNyttVardeAlien)) {
+                            sqlFraga = "UPDATE alien SET telefon = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                            lyckadValidering = true;
+                        }       
+                        break;
+                    case "Ansvarig agent":
+                        // Kontrollerar att ansvarig agent finns i databasen
+                        if (Validering.kollaOmAgentFinns(txtNyttVardeAlien)) {
+                            sqlFraga = "UPDATE alien SET ansvarig_agent = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                            lyckadValidering = true;
+                        }       
+                        break;
+                    case "Plats":
+                        //  Kontrollerar att platsen finns i databasen
+                        if (Validering.kollaOmPlatsFinns(txtNyttVardeAlien)) {
+                            sqlFraga = "UPDATE alien SET plats = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                            lyckadValidering = true;
+                        }
+                        break;
+                    case "Namn":
+                        //  Kontrollerar att namnet inte är för långt
+                        if (Validering.kollaNamnFormat(txtNyttVardeAlien)) {
+                            sqlFraga = "UPDATE alien SET namn = '" + nyttVarde + "' WHERE alien_id = '" + id + "';";
+                            lyckadValidering = true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (lyckadValidering) {
+                    try {
+                        idb.update(sqlFraga);
+                        JOptionPane.showMessageDialog(null, "Uppdatering av uppgifter lyckades.");
+                    } catch (InfException ex) {
+                        JOptionPane.showMessageDialog(null, "Något gick fel");
+                        System.out.println("Internt felmeddelande: " + ex.getMessage());
+                    }
+                }
             }
-        if(lyckadValidering = true) {
-        try {
-            idb.update(sqlFraga);
-            JOptionPane.showMessageDialog(null, "Uppdatering av uppgifter lyckades.");
-        } catch (InfException ex){
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
-    }}}
-     
-    
     }//GEN-LAST:event_btnVerkstallAlienActionPerformed
 
     private void btnVerkstallRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerkstallRasActionPerformed
-       if(Validering.kollaOmAlienFinns(txtAngeAlienIDRas)) {
-           
-           String id = txtAngeAlienIDRas.getText().trim();
-           String nyRas = (String) cbNyRas.getSelectedItem();
-           String tidigareRas = (String) cbTidigareRas.getSelectedItem();
-           
+        // Kollar först så den alien som ska redigeras finns i systemet.
+        if (Validering.kollaOmAlienFinns(txtAngeAlienIDRas)) {
 
-           String input = null;
-           String sqlDelete = "";
-           String sqlInsert = "";
-        
-         switch (tidigareRas) {
-             case "Boglodite":
-               sqlDelete = "DELETE FROM boglodite WHERE alien_id = '" + id + "'";
-               break;
-             case "Worm":
-               sqlDelete = "DELETE FROM worm WHERE alien_id = '" + id + "'";
-               break;
-             case "Squid":
-               sqlDelete = "DELETE FROM squid WHERE alien_id = '" + id + "'";
-               break;
-          }
+            // Deklarerar strängar till att vara värdet av våra textfält + comboboxval
+            String id = txtAngeAlienIDRas.getText().trim();
+            String nyRas = (String) cbNyRas.getSelectedItem();
+            String tidigareRas = (String) cbTidigareRas.getSelectedItem();
 
-      try {
-       idb.delete(sqlDelete);
-      }
-      
-      catch (InfException ex){
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
+            // Deklarerar tomma strängar för att kunna dynamiskt ändra senare.
+            String input = null;
+            String sqlDelete = "";
+            String sqlInsert = "";
+
+            // Beroende på vilken ras som väljs, ta bort den rasen ur databasen för vår alien
+            switch (tidigareRas) {
+                case "Boglodite":
+                    sqlDelete = "DELETE FROM boglodite WHERE alien_id = '" + id + "'";
+                    break;
+                case "Worm":
+                    sqlDelete = "DELETE FROM worm WHERE alien_id = '" + id + "'";
+                    break;
+                case "Squid":
+                    sqlDelete = "DELETE FROM squid WHERE alien_id = '" + id + "'";
+                    break;
+            }
+
+            try {
+                idb.delete(sqlDelete);
+            } catch (InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel");
+                System.out.println("Internt felmeddelande: " + ex.getMessage());
+            }
+
+            // Beroende på vilken ras som valts så insertar den vår alien in i den rasen.
+            switch (nyRas) {
+                case "Boglodite":
+                    input = JOptionPane.showInputDialog(null, "Ange antal boogies:");
+                    sqlInsert = "INSERT INTO boglodite (alien_id, antal_boogies) VALUES ('" + id + "','" + input + "')";
+                    break;
+                case "Worm":
+                    input = JOptionPane.showInputDialog(null, "Ange längd:");
+                    sqlInsert = "INSERT INTO worm (alien_id, langd) VALUES ('" + id + "','" + input + "')";
+                    break;
+                case "Squid":
+                    input = JOptionPane.showInputDialog(null, "Ange antal armar:");
+                    sqlInsert = "INSERT INTO squid (alien_id, antal_armar) VALUES ('" + id + "','" + input + "')";
+                    break;
+            }
+
+            //Om inputdialogen inte lämnas tom.
+            if (input != null && !input.isEmpty()) {
+                try {
+                    idb.insert(sqlInsert);
+                    JOptionPane.showMessageDialog(null, "Ras uppdaterad och tidigare ras borttagen!");
+                } catch (InfException ex) {
+                    JOptionPane.showMessageDialog(null, "Något gick fel");
+                    System.out.println("Internt felmeddelande: " + ex.getMessage());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Attributet kan inte vara tomt!");
+            }
         }
-
-      switch (nyRas) {
-       case "Boglodite":
-         input = JOptionPane.showInputDialog(null, "Ange antal boogies:");
-         sqlInsert = "INSERT INTO boglodite (alien_id, antal_boogies) VALUES ('" + id + "','" + input + "')";
-         break;
-       case "Worm":
-         input = JOptionPane.showInputDialog(null, "Ange längd:");
-         sqlInsert = "INSERT INTO worm (alien_id, langd) VALUES ('" + id + "','" + input + "')";
-         break;
-      case "Squid":
-         input = JOptionPane.showInputDialog(null, "Ange antal armar:");
-         sqlInsert = "INSERT INTO squid (alien_id, antal_armar) VALUES ('" + id + "','" + input + "')";
-         break;
-}
-
-if (input != null && !input.isEmpty()) {
-    try {
-        idb.insert(sqlInsert);
-        JOptionPane.showMessageDialog(null, "Ras uppdaterad och tidigare ras borttagen!");
-    } catch (InfException ex){
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
-        }
-} else {
-    JOptionPane.showMessageDialog(null, "Attributet kan inte vara tomt!");
-}}
     }//GEN-LAST:event_btnVerkstallRasActionPerformed
-
-    private void cbTidigareRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTidigareRasActionPerformed
-        
-    }//GEN-LAST:event_cbTidigareRasActionPerformed
 
     /**
      * @param args the command line arguments

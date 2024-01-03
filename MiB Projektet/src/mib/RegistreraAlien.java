@@ -10,14 +10,12 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Gustav
+ * @author Gustav, Neryse, Oskar
  */
 public class RegistreraAlien extends javax.swing.JFrame {
 
     private InfDB idb;
-    /**
-     * Creates new form RegistreraAgent
-     */
+    // Deklarerar och instansierar databasuppkoppling
     public RegistreraAlien(InfDB idb) {
         initComponents();
         this.idb = idb;
@@ -192,11 +190,17 @@ public class RegistreraAlien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbAlienRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienRasActionPerformed
-       if (Validering.kollaUniktIDAlien(txtAlienID) && Validering.kollaOmPlatsFinns(txtAlienPlats)
-            && Validering.kollaDatumFormat(txtAlienRegistreringsDatum) && Validering.kollaOmAgentFinns(txtAlienAnsvarigAgent)
-            && Validering.kollaUnikEpostForAlien(txtAlienEpost) && Validering.kollaLosenordLangd(txtAlienLosenord)
-            && Validering.kollaNamnFormat(txtAlienNamn) && Validering.kollaTelefonFormat(txtAlienTelefon)) {
-
+        // Validerar alla textrutor med det som passar den typen av inmatning.
+        if (Validering.kollaUniktIDAlien(txtAlienID) 
+                && Validering.kollaOmPlatsFinns(txtAlienPlats)
+                && Validering.kollaDatumFormat(txtAlienRegistreringsDatum) 
+                && Validering.kollaOmAgentFinns(txtAlienAnsvarigAgent)
+                && Validering.kollaUnikEpostForAlien(txtAlienEpost) 
+                && Validering.kollaLosenordLangd(txtAlienLosenord)
+                && Validering.kollaNamnFormat(txtAlienNamn) 
+                && Validering.kollaTelefonFormat(txtAlienTelefon)) {
+            
+            // Deklarerar strängar utav alla textrutor.
             String nyttAlien_id = (String) txtAlienID.getText();
             String nyttRegistreringsdatum = txtAlienRegistreringsDatum.getText();
             String nyEpost = txtAlienEpost.getText();
@@ -210,46 +214,50 @@ public class RegistreraAlien extends javax.swing.JFrame {
             String sqlFraga = "INSERT INTO alien (alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent) VALUES ('" 
                     + nyttAlien_id + "', '" + nyttRegistreringsdatum + "', '" + nyEpost + "', '" + nyttLosenord + "', '" 
                     + nyttNamn + "', '" + nyTelefon + "', '" + nyPlats + "', '" + nyAnsvarigAgent + "')";
+
+            String valdRas = (String) cbAlienRas.getSelectedItem();
             
-      String valdRas = (String) cbAlienRas.getSelectedItem();
+            // Deklarerar tomma strängar som ändras beroende på valt alternativ i combobox
+            String nySQLFraga = "";
+            String input = "";
+            
+            // Beroende på vilken ras man väljer får man antingen ange boogies, längd, eller armar. Värdet gör då om nySQLFraga till en SQL fråga som insertar värdet i rätt tabell.
+            if ("Boglodite".equals(valdRas)) {
+                input = JOptionPane.showInputDialog(this, "Ange antal boogies:");
+                if (Validering.isHelTalInputDialog(input)) {
+                    nySQLFraga = "INSERT INTO boglodite (alien_id, antal_boogies) VALUES ('" + nyttAlien_id + "', '" + input + "');";
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ogiltig inmatning för antal boogies"); 
+                    return;
+                }
+            } else if ("Worm".equals(valdRas)) {
+                input = JOptionPane.showInputDialog(this, "Ange längd:");
+                if (Validering.isDoubleInputDialog(input)) {
+                    nySQLFraga = "INSERT INTO worm (alien_id, langd) VALUES ('" + nyttAlien_id + "', '" + input + "');";
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ogiltig inmatning för längd"); 
+                    return;
+                }
+            } else if ("Squid".equals(valdRas)) {
+                input = JOptionPane.showInputDialog(this, "Ange antal armar:");
+                if (Validering.isHelTalInputDialog(input)) {
+                    nySQLFraga = "INSERT INTO squid (alien_id, antal_armar) VALUES ('" + nyttAlien_id + "', '" + input + "');";
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ogiltig inmatning för antal armar"); 
+                    return;
+                }
+            } 
 
-      String nySQLFraga = "";
-      String input = "";
-
-      if ("Boglodite".equals(valdRas)) {
-          input = JOptionPane.showInputDialog(this, "Ange antal boogies:");
-          if (Validering.isHelTalInputDialog(input)) {
-              nySQLFraga = "INSERT INTO boglodite (alien_id, antal_boogies) VALUES ('" + nyttAlien_id + "', '" + input + "');";
-          } else {
-              JOptionPane.showMessageDialog(null, "Ogiltig inmatning för antal boogies"); 
-              return;
-          }
-      } else if ("Worm".equals(valdRas)) {
-          input = JOptionPane.showInputDialog(this, "Ange längd:");
-          if (Validering.isDoubleInputDialog(input)) {
-              nySQLFraga = "INSERT INTO worm (alien_id, langd) VALUES ('" + nyttAlien_id + "', '" + input + "');";
-          } else {
-              JOptionPane.showMessageDialog(null, "Ogiltig inmatning för längd"); 
-              return;
-          }
-      } else if ("Squid".equals(valdRas)) {
-          input = JOptionPane.showInputDialog(this, "Ange antal armar:");
-          if (Validering.isHelTalInputDialog(input)) {
-              nySQLFraga = "INSERT INTO squid (alien_id, antal_armar) VALUES ('" + nyttAlien_id + "', '" + input + "');";
-          } else {
-              JOptionPane.showMessageDialog(null, "Ogiltig inmatning för antal armar"); 
-              return;
-          }
-      } 
-
-      try {
-          idb.insert(sqlFraga);
-          idb.insert(nySQLFraga);
-          JOptionPane.showMessageDialog(null, "Alieninformation lades till i databasen.");
-      } catch (InfException ex){
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
-        } } 
+            try {
+                // Kör först alien in i databasen, och sedan sätter dess ras
+                idb.insert(sqlFraga);
+                idb.insert(nySQLFraga);
+                JOptionPane.showMessageDialog(null, "Alieninformation lades till i databasen.");
+            } catch (InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel");
+                System.out.println("Internt felmeddelande: " + ex.getMessage());
+            } 
+        } 
     }//GEN-LAST:event_cbAlienRasActionPerformed
 
     /**

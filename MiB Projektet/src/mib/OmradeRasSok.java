@@ -16,15 +16,17 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Gustav
+ * @author Gustav, Neryse, Oskar
  */
 public class OmradeRasSok extends javax.swing.JFrame {
     private InfDB idb;
 
+    // Deklarerar och instansierar databasuppkoppling
     public OmradeRasSok(InfDB idb) {
         initComponents();
         this.idb = idb;
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,137 +124,135 @@ public class OmradeRasSok extends javax.swing.JFrame {
     
    
     private void cbAlienPlatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienPlatsActionPerformed
-    String valtPlats = (String) cbAlienPlats.getSelectedItem();
-    String sqlFraga = "SELECT alien.Alien_ID, alien.Namn, plats.benamning AS Plats " +
-                      "FROM alien " +
-                      "JOIN plats ON alien.Plats = plats.plats_id " +
-                      "WHERE plats.finns_i IN (SELECT omrades_id FROM omrade WHERE benamning = '" + valtPlats + "')";
-    
-    try {
-        ArrayList<HashMap<String, String>> alienPlatsLista = idb.fetchRows(sqlFraga);
-        
-        // Iterera genom HashMap/ArrayList
-        for (HashMap<String, String> alien : alienPlatsLista) {
-            // Hämta data från HashMap
-            String alienID = alien.get("Alien_ID");
-            String namn = alien.get("Namn");
-            String plats = alien.get("Benamning");
-            
-            // Formatering av output
-            String output = String.format("ID: %s, Namn: %s, Plats: %s%n", alienID, namn, plats);
-            
-            // Output skickas ut i textruta
-            txtareaPlatsSok.append(output);
-        }
-    } catch (InfException ex){
+        // Deklarerar två strängar, en som hämtar värdet ur vald combobox, och en som hämtar ut Alien_Id, alien namn och platsbenämning.
+        String valtPlats = (String) cbAlienPlats.getSelectedItem();
+        String sqlFraga = "SELECT alien.Alien_ID, alien.Namn, plats.benamning AS Plats " +
+                          "FROM alien " +
+                          "JOIN plats ON alien.Plats = plats.plats_id " +
+                          "WHERE plats.finns_i IN (SELECT omrades_id FROM omrade WHERE benamning = '" + valtPlats + "')";
+
+        try {
+            ArrayList<HashMap<String, String>> alienPlatsLista = idb.fetchRows(sqlFraga);
+
+            // Iterera genom HashMap/ArrayList
+            for (HashMap<String, String> alien : alienPlatsLista) {
+                // Hämta data från HashMap
+                String alienID = alien.get("Alien_ID");
+                String namn = alien.get("Namn");
+                String plats = alien.get("Benamning");
+
+                // Formatering av output
+                String output = String.format("ID: %s, Namn: %s, Plats: %s%n", alienID, namn, plats);
+
+                // Output skickas ut i textruta
+                txtareaPlatsSok.append(output);
+            }
+        } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
-   
     }//GEN-LAST:event_cbAlienPlatsActionPerformed
 
     private void cbAlienRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienRasActionPerformed
+        // Deklarerar en tom sträng för att kunna appenda en output senare.
         txtareaRasSok.setText("");
-        String valdRas= (String) cbAlienRas.getSelectedItem();
+
+        // Deklarerar strängar för vald comboboxruta och en tom SQL-fråga som används för att hämta ut korrekt information ur rätt tabell
+        String valdRas = (String) cbAlienRas.getSelectedItem();
         String sqlFraga = "";
-        
+
+        // Ungefär samma kod gäller för alla raser, men principen är att den hämtar ut all information som finns inom de olika raserna, samt vilka aliens som tillhör och deras information.
         if ("Worm".equals(valdRas)) {
-        
-        sqlFraga = "SELECT alien.alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent, langd FROM alien\n" +
-                   "JOIN worm ON alien.alien_id = worm.Alien_ID;";
-      
-    try {
-        ArrayList<HashMap<String, String>> alienWormLista = idb.fetchRows(sqlFraga);
-        
-        // Iterera genom HashMap/ArrayList
-        for (HashMap<String, String> alien : alienWormLista) {
-            // Hämta data från HashMap
-            String alienID = alien.get("Alien_ID");
-            String registreringsdatum = alien.get("Registreringsdatum");
-            String epost = alien.get("Epost");
-            String namn = alien.get("Namn");
-            String telefon = alien.get("Telefon");
-            String plats = alien.get("Plats");
-            String ansvarigAgent = alien.get("Ansvarig_Agent");
-            String langd = alien.get("Langd");
-            
-            //Formatering av output
-            String output = String.format("ID: %s, Datum: %s, Epost: %s, Namn: %s, Telefon: %s, Plats: %s, Agent: %s, Längd: %s%n", 
-                    alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent, langd);
-            
-            // Output skickas ut i textruta
-            txtareaRasSok.append(output);
+            sqlFraga = "SELECT alien.alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent, langd FROM alien\n" +
+                       "JOIN worm ON alien.alien_id = worm.Alien_ID;";
+
+            try {
+                ArrayList<HashMap<String, String>> alienWormLista = idb.fetchRows(sqlFraga);
+
+                // Iterera genom HashMap/ArrayList
+                for (HashMap<String, String> alien : alienWormLista) {
+                    // Hämta data från HashMap
+                    String alienID = alien.get("Alien_ID");
+                    String registreringsdatum = alien.get("Registreringsdatum");
+                    String epost = alien.get("Epost");
+                    String namn = alien.get("Namn");
+                    String telefon = alien.get("Telefon");
+                    String plats = alien.get("Plats");
+                    String ansvarigAgent = alien.get("Ansvarig_Agent");
+                    String langd = alien.get("Langd");
+
+                    // Formatering av output
+                    String output = String.format("ID: %s, Datum: %s, Epost: %s, Namn: %s, Telefon: %s, Plats: %s, Agent: %s, Längd: %s%n", 
+                                                 alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent, langd);
+
+                    // Output skickas ut i textrutan
+                    txtareaRasSok.append(output);
+                }
+            } catch (InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel");
+                System.out.println("Internt felmeddelande: " + ex.getMessage());
+            }
+        } else if ("Boglodite".equals(valdRas)) {
+            sqlFraga = "SELECT alien.alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent, antal_boogies FROM alien\n" +
+                       "JOIN boglodite ON alien.alien_id = boglodite.Alien_ID;";
+
+            try {
+                ArrayList<HashMap<String, String>> alienBogloditeLista = idb.fetchRows(sqlFraga);
+
+                // Iterera genom HashMap/ArrayList
+                for (HashMap<String, String> alien : alienBogloditeLista) {
+                    // Hämta data från HashMap
+                    String alienID = alien.get("Alien_ID");
+                    String registreringsdatum = alien.get("Registreringsdatum");
+                    String epost = alien.get("Epost");
+                    String namn = alien.get("Namn");
+                    String telefon = alien.get("Telefon");
+                    String plats = alien.get("Plats");
+                    String ansvarigAgent = alien.get("Ansvarig_Agent");
+                    String antalBoogies = alien.get("Antal_Boogies");
+
+                    // Formatering av output
+                    String output = String.format("ID: %s, Datum: %s, Epost: %s, Namn: %s, Telefon: %s, Plats: %s, Agent: %s, Boogies: %s%n", 
+                                                 alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent, antalBoogies);
+
+                    // Output skickas ut i textrutan
+                    txtareaRasSok.append(output);
+                }
+            } catch (InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel");
+                System.out.println("Internt felmeddelande: " + ex.getMessage());
+            }
+        } else if ("Squid".equals(valdRas)) {
+            sqlFraga = "SELECT alien.alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent, antal_armar FROM alien\n" +
+                       "JOIN squid ON alien.alien_id = squid.Alien_ID;";
+
+            try {
+                ArrayList<HashMap<String, String>> alienSquidLista = idb.fetchRows(sqlFraga);
+
+                // Iterera genom HashMap/ArrayList
+                for (HashMap<String, String> alien : alienSquidLista) {
+                    // Hämta data från HashMap
+                    String alienID = alien.get("Alien_ID");
+                    String registreringsdatum = alien.get("Registreringsdatum");
+                    String epost = alien.get("Epost");
+                    String namn = alien.get("Namn");
+                    String telefon = alien.get("Telefon");
+                    String plats = alien.get("Plats");
+                    String ansvarigAgent = alien.get("Ansvarig_Agent");
+                    String antalArmar = alien.get("Antal_Armar");
+
+                    // Formatering av output
+                    String output = String.format("ID: %s, Datum: %s, Epost: %s, Namn: %s, Telefon: %s, Plats: %s, Agent: %s, Armar: %s%n", 
+                                                 alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent, antalArmar);
+
+                    // Output skickas ut i textrutan
+                    txtareaRasSok.append(output);
+                }
+            } catch (InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel");
+                System.out.println("Internt felmeddelande: " + ex.getMessage());
+            }
         }
-    } catch (InfException ex){
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
-        }
-        }
-        
-    else if ("Boglodite".equals(valdRas)) {
-        
-        sqlFraga = "SELECT alien.alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent, antal_boogies FROM alien\n" +
-                   "JOIN boglodite ON alien.alien_id = boglodite.Alien_ID;";
-      
-    try {
-        ArrayList<HashMap<String, String>> alienBogloditeLista = idb.fetchRows(sqlFraga);
-        
-        // Iterera genom HashMap/ArrayList
-        for (HashMap<String, String> alien : alienBogloditeLista) {
-            // Hämta data från HashMap
-            String alienID = alien.get("Alien_ID");
-            String registreringsdatum = alien.get("Registreringsdatum");
-            String epost = alien.get("Epost");
-            String namn = alien.get("Namn");
-            String telefon = alien.get("Telefon");
-            String plats = alien.get("Plats");
-            String ansvarigAgent = alien.get("Ansvarig_Agent");
-            String antalBoogies = alien.get("Antal_Boogies");
-            
-            //Formatering av output
-            String output = String.format("ID: %s, Datum: %s, Epost: %s, Namn: %s, Telefon: %s, Plats: %s, Agent: %s, Boogies: %s%n", 
-                    alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent, antalBoogies);
-            
-            // Output skickas ut i textruta
-            txtareaRasSok.append(output);
-        }
-    } catch (InfException ex){
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
-        }
-        
-    } else if ("Squid".equals(valdRas)) {
-        
-        sqlFraga = "SELECT alien.alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent, antal_armar FROM alien\n" +
-                   "JOIN squid ON alien.alien_id = squid.Alien_ID;";
-    
-    
-    try {
-        ArrayList<HashMap<String, String>> alienSquidLista = idb.fetchRows(sqlFraga);
-        
-        // Iterera genom HashMap/ArrayList
-        for (HashMap<String, String> alien : alienSquidLista) {
-            // Hämta data från HashMap
-            String alienID = alien.get("Alien_ID");
-            String registreringsdatum = alien.get("Registreringsdatum");
-            String epost = alien.get("Epost");
-            String namn = alien.get("Namn");
-            String telefon = alien.get("Telefon");
-            String plats = alien.get("Plats");
-            String ansvarigAgent = alien.get("Ansvarig_Agent");
-            String antalArmar = alien.get("Antal_Armar");
-            
-            //Formatering av output
-            String output = String.format("ID: %s, Datum: %s, Epost: %s, Namn: %s, Telefon: %s, Plats: %s, Agent: %s, Armar: %s%n", 
-                    alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent, antalArmar);
-            
-            // Output skickas ut i textruta
-            txtareaRasSok.append(output);
-        }
-    } catch (InfException ex){
-            JOptionPane.showMessageDialog(null, "Något gick fel");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
-        }}
     }//GEN-LAST:event_cbAlienRasActionPerformed
         
     /**

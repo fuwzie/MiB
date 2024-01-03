@@ -13,14 +13,12 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Gustav
+ * @author Gustav, Neryse, Oskar
  */
 public class RegistreraAgent extends javax.swing.JFrame {
 
     private InfDB idb;
-    /**
-     * Creates new form RegistreraAgent
-     */
+    // Deklarerar och instansierar databasuppkoppling
     public RegistreraAgent(InfDB idb) {
         initComponents();
         this.idb = idb;
@@ -70,11 +68,6 @@ public class RegistreraAgent extends javax.swing.JFrame {
         txtAgentEpost.setText("mail@mib.net");
 
         txtAgentLosenord.setText("lösen");
-        txtAgentLosenord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAgentLosenordActionPerformed(evt);
-            }
-        });
 
         btnRegistreraAgent.setText("Registrera");
         btnRegistreraAgent.addActionListener(new java.awt.event.ActionListener() {
@@ -206,41 +199,41 @@ public class RegistreraAgent extends javax.swing.JFrame {
         
     
     private void btnRegistreraAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistreraAgentActionPerformed
-    //Massiv validering som kollar så alla textfält har värden, de som är int (id och område) valideras så att de är heltal, epost och id jämförs även i databasen för att se om de är unika.
+        // Validering som validerar alla textrutor efter deras specifika behov.
         if (Validering.kollaUniktIDAgent(txtAgentId) 
-    && Validering.kollaNamnFormat(txtAgentNamn) 
-    && Validering.kollaTelefonFormat(txtAgentTelefon) 
-    && Validering.kollaDatumFormat(txtAgentAnstallningsDatum) 
-    && Validering.kollaUnikEpostForAgent(txtAgentEpost) 
-    && Validering.kollaLosenordLangd(txtAgentLosenord)) {
+            && Validering.kollaNamnFormat(txtAgentNamn) 
+            && Validering.kollaTelefonFormat(txtAgentTelefon) 
+            && Validering.kollaDatumFormat(txtAgentAnstallningsDatum) 
+            && Validering.kollaUnikEpostForAgent(txtAgentEpost) 
+            && Validering.kollaLosenordLangd(txtAgentLosenord)) {
+
+            // Deklarerar strängar från textrutorna.
             String nyttAgent_id = txtAgentId.getText();
             String nyttNamn = txtAgentNamn.getText();
             String nyTelefon = txtAgentTelefon.getText();
             String nyttAnstallningsdatum = txtAgentAnstallningsDatum.getText();
             String nyEpost = txtAgentEpost.getText();
             String nyttLosenord = txtAgentLosenord.getText();
+
             //Behöver använda (String) för att konvertera combobox-värdet till en sträng.
             String nyAdministrator = (String) cbAgentAdministrator.getSelectedItem();
             String nyttOmrade = (String) cbAgentOmrade.getSelectedItem();
+
             //Insertar alla strängar ovan in i agenttabellen.
             String sqlFraga = "INSERT INTO agent (agent_id, namn, telefon, anstallningsdatum, administrator, epost, losenord, omrade) VALUES (" 
-            + nyttAgent_id + ", '" + nyttNamn + "', '" + nyTelefon + "', '" + nyttAnstallningsdatum + "', '" 
-            + nyAdministrator + "', '" + nyEpost + "', '" + nyttLosenord + "', " + nyttOmrade + ")";
+                + nyttAgent_id + ", '" + nyttNamn + "', '" + nyTelefon + "', '" + nyttAnstallningsdatum + "', '" 
+                + nyAdministrator + "', '" + nyEpost + "', '" + nyttLosenord + "', " + nyttOmrade + ")";
 
-        try {
-            //Om alla värden stämmer.
-            idb.insert(sqlFraga);
-            JOptionPane.showMessageDialog(null, "Ny agent har registrerats.");
-        } catch (InfException ex) {
-            JOptionPane.showMessageDialog(null, "Något gick fel!");
-            System.out.println("Internt felmeddelande: " + ex.getMessage());
+            try {
+                //Om alla värden stämmer.
+                idb.insert(sqlFraga);
+                JOptionPane.showMessageDialog(null, "Ny agent har registrerats.");
+            } catch (InfException ex) {
+                JOptionPane.showMessageDialog(null, "Något gick fel!");
+                System.out.println("Internt felmeddelande: " + ex.getMessage());
+            }
         }
-    }
     }//GEN-LAST:event_btnRegistreraAgentActionPerformed
-
-    private void txtAgentLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgentLosenordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAgentLosenordActionPerformed
 
     /**
      * @param args the command line arguments

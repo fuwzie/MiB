@@ -10,15 +10,14 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Gustav
+ * @author Gustav, Neryse, Oskar
  */
 public class RedigeraAgent extends javax.swing.JFrame {
     
-        private InfDB idb;
-        private String loginID;
-    /**
-     * Creates new form RedigeraAgent
-     */
+    private InfDB idb;
+    private String loginID;
+    
+    // Deklarerar och instansierar databasuppkoppling samt tar med ett sessionsid.
     public RedigeraAgent(InfDB idb, String loginID) {
         initComponents();
         this.idb = idb;
@@ -118,66 +117,79 @@ public class RedigeraAgent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerkstallAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerkstallAgentActionPerformed
-        if(Validering.kollaOmAgentFinns(txtAngeAgentID)){
+        // Kollar först om agenten finns i databasen (så att den kan redigeras)
+        if (Validering.kollaOmAgentFinns(txtAngeAgentID)) {
+            // Deklarerar en tom sträng för att kunna ändra beroende på switch case
             String sqlFraga = "";
+            // Deklarerar strängar utav våra textfält och comboboxar
             String id = (String) txtAngeAgentID.getText();
             String valdAndring = (String) cbAndraAgent.getSelectedItem();
             String nyttVarde = (String) txtNyttVardeAgent.getText();
+            // Boolean som kollar om någon switch case validering gick genom.
             boolean valideringLyckad = false;
-
-            if (null != valdAndring)switch (valdAndring) {
+            // Beroende på val, uppdaterar rätt fält med rätt format efter validering
+            if (null != valdAndring) switch (valdAndring) {
                 case "Namn":
-                if(Validering.kollaNamnFormat(txtNyttVardeAgent)) {
-                    sqlFraga = "UPDATE agent SET namn = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
-                    valideringLyckad = true;
-                }      break;
-                case "Telefonnummer":
-                if(Validering.kollaTelefonFormat(txtNyttVardeAgent)) {
-                    sqlFraga = "UPDATE agent SET telefon = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
-                    valideringLyckad = true;
-                }      break;
-                case "Anställningsdatum":
-                if(Validering.kollaDatumFormat(txtNyttVardeAgent)) {
-                    sqlFraga = "UPDATE agent SET anstallningsdatum = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
-                    valideringLyckad = true;
-                }          break;
-                case "Administratörsstatus":
-                if(!id.equals(loginID)) {
-                    if(nyttVarde.equals("J") || nyttVarde.equals("N")) {
-                        sqlFraga = "UPDATE agent SET administrator = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
+                    if (Validering.kollaNamnFormat(txtNyttVardeAgent)) {
+                        sqlFraga = "UPDATE agent SET namn = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
                         valideringLyckad = true;
-                    }
-                    else {
-                        nyttVarde = "";
-                        JOptionPane.showMessageDialog(null, "Ange endast J eller N som adminstatus.");
-                    } } else {
-                        JOptionPane.showMessageDialog(null, "Du kan inte redigera din egna administratörsstatus.");}          break;
-                    case "Lösenord":
-                    if(Validering.kollaLosenordLangd(txtNyttVardeAgent)) {
+                    }      
+                    break;
+                case "Telefonnummer":
+                    if (Validering.kollaTelefonFormat(txtNyttVardeAgent)) {
+                        sqlFraga = "UPDATE agent SET telefon = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
+                        valideringLyckad = true;
+                    }      
+                    break;
+                case "Anställningsdatum":
+                    if (Validering.kollaDatumFormat(txtNyttVardeAgent)) {
+                        sqlFraga = "UPDATE agent SET anstallningsdatum = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
+                        valideringLyckad = true;
+                    }          
+                    break;
+                case "Administratörsstatus":
+                    // Använder vårat sessionsID så att man inte kan ändra sin egna adminstatus
+                    if (!id.equals(loginID)) {
+                        if (nyttVarde.equals("J") || nyttVarde.equals("N")) {
+                            sqlFraga = "UPDATE agent SET administrator = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
+                            valideringLyckad = true;
+                        } else {
+                            nyttVarde = "";
+                            JOptionPane.showMessageDialog(null, "Ange endast J eller N som adminstatus.");
+                        } 
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Du kan inte redigera din egna administratörsstatus.");
+                    }          
+                    break;
+                case "Lösenord":
+                    if (Validering.kollaLosenordLangd(txtNyttVardeAgent)) {
                         sqlFraga = "UPDATE agent SET losenord = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
                         valideringLyckad = true;
-                    }          break;
-                    case "Område":
-                    if(Validering.kollaOmOmradeFinns(txtNyttVardeAgent)) {
+                    }          
+                    break;
+                case "Område":
+                    if (Validering.kollaOmOmradeFinns(txtNyttVardeAgent)) {
                         sqlFraga = "UPDATE agent SET omrade = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
                         valideringLyckad = true;
-                    }          break;
-                    default:
+                    }          
                     break;
-                }
-                if(!valideringLyckad) {
-                    nyttVarde = "";
-                }
-                if (nyttVarde != null && !nyttVarde.trim().isEmpty()) {
-                    try {
-                        idb.update(sqlFraga);
-                        JOptionPane.showMessageDialog(null, "Uppdatering lyckades.");
-                    } catch (InfException ex) {
-                        JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
-                        System.out.println("Internt felmeddelande:" + ex);
-                    }
+                default:
+                    break;
+            }
+            // Ifall nån validering misslyckas så gör den rutan tom för att undvika att SQLfrågan körs.
+            if (!valideringLyckad) {
+                nyttVarde = "";
+            }
+            if (nyttVarde != null && !nyttVarde.trim().isEmpty()) {
+                try {
+                    idb.update(sqlFraga);
+                    JOptionPane.showMessageDialog(null, "Uppdatering lyckades.");
+                } catch (InfException ex) {
+                    JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
+                    System.out.println("Internt felmeddelande:" + ex);
                 }
             }
+        }
     }//GEN-LAST:event_btnVerkstallAgentActionPerformed
 
     /**
