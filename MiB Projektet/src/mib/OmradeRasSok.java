@@ -40,9 +40,9 @@ public class OmradeRasSok extends javax.swing.JFrame {
         lblVisaAliensEfterOmrade = new javax.swing.JLabel();
         lblVisaAliensEfterRas = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtareaRasSok = new javax.swing.JTextArea();
+        txtAlienRas = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtareaPlatsSok = new javax.swing.JTextArea();
+        txtAlienPlats = new javax.swing.JTextArea();
         cbAlienPlats = new javax.swing.JComboBox<>();
         cbAlienRas = new javax.swing.JComboBox<>();
 
@@ -53,13 +53,13 @@ public class OmradeRasSok extends javax.swing.JFrame {
 
         lblVisaAliensEfterRas.setText("Visa aliens efter ras");
 
-        txtareaRasSok.setColumns(20);
-        txtareaRasSok.setRows(5);
-        jScrollPane1.setViewportView(txtareaRasSok);
+        txtAlienRas.setColumns(20);
+        txtAlienRas.setRows(5);
+        jScrollPane1.setViewportView(txtAlienRas);
 
-        txtareaPlatsSok.setColumns(20);
-        txtareaPlatsSok.setRows(5);
-        jScrollPane2.setViewportView(txtareaPlatsSok);
+        txtAlienPlats.setColumns(20);
+        txtAlienPlats.setRows(5);
+        jScrollPane2.setViewportView(txtAlienPlats);
 
         cbAlienPlats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Götaland", "Norrland", "Svealand" }));
         cbAlienPlats.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +145,7 @@ public class OmradeRasSok extends javax.swing.JFrame {
                 String output = String.format("ID: %s, Namn: %s, Plats: %s%n", alienID, namn, plats);
 
                 // Output skickas ut i textruta
-                txtareaPlatsSok.append(output);
+                txtAlienPlats.append(output);
             }
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -155,7 +155,7 @@ public class OmradeRasSok extends javax.swing.JFrame {
 
     private void cbAlienRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienRasActionPerformed
         // Deklarerar en tom sträng för att kunna appenda en output senare.
-        txtareaRasSok.setText("");
+        txtAlienRas.setText("");
 
         // Deklarerar strängar för vald comboboxruta och en tom SQL-fråga som används för att hämta ut korrekt information ur rätt tabell
         String valdRas = (String) cbAlienRas.getSelectedItem();
@@ -186,7 +186,7 @@ public class OmradeRasSok extends javax.swing.JFrame {
                                                  alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent, langd);
 
                     // Output skickas ut i textrutan
-                    txtareaRasSok.append(output);
+                    txtAlienRas.append(output);
                 }
             } catch (InfException ex) {
                 JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -216,7 +216,7 @@ public class OmradeRasSok extends javax.swing.JFrame {
                                                  alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent, antalBoogies);
 
                     // Output skickas ut i textrutan
-                    txtareaRasSok.append(output);
+                    txtAlienRas.append(output);
                 }
             } catch (InfException ex) {
                 JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -246,7 +246,7 @@ public class OmradeRasSok extends javax.swing.JFrame {
                                                  alienID, registreringsdatum, epost, namn, telefon, plats, ansvarigAgent, antalArmar);
 
                     // Output skickas ut i textrutan
-                    txtareaRasSok.append(output);
+                    txtAlienRas.append(output);
                 }
             } catch (InfException ex) {
                 JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -295,8 +295,8 @@ public class OmradeRasSok extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblVisaAliensEfterOmrade;
     private javax.swing.JLabel lblVisaAliensEfterRas;
-    private javax.swing.JTextArea txtareaPlatsSok;
-    private javax.swing.JTextArea txtareaRasSok;
+    private javax.swing.JTextArea txtAlienPlats;
+    private javax.swing.JTextArea txtAlienRas;
     // End of variables declaration//GEN-END:variables
 
     private static class infException {

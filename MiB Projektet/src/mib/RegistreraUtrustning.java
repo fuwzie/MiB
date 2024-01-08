@@ -38,7 +38,7 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
         lblUtrustningsTyp = new javax.swing.JLabel();
         cbUtrustningsTyp = new javax.swing.JComboBox<>();
         txtUtrustningsID = new javax.swing.JTextField();
-        txtBenamning = new javax.swing.JTextField();
+        txtUtrustningsBenamning = new javax.swing.JTextField();
         lblRegistreringsBeskrivning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,7 +60,7 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
 
         txtUtrustningsID.setText("1");
 
-        txtBenamning.setText("Cool utrustning");
+        txtUtrustningsBenamning.setText("Cool utrustning");
 
         lblRegistreringsBeskrivning.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblRegistreringsBeskrivning.setText("Utrustningen läggs till när du valt utrustningstyp.");
@@ -86,7 +86,7 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(lblUtrustningsBenamning)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtUtrustningsBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(170, 170, 170)
                         .addComponent(lblRegistreraUtrustning))
@@ -107,7 +107,7 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUtrustningsBenamning)
-                    .addComponent(txtBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUtrustningsBenamning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUtrustningsTyp)
@@ -122,14 +122,14 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
 
     private void cbUtrustningsTypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUtrustningsTypActionPerformed
         // Kollar först så textfälten har värden och om nödvändigt, är heltal.
-        if (Validering.kollaUniktIDUtrustning(txtUtrustningsID) && Validering.textFaltHarVarde(txtBenamning)) {
+        if (Validering.kollaUniktIDUtrustning(txtUtrustningsID) && Validering.textFaltHarVarde(txtUtrustningsBenamning)) {
             // Sätter en maxlängd på utrustningens benämning för att stämma överens med databasstrukturen
             int benamningMaxLangd = 20;
 
-            if (txtBenamning.getText().length() < benamningMaxLangd) {
+            if (txtUtrustningsBenamning.getText().length() < benamningMaxLangd) {
                 // Hämtar värden från textrutor och combobox och deklarerar deras värden som strängar.
                 String nyttUtrustningsID = txtUtrustningsID.getText();
-                String nyttUtrustningsBenamning = txtBenamning.getText();
+                String nyttUtrustningsBenamning = txtUtrustningsBenamning.getText();
                 String valdTyp = (String) cbUtrustningsTyp.getSelectedItem();
                 // Deklarerar strängar för fråga och input för att kunna dynamiskt ändra dem vid switch case
                 String sqlFraga = "";
@@ -223,7 +223,7 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
     private javax.swing.JLabel lblUtrustningsBenamning;
     private javax.swing.JLabel lblUtrustningsID;
     private javax.swing.JLabel lblUtrustningsTyp;
-    private javax.swing.JTextField txtBenamning;
+    private javax.swing.JTextField txtUtrustningsBenamning;
     private javax.swing.JTextField txtUtrustningsID;
     // End of variables declaration//GEN-END:variables
 }

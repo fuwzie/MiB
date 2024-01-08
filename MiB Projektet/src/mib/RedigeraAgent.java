@@ -38,7 +38,7 @@ public class RedigeraAgent extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnVerkstallAgent = new javax.swing.JButton();
-        cbAndraAgent = new javax.swing.JComboBox<>();
+        cbAndraAgentAttribut = new javax.swing.JComboBox<>();
         txtAngeAgentID = new javax.swing.JTextField();
         txtNyttVardeAgent = new javax.swing.JTextField();
 
@@ -63,7 +63,7 @@ public class RedigeraAgent extends javax.swing.JFrame {
             }
         });
 
-        cbAndraAgent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Namn", "Telefonnummer", "Anställningsdatum", "Administratörsstatus", "Lösenord", "Område" }));
+        cbAndraAgentAttribut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Namn", "Telefonnummer", "Anställningsdatum", "Administratörsstatus", "Lösenord", "Område" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +74,7 @@ public class RedigeraAgent extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(103, 103, 103)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(cbAndraAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbAndraAgentAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -103,7 +103,7 @@ public class RedigeraAgent extends javax.swing.JFrame {
                     .addGap(31, 31, 31)
                     .addComponent(jLabel7)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(cbAndraAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbAndraAgentAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(26, 26, 26)
                     .addComponent(jLabel8)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -123,7 +123,7 @@ public class RedigeraAgent extends javax.swing.JFrame {
             String sqlFraga = "";
             // Deklarerar strängar utav våra textfält och comboboxar
             String id = (String) txtAngeAgentID.getText();
-            String valdAndring = (String) cbAndraAgent.getSelectedItem();
+            String valdAndring = (String) cbAndraAgentAttribut.getSelectedItem();
             String nyttVarde = (String) txtNyttVardeAgent.getText();
             // Boolean som kollar om någon switch case validering gick genom.
             boolean valideringLyckad = false;
@@ -225,7 +225,7 @@ public class RedigeraAgent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVerkstallAgent;
-    private javax.swing.JComboBox<String> cbAndraAgent;
+    private javax.swing.JComboBox<String> cbAndraAgentAttribut;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

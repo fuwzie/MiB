@@ -32,7 +32,7 @@ public class RedigeraAlien extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btnVerkstallAlien = new javax.swing.JButton();
-        cbAndraAlien = new javax.swing.JComboBox<>();
+        cbAndraAlienAttribut = new javax.swing.JComboBox<>();
         txtAngeAlienID = new javax.swing.JTextField();
         txtNyttVardeAlien = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -45,8 +45,8 @@ public class RedigeraAlien extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         btnVerkstallRas = new javax.swing.JButton();
-        cbTidigareRas = new javax.swing.JComboBox<>();
-        cbNyRas = new javax.swing.JComboBox<>();
+        cbValjTidigareRas = new javax.swing.JComboBox<>();
+        cbValjNyRas = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,7 +60,7 @@ public class RedigeraAlien extends javax.swing.JFrame {
             }
         });
 
-        cbAndraAlien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Registreringsdatum", "Lösenord", "Namn", "Telefonnummer", "Plats", "Ansvarig agent" }));
+        cbAndraAlienAttribut.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Registreringsdatum", "Lösenord", "Namn", "Telefonnummer", "Plats", "Ansvarig agent" }));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Ange alien-ID");
@@ -92,9 +92,9 @@ public class RedigeraAlien extends javax.swing.JFrame {
             }
         });
 
-        cbTidigareRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boglodite", "Squid", "Worm" }));
+        cbValjTidigareRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boglodite", "Squid", "Worm" }));
 
-        cbNyRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boglodite", "Squid", "Worm" }));
+        cbValjNyRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boglodite", "Squid", "Worm" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,7 +110,7 @@ public class RedigeraAlien extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtAngeAlienID, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3)
-                                    .addComponent(cbAndraAlien, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cbAndraAlienAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(50, 50, 50)
                                 .addComponent(jLabel1))
@@ -146,8 +146,8 @@ public class RedigeraAlien extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbTidigareRas, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbNyRas, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(cbValjTidigareRas, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbValjNyRas, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +172,7 @@ public class RedigeraAlien extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbAndraAlien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbAndraAlienAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -189,11 +189,11 @@ public class RedigeraAlien extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbTidigareRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbValjTidigareRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbNyRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbValjNyRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnVerkstallRas)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -209,7 +209,7 @@ public class RedigeraAlien extends javax.swing.JFrame {
             String sqlFraga = "";
             // Deklarerar strängar till att vara värdet av våra textfält + comboboxval
             String id = txtAngeAlienID.getText();
-            String valdAndring = (String) cbAndraAlien.getSelectedItem();
+            String valdAndring = (String) cbAndraAlienAttribut.getSelectedItem();
             String nyttVarde = txtNyttVardeAlien.getText();
             //En boolean som kollar om någon av valideringarna nedan lyckas.
             boolean lyckadValidering = false;
@@ -280,8 +280,8 @@ public class RedigeraAlien extends javax.swing.JFrame {
 
             // Deklarerar strängar till att vara värdet av våra textfält + comboboxval
             String id = txtAngeAlienIDRas.getText().trim();
-            String nyRas = (String) cbNyRas.getSelectedItem();
-            String tidigareRas = (String) cbTidigareRas.getSelectedItem();
+            String nyRas = (String) cbValjNyRas.getSelectedItem();
+            String tidigareRas = (String) cbValjTidigareRas.getSelectedItem();
 
             // Deklarerar tomma strängar för att kunna dynamiskt ändra senare.
             String input = null;
@@ -378,9 +378,9 @@ public class RedigeraAlien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVerkstallAlien;
     private javax.swing.JButton btnVerkstallRas;
-    private javax.swing.JComboBox<String> cbAndraAlien;
-    private javax.swing.JComboBox<String> cbNyRas;
-    private javax.swing.JComboBox<String> cbTidigareRas;
+    private javax.swing.JComboBox<String> cbAndraAlienAttribut;
+    private javax.swing.JComboBox<String> cbValjNyRas;
+    private javax.swing.JComboBox<String> cbValjTidigareRas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
