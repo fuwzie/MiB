@@ -417,8 +417,11 @@ public class AdminFonster extends javax.swing.JFrame {
             // Sätter ihop strängar för sql-frågorna för att undvika upprepning.
             String utrustningsTypKollFrom = "SELECT utrustnings_id FROM ";
             String utrustningsTypKollWhere = " WHERE utrustnings_id=" + utrustningAttTaBort;
+            
+            // Kollar om utrustning innehas av en agent
+            String agentInneharKoll = utrustningsTypKollFrom + "innehar_utrustning" + utrustningsTypKollWhere;
 
-            // Kollar om matchande resultat finns i någon av de tre undertabellerna
+            // Kollar vilken typ av utrustning vi har att arbeta med för att sedan kunna ta bort den.
             String vapenKoll = utrustningsTypKollFrom + "vapen" + utrustningsTypKollWhere;
             String teknikKoll = utrustningsTypKollFrom + "teknik" + utrustningsTypKollWhere;
             String kommunikationKoll = utrustningsTypKollFrom + "kommunikation" + utrustningsTypKollWhere;
@@ -426,6 +429,7 @@ public class AdminFonster extends javax.swing.JFrame {
             String vapenSvar = idb.fetchSingle(vapenKoll);
             String teknikSvar = idb.fetchSingle(teknikKoll);
             String kommunikationSvar = idb.fetchSingle(kommunikationKoll);
+            String agentInneharSvar = idb.fetchSingle(agentInneharKoll);
 
             // Samma fråga med olika kriterier nedan, men de tre if-satserna kollar om nåt av värdena inte var null, stämmer det 
             if (vapenSvar != null) {
@@ -441,6 +445,11 @@ public class AdminFonster extends javax.swing.JFrame {
             if (kommunikationSvar != null) {
                 String kommunikationBorttagning = "DELETE FROM kommunikation WHERE utrustnings_id=" + utrustningAttTaBort;
                 idb.delete(kommunikationBorttagning);
+            }
+            
+            if (agentInneharSvar != null) {
+                String agentInneharBorttagning = "DELETE FROM innehar_utrustning WHERE utrustnings_id=" + utrustningAttTaBort;
+                idb.delete(agentInneharBorttagning);
             }
 
             // Denna metod körs först då alla utrustningstyper som utrustningen var associerad med är borttagna.
@@ -554,6 +563,26 @@ public class AdminFonster extends javax.swing.JFrame {
             if(!txtTaBortAgent.getText().equals(id)) {
             try {
                 String agentAttTaBort = txtTaBortAgent.getText();
+                        
+                        // Kollar om agenten är chef för antingen kontor eller område.
+                        String sqlKollaOmradesChef = "SELECT agent_id FROM omradeschef WHERE agent_id = " + agentAttTaBort;
+                        String sqlKollaKontorsChef = "SELECT agent_id FROM kontorschef WHERE agent_id = " + agentAttTaBort;
+                        
+                        String sqlKollaOmradesSvar = idb.fetchSingle(sqlKollaOmradesChef);
+                        String sqlKollaKontorsSvar = idb.fetchSingle(sqlKollaKontorsChef);
+                        
+                        // Eftersom man inte kan ta bort sig själv som chef så blir personen som tar bort användaren då (temporär) chef istället.
+                        if(sqlKollaOmradesSvar != null) {
+                            String omradesChefsAndring = "UPDATE omradeschef SET agent_id = " + id + " WHERE agent_id = " + agentAttTaBort;
+                            idb.update(omradesChefsAndring);
+                        }
+                        
+                        // Eftersom man inte kan ta bort sig själv som chef så blir personen som tar bort användaren då (temporär) chef istället.
+                        if(sqlKollaKontorsSvar != null) {
+                            String kontorsChefsAndring = "UPDATE kontorschef SET agent_id = " + id + " WHERE agent_id = " + agentAttTaBort;
+                            idb.update(kontorsChefsAndring);
+                        }
+                
                         // Hämtar ut aliens ur databasen som har vår agent som ansvarig agent
                         String sqlAlienFraga = "SELECT alien_id FROM alien WHERE Ansvarig_Agent = " + agentAttTaBort;
 
