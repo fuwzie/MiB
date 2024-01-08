@@ -24,6 +24,7 @@ public class AlienRegister extends javax.swing.JFrame {
      * Creates new form AlienRegister
      */
     public AlienRegister(InfDB idb) {
+        // Deklarerar instans av databasuppkoppling
         this.idb = idb;
         initComponents();
     }
@@ -177,12 +178,16 @@ public class AlienRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOmradeRasSokActionPerformed
 
     private void btnDatumSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatumSokActionPerformed
-    if(Validering.kollaDatumFormat(txtDatum1) && Validering.kollaDatumFormat(txtDatum2)) {
+    //Validerar så input är angiven i korrekt format
+        if(Validering.kollaDatumFormat(txtDatum1) && Validering.kollaDatumFormat(txtDatum2)) {
+        //Deklarerar strängar som tar in information från textrutor. 
         String startDatum = txtDatum1.getText();
-    String slutDatum = txtDatum2.getText();
-    String sqlFraga = "SELECT * FROM alien WHERE registreringsdatum BETWEEN '" + startDatum + "' AND '" + slutDatum + "';";
+        String slutDatum = txtDatum2.getText();
+        //Deklarerar SQL-fråga
+        String sqlFraga = "SELECT * FROM alien WHERE registreringsdatum BETWEEN '" + startDatum + "' AND '" + slutDatum + "';";
     
     try {
+       // idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMap
         ArrayList<HashMap<String, String>> alienDatumLista = idb.fetchRows(sqlFraga);
         txtareaDatumSok.setText("");
         
@@ -213,11 +218,15 @@ public class AlienRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDatumSokActionPerformed
 
     private void btnEnskildAlienSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnskildAlienSokActionPerformed
+        //Validerar så input som angivits är en alien som finns i systemet.
         if(Validering.kollaOmAlienFinns(txtEnskildAlienSok)){
+        //Deklarerar sträng som hämtar input från textruta.
         String id = txtEnskildAlienSok.getText();
+        //Deklarerar SQL-fråga
         String sqlFraga = "SELECT * FROM alien WHERE alien_id = '" + id + "'";
     
     try {
+        // idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMap
         ArrayList<HashMap<String, String>> alienEnskildLista = idb.fetchRows(sqlFraga);
         txtareaEnskildAlienSok.setText("");
         
@@ -240,6 +249,7 @@ public class AlienRegister extends javax.swing.JFrame {
             txtareaEnskildAlienSok.append(output);
         }
     } catch (InfException ex){
+        //Vid oväntat fel, visa felmeddelande.
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
         }

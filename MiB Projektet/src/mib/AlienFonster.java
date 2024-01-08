@@ -22,7 +22,9 @@ public class AlienFonster extends javax.swing.JFrame {
      * Creates new form AlienFonster
      */
     public AlienFonster(InfDB idb, String id) {
+        // Deklarerar instans av databasuppkoppling
         this.idb = idb;
+        //Deklarerar id-variabel
         this.id = id;
         initComponents();
          
@@ -115,7 +117,7 @@ public class AlienFonster extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
-          //Loggar ut användare genom att öppna nytt inloggningsfönster och stänga det tidigare fönstret
+          //Loggar ut användare genom att öppna nytt inloggningsfönster och stänger det tidigare fönstret
           new Inloggning(idb).setVisible(true);
           dispose();
     }//GEN-LAST:event_btnLogOutActionPerformed

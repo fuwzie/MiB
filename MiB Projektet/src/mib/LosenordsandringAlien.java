@@ -22,7 +22,9 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
      * Creates new form Losenordsandring
      */
     public LosenordsandringAlien(InfDB idb, String id) {
+        // Deklarerar instans av databasuppkoppling
         this.idb = idb;
+        //Deklarerar id-variabel
         this.id = id;
         initComponents();
     }
@@ -130,7 +132,7 @@ public class LosenordsandringAlien extends javax.swing.JFrame {
         //Kollar så alla textrutor har ett värde.
         if (Validering.kollaLosenordLangd(pwGammaltLosenord) && Validering.kollaLosenordLangd(pwNyttLosenord) && Validering.kollaLosenordLangd(pwNyttLosenordUpprepa))
         { try {
-             
+             //Deklarerar variabel som motsvarar tidigare lösenord. Hämtar input från textruta.
             String kollaLosenord = new String(pwGammaltLosenord.getPassword());
             
             //Hämtar ut användarens nuvarande lösenord

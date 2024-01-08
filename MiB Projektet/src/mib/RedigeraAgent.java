@@ -13,13 +13,13 @@ import oru.inf.InfException;
  * @author Gustav, Neryse, Oskar
  */
 public class RedigeraAgent extends javax.swing.JFrame {
-    
-    private InfDB idb;
+    // Deklarerar och instansierar databasuppkoppling samt tar med ett sessions-ID.
+    private InfDB idb;  
     private String loginID;
     
-    // Deklarerar och instansierar databasuppkoppling samt tar med ett sessionsid.
     public RedigeraAgent(InfDB idb, String loginID) {
         initComponents();
+        // Deklarerar instanser av databasuppkoppling och sessions-ID.
         this.idb = idb;
         this.loginID = loginID;
     }
@@ -148,7 +148,7 @@ public class RedigeraAgent extends javax.swing.JFrame {
                     }          
                     break;
                 case "Administratörsstatus":
-                    // Använder vårat sessionsID så att man inte kan ändra sin egna adminstatus
+                    // Använder vårt sessionsID så att man inte kan ändra sin egna adminstatus
                     if (!id.equals(loginID)) {
                         if (nyttVarde.equals("J") || nyttVarde.equals("N")) {
                             sqlFraga = "UPDATE agent SET administrator = '" + nyttVarde + "' WHERE agent_id = " + id + ";";
@@ -182,9 +182,11 @@ public class RedigeraAgent extends javax.swing.JFrame {
             }
             if (nyttVarde != null && !nyttVarde.trim().isEmpty()) {
                 try {
+                    //Vid lyckad uppdatering, visa bekräftelsemeddelande.
                     idb.update(sqlFraga);
                     JOptionPane.showMessageDialog(null, "Uppdatering lyckades.");
                 } catch (InfException ex) {
+                    //Vid oväntat fel, visa felmeddelande.
                     JOptionPane.showMessageDialog(null, "Något gick fel: " + ex.getMessage());
                     System.out.println("Internt felmeddelande:" + ex);
                 }

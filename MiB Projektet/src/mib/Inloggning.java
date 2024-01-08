@@ -21,7 +21,8 @@ public class Inloggning extends javax.swing.JFrame {
      */
     public Inloggning(InfDB idb) {
         initComponents();
-         this.idb = idb;
+         // Deklarerar instans av databasuppkoppling
+        this.idb = idb;
     }
 
     /**
@@ -188,7 +189,7 @@ public class Inloggning extends javax.swing.JFrame {
                         new AlienFonster(idb, svar).setVisible(true);
                         lyckadInloggning = true;
                     }   else {
-                // Felaktiga inloggningsuppgifter för agent/administratör
+                    // Felaktiga inloggningsuppgifter för agent/administratör
                     JOptionPane.showMessageDialog(null, "Antingen har du matat in fel uppgifter eller så finns användaren inte.");
                         }
         }

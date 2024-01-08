@@ -19,11 +19,13 @@ import oru.inf.InfException;
  * @author Gustav, Neryse, Oskar
  */
 public class OmradeRasSok extends javax.swing.JFrame {
-    private InfDB idb;
+    //Deklarerar databasuppkoppling
+     private InfDB idb;
 
     // Deklarerar och instansierar databasuppkoppling
     public OmradeRasSok(InfDB idb) {
         initComponents();
+        // Deklarerar instans av databasuppkoppling
         this.idb = idb;
     }
 
@@ -124,7 +126,7 @@ public class OmradeRasSok extends javax.swing.JFrame {
     
    
     private void cbAlienPlatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlienPlatsActionPerformed
-        // Deklarerar två strängar, en som hämtar värdet ur vald combobox, och en som hämtar ut Alien_Id, alien namn och platsbenämning.
+        // Deklarerar två strängar, en som hämtar värdet ur vald combobox, och en SQL-fråga som hämtar ut Alien_Id, alien namn och platsbenämning.
         String valtPlats = (String) cbAlienPlats.getSelectedItem();
         String sqlFraga = "SELECT alien.Alien_ID, alien.Namn, plats.benamning AS Plats " +
                           "FROM alien " +
@@ -132,6 +134,7 @@ public class OmradeRasSok extends javax.swing.JFrame {
                           "WHERE plats.finns_i IN (SELECT omrades_id FROM omrade WHERE benamning = '" + valtPlats + "')";
 
         try {
+            // idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMap
             ArrayList<HashMap<String, String>> alienPlatsLista = idb.fetchRows(sqlFraga);
 
             // Iterera genom HashMap/ArrayList
@@ -148,6 +151,7 @@ public class OmradeRasSok extends javax.swing.JFrame {
                 txtAlienPlats.append(output);
             }
         } catch (InfException ex) {
+            //Vid oväntat fel, visa felmeddelande.
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
@@ -163,10 +167,12 @@ public class OmradeRasSok extends javax.swing.JFrame {
 
         // Ungefär samma kod gäller för alla raser, men principen är att den hämtar ut all information som finns inom de olika raserna, samt vilka aliens som tillhör och deras information.
         if ("Worm".equals(valdRas)) {
+            //Om användaren valt "Worm", skickas denna SQL-fråga till databasen.
             sqlFraga = "SELECT alien.alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent, langd FROM alien\n" +
                        "JOIN worm ON alien.alien_id = worm.Alien_ID;";
 
             try {
+                // idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMap
                 ArrayList<HashMap<String, String>> alienWormLista = idb.fetchRows(sqlFraga);
 
                 // Iterera genom HashMap/ArrayList
@@ -189,14 +195,17 @@ public class OmradeRasSok extends javax.swing.JFrame {
                     txtAlienRas.append(output);
                 }
             } catch (InfException ex) {
+                //Vid oväntat fel, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex.getMessage());
             }
         } else if ("Boglodite".equals(valdRas)) {
+            //Om användaren valt "Boglodite", skickas denna SQL-fråga till databasen.
             sqlFraga = "SELECT alien.alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent, antal_boogies FROM alien\n" +
                        "JOIN boglodite ON alien.alien_id = boglodite.Alien_ID;";
 
             try {
+                // idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMap
                 ArrayList<HashMap<String, String>> alienBogloditeLista = idb.fetchRows(sqlFraga);
 
                 // Iterera genom HashMap/ArrayList
@@ -223,10 +232,12 @@ public class OmradeRasSok extends javax.swing.JFrame {
                 System.out.println("Internt felmeddelande: " + ex.getMessage());
             }
         } else if ("Squid".equals(valdRas)) {
+            //Om användaren valt "Squid", skickas denna SQL-fråga till databasen.
             sqlFraga = "SELECT alien.alien_id, registreringsdatum, epost, losenord, namn, telefon, plats, ansvarig_agent, antal_armar FROM alien\n" +
                        "JOIN squid ON alien.alien_id = squid.Alien_ID;";
 
             try {
+                // idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMap
                 ArrayList<HashMap<String, String>> alienSquidLista = idb.fetchRows(sqlFraga);
 
                 // Iterera genom HashMap/ArrayList
@@ -249,6 +260,7 @@ public class OmradeRasSok extends javax.swing.JFrame {
                     txtAlienRas.append(output);
                 }
             } catch (InfException ex) {
+                //Vid oväntat fel, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex.getMessage());
             }

@@ -18,6 +18,7 @@ public class RegistreraAlien extends javax.swing.JFrame {
     // Deklarerar och instansierar databasuppkoppling
     public RegistreraAlien(InfDB idb) {
         initComponents();
+        // Deklarerar instans av databasuppkoppling
         this.idb = idb;
     }
 
@@ -254,6 +255,7 @@ public class RegistreraAlien extends javax.swing.JFrame {
                 idb.insert(nySQLFraga);
                 JOptionPane.showMessageDialog(null, "Alieninformation lades till i databasen.");
             } catch (InfException ex) {
+                //Vid oväntat fel, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex.getMessage());
             } 

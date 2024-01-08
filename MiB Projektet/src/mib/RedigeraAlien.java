@@ -18,6 +18,7 @@ public class RedigeraAlien extends javax.swing.JFrame {
     // Deklarerar och instansierar databasuppkoppling
     public RedigeraAlien(InfDB idb) {
         initComponents();
+        // Deklarerar instans av databasuppkoppling
         this.idb = idb;
     }
 
@@ -263,9 +264,11 @@ public class RedigeraAlien extends javax.swing.JFrame {
                 }
                 if (lyckadValidering) {
                     try {
+                        //Vid lyckad uppdatering, visa bekräftelsemeddelande.
                         idb.update(sqlFraga);
                         JOptionPane.showMessageDialog(null, "Uppdatering av uppgifter lyckades.");
                     } catch (InfException ex) {
+                        //Vid oväntat fel, visa felmeddelande.
                         JOptionPane.showMessageDialog(null, "Något gick fel");
                         System.out.println("Internt felmeddelande: " + ex.getMessage());
                     }
@@ -302,8 +305,10 @@ public class RedigeraAlien extends javax.swing.JFrame {
             }
 
             try {
+                //Skickar in SQL-fråga till databasen som raderar valt värde.
                 idb.delete(sqlDelete);
             } catch (InfException ex) {
+                //Vid oväntat fel, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex.getMessage());
             }
@@ -326,14 +331,17 @@ public class RedigeraAlien extends javax.swing.JFrame {
 
             //Om inputdialogen inte lämnas tom.
             if (input != null && !input.isEmpty()) {
+                //Vid lyckad uppdatering, visa bekräftelsemeddelande.
                 try {
                     idb.insert(sqlInsert);
                     JOptionPane.showMessageDialog(null, "Ras uppdaterad och tidigare ras borttagen!");
                 } catch (InfException ex) {
+                    //Vid oväntat fel, visa felmeddelande.
                     JOptionPane.showMessageDialog(null, "Något gick fel");
                     System.out.println("Internt felmeddelande: " + ex.getMessage());
                 }
             } else {
+                //Om användare ej anger något värde i textruta.
                 JOptionPane.showMessageDialog(null, "Attributet kan inte vara tomt!");
             }
         }

@@ -21,7 +21,9 @@ public class LosenordsandringAgent extends javax.swing.JFrame {
      * Creates new form LosenordsandringAgent
      */
     public LosenordsandringAgent(InfDB idb, String id) {
+        // Deklarerar instans av databasuppkoppling
         this.idb = idb;
+        //Deklarerar id-variabel
         this.id = id;
         initComponents();
     }
@@ -129,7 +131,7 @@ public class LosenordsandringAgent extends javax.swing.JFrame {
        //Kollar så alla textrutor har ett värde.
         if (Validering.kollaLosenordLangd(pwGammaltLosenord) && Validering.kollaLosenordLangd(pwNyttLosenord) && Validering.kollaLosenordLangd(pwNyttLosenordUpprepa))
         { try {
-            
+            //Deklarerar variabel som motsvarar tidigare lösenord. Hämtar input från textruta.
             String kollaLosenord = new String(pwGammaltLosenord.getPassword());
            
             //Hämtar ut användarens nuvarande lösenord
@@ -162,6 +164,7 @@ public class LosenordsandringAgent extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Nytt lösenord kan inte vara samma som tidigare.");
                 } 
             } else {
+                //Om nuvarande lösenord ej stämmer, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Nuvarande lösenord stämmer inte.");
             } 
         }

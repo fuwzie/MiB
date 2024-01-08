@@ -21,6 +21,7 @@ public class RegistreraAgent extends javax.swing.JFrame {
     // Deklarerar och instansierar databasuppkoppling
     public RegistreraAgent(InfDB idb) {
         initComponents();
+        // Deklarerar instans av databasuppkoppling
         this.idb = idb;
     }
 
@@ -229,6 +230,7 @@ public class RegistreraAgent extends javax.swing.JFrame {
                 idb.insert(sqlFraga);
                 JOptionPane.showMessageDialog(null, "Ny agent har registrerats.");
             } catch (InfException ex) {
+                //Vid oväntat fel, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Något gick fel!");
                 System.out.println("Internt felmeddelande: " + ex.getMessage());
             }

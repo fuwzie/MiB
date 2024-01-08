@@ -18,6 +18,7 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
 
     // Deklarerar och instansierar databasuppkoppling
     public RegistreraUtrustning(InfDB idb) {
+        // Deklarerar instans av databasuppkoppling
         this.idb = idb;
         initComponents();
     
@@ -178,6 +179,7 @@ public class RegistreraUtrustning extends javax.swing.JFrame {
                         }
                     }
                 } catch (InfException ex) {
+                    //Vid oväntat fel, visa felmeddelande.
                     JOptionPane.showMessageDialog(null, "Något gick fel");
                     System.out.println("Internt felmeddelande: " + ex.getMessage());
                 }

@@ -20,6 +20,7 @@ public class Validering {
     private static InfDB idb;
 
     public Validering(InfDB idb) {
+        //deklarerar instans av databasuppkoppling.
         this.idb = idb;
     }
     
@@ -115,7 +116,7 @@ public class Validering {
         if (nyString.equals("N")) {
             admin = false;
         }
-
+        //Om användaren som angivits ej finns i databasen.
         if (nyString.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Användaren fanns ej i registret.");
         }
@@ -145,6 +146,7 @@ public class Validering {
                 }
 
             } catch (InfException ex) {
+                //Vid oväntat fel, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Något gick fel");
             }
         }
@@ -175,6 +177,7 @@ public class Validering {
                 }
 
             } catch(InfException ex) {
+                //Vid oväntat fel, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Något gick fel");
             }
         }
@@ -205,6 +208,7 @@ public class Validering {
                 }
 
             } catch(InfException ex) {
+                //Vid oväntat fel, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Något gick fel");
             }
         }
@@ -355,6 +359,7 @@ public class Validering {
             if (namnet.length() <= 20) {
                 namnLangd = true;
             } else {
+                //Om namnet överskrider 20 tecken.
                 JOptionPane.showMessageDialog(null, "Ditt namn är för långt. Ange annat namn eller förkortad version.");
             }
         }
@@ -372,6 +377,7 @@ public class Validering {
             if (nyttVarde.matches("\\d{4}-\\d{2}-\\d{2}")) {
                 formatStammer = true;
             } else {
+                //Om datumet angivits i fel format.
                 JOptionPane.showMessageDialog(null, "Datumet måste vara i formatet ÅÅÅÅ-MM-DD!");
             }
         }
@@ -397,9 +403,11 @@ public class Validering {
                 if (svarOmAgentFinns != null) {
                     agentFanns = true;
                 } else {
+                    //Om agent-ID ej finns i databasen.
                     JOptionPane.showMessageDialog(null, "Agenten fanns ej i databasen.");
                 }
             } catch (InfException ex) {
+                //Vid oväntat fel, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex);
             }
@@ -426,9 +434,11 @@ public class Validering {
                 if (svarOmAlienFinns != null) {
                     alienFanns = true;
                 } else {
+                    //Om alien-ID ej finns i databasen.
                     JOptionPane.showMessageDialog(null, "Vald alien fanns ej i databasen.");
                 }
             } catch (InfException ex) {
+                //Vid oväntat fel, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex);
             }
@@ -454,9 +464,11 @@ public class Validering {
                 if (svarOmUtrustningFinns != null) {
                     utrustningFanns = true;
                 } else {
+                    //Om utrustnings-ID ej finns i databasen.
                     JOptionPane.showMessageDialog(null, "Vald utrustning fanns ej i databasen.");
                 }
             } catch (InfException ex) {
+                //Vid oväntat fel, visa felmeddelande.
                 JOptionPane.showMessageDialog(null, "Något gick fel");
                 System.out.println("Internt felmeddelande: " + ex);
             }
@@ -485,6 +497,7 @@ public class Validering {
                     JOptionPane.showMessageDialog(null, "Vald plats fanns inte i databasen.");
                 }
             } catch (InfException ex) {
+                //Om plats-id ej finns i databasen.
                 JOptionPane.showMessageDialog(null, "Vald plats fanns inte i databasen.");
                 System.out.println("Internt felmeddelande: " + ex);
             }
@@ -513,6 +526,7 @@ public class Validering {
                     JOptionPane.showMessageDialog(null, "Valt område fanns inte i databasen.");
                 }
             } catch(InfException ex) {
+                //Om områdes-id ej finns i databasen.
                 JOptionPane.showMessageDialog(null, "Valt område fanns inte i databasen.");
                 System.out.println("Internt felmeddelande: " + ex);
             }

@@ -24,7 +24,9 @@ public class AgentFonster extends javax.swing.JFrame {
      * Creates new form AgentFonster
      */
     public AgentFonster(InfDB idb, String id) {
+       // Deklarerar instans av databasuppkoppling
         this.idb = idb;
+        //Deklarerar id-variabel
         this.id = id;
         initComponents();
         
@@ -247,19 +249,23 @@ public class AgentFonster extends javax.swing.JFrame {
     private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
         //loggar ut och återvänder användaren till inloggningsmenyn 
         new Inloggning(idb).setVisible(true);
+        //Stänger tidigare fönster
         dispose();
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void cbSokOmradesAnsvarigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSokOmradesAnsvarigActionPerformed
         String valtOmrade = (String) cbSokOmradesAnsvarig.getSelectedItem(); //deklarerar combobox-val
+        //Deklarerar SQL-fråga
         String sqlFraga = "SELECT namn FROM agent\n" +
                           "JOIN omradeschef ON agent.agent_id = omradeschef.agent_id\n" +
                           "JOIN omrade on omradeschef.omrade = omrade.Omrades_ID WHERE benamning = '" + valtOmrade + "'"; //deklarerar SQL-fråga
         try {
+            //Skickar in SQL-fråga och hämtar info från databasen. Svaret printas sedan i textrutan.
             String svar = idb.fetchSingle(sqlFraga);
             idb.fetchRows(sqlFraga);
             txtSokOmradesAnsvarig.setText(svar);
         } catch (InfException ex){
+            //Vid oväntat fel, visa felmeddelande.
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println("Internt felmeddelande: " + ex.getMessage());
         }
@@ -286,7 +292,8 @@ public class AgentFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistreraUtrustningActionPerformed
 
     private void btnVisaUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaUtrustningActionPerformed
-       String sqlFraga = "SELECT u.Benamning, t.Kraftkalla, v.Kaliber "
+       //Deklarerar SQL-fråga.
+        String sqlFraga = "SELECT u.Benamning, t.Kraftkalla, v.Kaliber "
                     + "FROM innehar_utrustning iu "
                     + "JOIN utrustning u ON iu.Utrustnings_ID = u.Utrustnings_ID "
                     + "LEFT JOIN teknik t ON u.Utrustnings_ID = t.Utrustnings_ID "
@@ -297,7 +304,7 @@ public class AgentFonster extends javax.swing.JFrame {
         // idb.fetchRows(sqlFraga) returnerar en ArrayList med HashMap
         ArrayList<HashMap<String, String>> utrustningsLista = idb.fetchRows(sqlFraga);
         
-        // SÄtter textruta till tom
+        // Sätter textruta till tom
         txtVisaUtrustning.setText("");
         
         //  Iterera genom arraylistan och skriver ut info

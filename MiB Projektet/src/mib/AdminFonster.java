@@ -23,7 +23,9 @@ public class AdminFonster extends javax.swing.JFrame {
      */
     public AdminFonster(InfDB idb, String id) {
         initComponents();
+        // Deklarerar instans av databasuppkoppling
         this.idb = idb;
+        //Deklarerar id-variabel
         this.id = id;
     }
 
@@ -375,6 +377,7 @@ public class AdminFonster extends javax.swing.JFrame {
                     String svarChefsStatus = idb.fetchSingle(kollaChefsStatus);
 
                     if(svarChefsStatus != null) {
+                        //Är agenten redan chef för ett område, visa felmeddelande
                         JOptionPane.showMessageDialog(null, "Användaren är redan områdeschef för ett område.");
                     }
 
@@ -562,6 +565,7 @@ public class AdminFonster extends javax.swing.JFrame {
         if (Validering.kollaOmAgentFinns(txtTaBortAgent)) {
             if(!txtTaBortAgent.getText().equals(id)) {
             try {
+                //Hämtar värde från textruta som anger vilken agent som ska raderas
                 String agentAttTaBort = txtTaBortAgent.getText();
                         
                         // Kollar om agenten är chef för antingen kontor eller område.
@@ -658,15 +662,18 @@ public class AdminFonster extends javax.swing.JFrame {
                       idb.update(uppdateraKontorsChef);
                       JOptionPane.showMessageDialog(null, "Agenten befordrades till kontorschef.");
                       } catch(InfException ex) {
+                          //Vid oväntat/internt fel, visa felmeddelande
                           JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till kontorschef. Kontrollera så att agenten tillhör ett kontor");
                           System.out.println("Internt felmeddelande: " + ex.getMessage());
                       }
                   }
                   else {
+                      //Om agenten saknar områdestilldelning, visa felmeddelande.
                       JOptionPane.showMessageDialog(null, "Agenten är inte tilldelad ett område och kan därför inte bli kontorschef.");
                   }
               }
                     else {
+                      //Är agenten redan chef för ett kontor, visa felmeddelande.
                         JOptionPane.showMessageDialog(null, "Agenten är redan chef för ett kontor");
                     }}    
            catch(InfException ex) {
@@ -680,6 +687,7 @@ public class AdminFonster extends javax.swing.JFrame {
     private void cbAgentInfoAttributActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAgentInfoAttributActionPerformed
         if (Validering.kollaOmAgentFinns(txtAgentInfoID)) {
             try {
+                //Deklarerar strängar som hämtar info från textruta + combobox
                 String valdAgentID = txtAgentInfoID.getText();
                 String valdTyp = (String) cbAgentInfoAttribut.getSelectedItem();
 
