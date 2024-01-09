@@ -128,6 +128,12 @@ public class AgentFonster extends javax.swing.JFrame {
             }
         });
 
+        txtSokOmradesAnsvarig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSokOmradesAnsvarigActionPerformed(evt);
+            }
+        });
+
         lblSokOmradesAnsvarig.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSokOmradesAnsvarig.setText("Sök områdesansvarig");
 
@@ -263,7 +269,12 @@ public class AgentFonster extends javax.swing.JFrame {
             //Skickar in SQL-fråga och hämtar info från databasen. Svaret printas sedan i textrutan.
             String svar = idb.fetchSingle(sqlFraga);
             idb.fetchRows(sqlFraga);
+            if(svar != null) {
             txtSokOmradesAnsvarig.setText(svar);
+        }
+            else {
+                txtSokOmradesAnsvarig.setText("Det finns för tillfället ingen områdesansvarig.");
+            }
         } catch (InfException ex){
             //Vid oväntat fel, visa felmeddelande.
             JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -389,6 +400,10 @@ try {
 }
         
     }//GEN-LAST:event_cbAgentRankingActionPerformed
+
+    private void txtSokOmradesAnsvarigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSokOmradesAnsvarigActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSokOmradesAnsvarigActionPerformed
 
     /**
      * @param args the command line arguments

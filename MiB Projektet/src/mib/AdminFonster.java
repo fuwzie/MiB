@@ -70,6 +70,10 @@ public class AdminFonster extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtareaAgentInfo = new javax.swing.JTextArea();
         btnRedigeraAgent = new javax.swing.JButton();
+        cbOmradeForOmradesChef = new javax.swing.JComboBox<>();
+        lblValtOmrade = new javax.swing.JLabel();
+        cbKontorForKontorsChef = new javax.swing.JComboBox<>();
+        lblValtKontor = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,6 +208,14 @@ public class AdminFonster extends javax.swing.JFrame {
             }
         });
 
+        cbOmradeForOmradesChef.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svealand", "Götaland", "Norrland" }));
+
+        lblValtOmrade.setText("Område att bli chef över:");
+
+        cbKontorForKontorsChef.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Örebrokontoret", "Göteborgskontoret", "Kirunakontoret" }));
+
+        lblValtKontor.setText("Kontor:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,6 +223,28 @@ public class AdminFonster extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblValtKontor)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbKontorForKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnBytKontorsChef, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(btnLosenordsAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLogOut)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAgentInfo)
+                            .addComponent(lblValkommenAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -232,7 +266,7 @@ public class AdminFonster extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTaBortUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnTaBortUtrustning, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblBefordraAgentTillAdministrator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnBefordraAgentTillAdministrator, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -241,55 +275,44 @@ public class AdminFonster extends javax.swing.JFrame {
                         .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(lblBytOmradesChef)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(btnBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblBytKontorsChef)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtBytKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                    .addComponent(btnBytKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(btnLosenordsAndring, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnLogOut))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblAgentInfoID)
-                                    .addComponent(lblAgentInfoAttribut))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cbAgentInfoAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(txtAgentInfoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnRedigeraAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnRegistreraAgent)
-                                                .addGap(37, 37, 37)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(btnRedigeraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(btnRegistreraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                        .addGap(14, 14, 14)))))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblAgentInfoID)
+                            .addComponent(lblAgentInfoAttribut))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAgentInfo)
-                            .addComponent(lblValkommenAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(txtAgentInfoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnRedigeraAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnRegistreraAgent)
+                                        .addGap(37, 37, 37)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(btnRedigeraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnRegistreraAlien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbAgentInfoAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(347, 347, 347)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(lblBytOmradesChef)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(44, 44, 44)
+                                                .addComponent(lblBytKontorsChef)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtBytKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(btnBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(lblValtOmrade)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(cbOmradeForOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addContainerGap())))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,27 +336,29 @@ public class AdminFonster extends javax.swing.JFrame {
                     .addComponent(lblAgentInfo))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtBytKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblBytKontorsChef))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBytKontorsChef))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblBytOmradesChef))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBytOmradesChef))))
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtBytOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBytOmradesChef)
+                            .addComponent(txtBytKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBytKontorsChef))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbOmradeForOmradesChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblValtOmrade)
+                            .addComponent(cbKontorForKontorsChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblValtKontor))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnBytOmradesChef)
+                            .addComponent(btnBytKontorsChef)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAgentInfoAttribut)
                             .addComponent(cbAgentInfoAttribut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTaBortAgent)
                     .addComponent(lblTaBortAlien)
@@ -366,44 +391,62 @@ public class AdminFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogOutActionPerformed
 
     private void btnBytOmradesChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytOmradesChefActionPerformed
-        
-        if(Validering.kollaOmAgentFinns(txtBytOmradesChef)) {
-            
-            try {
-                
-                //Hämtar ID på den agent som ska befordras och kollar om den redan är områdeschef på området (eller annat område)
-                String nyOmradesChefID = txtBytOmradesChef.getText();
-                    String kollaChefsStatus = "SELECT agent_id FROM omradeschef WHERE agent_id = "+nyOmradesChefID;
-                    String svarChefsStatus = idb.fetchSingle(kollaChefsStatus);
+if (Validering.kollaOmAgentFinns(txtBytOmradesChef)) {
+        // Hämtar ner valda området från vår ComboBox
+        String valtOmrade = (String) cbOmradeForOmradesChef.getSelectedItem();
+        // Hämtar ner ID på nya områdeschefen till en sträng
+        String nyOmradesChefsID = txtBytOmradesChef.getText();
+        try {
+            // Kollar om agenten redan är chef för området vi försöker befordra den till. (pga primärnycklar)
+            String kollaOmradesChefsStatus = "SELECT agent_id FROM omradeschef WHERE agent_id = " + nyOmradesChefsID;
+            String svarOmradesChefsStatus = idb.fetchSingle(kollaOmradesChefsStatus);
 
-                    if(svarChefsStatus != null) {
-                        //Är agenten redan chef för ett område, visa felmeddelande
-                        JOptionPane.showMessageDialog(null, "Användaren är redan områdeschef för ett område.");
+            // Fortsätter endast om personen ej är områdeschef för ett område
+            if (svarOmradesChefsStatus == null) {
+
+                // Failsafe ifall ComboBoxen på något vis skulle vara tom.
+                if (valtOmrade != null) {
+                    String agentensOmrade = "";
+                    // Switchcaset bestämmer vilket värde som ska matas in i databasen sen.
+                    agentensOmrade = switch (valtOmrade) {
+                        case "Svealand" -> "1";
+                        case "Götaland" -> "2";
+                        case "Norrland" -> "4";
+                        default -> "Okänt område";
+                    };
+                     // defaultvärdet ska inte kunna användas men finns som failsafe.
+
+                    try {
+                        // Ifall att området som väljs inte finns (vid ny databasuppkoppling eller borttagning av chef) så läggs de till i databasen med rätt värden.
+                        String kollaOmOmradeFinns = "SELECT omrade FROM omradeschef WHERE omrade = " +  agentensOmrade;
+                        String svarOmOmradeFinns = idb.fetchSingle(kollaOmOmradeFinns);
+
+                        // Om svaret var null, dvs om området inte hittades, skapa området
+                        if (svarOmOmradeFinns == null) {
+                            // Matar in värden av vår agent + områdets ID från ComboBox in i databasen.
+                            String skapaOmradet = "INSERT INTO omradeschef(agent_id, omrade) VALUES(" + nyOmradesChefsID + ", " + agentensOmrade + ");";
+                            idb.insert(skapaOmradet);
+                            JOptionPane.showMessageDialog(null, "Agenten befordrades till områdeschef över " + agentensOmrade);
+                        } else {
+                            String uppdateraOmradesChef = "UPDATE omradesschef SET agent_id = " + nyOmradesChefsID + " WHERE omrade = " + agentensOmrade;
+                            idb.update(uppdateraOmradesChef);
+                            JOptionPane.showMessageDialog(null, "Agenten befordrades till områdeschef över " + agentensOmrade);
+                        }
+
+                    } catch (InfException ex) {
+                        // Vid oväntat/internt fel, visa felmeddelande
+                        JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till områdeschef. Kontrollera så att uppgifterna stämmer");
+                        System.out.println("Internt felmeddelande: " + ex.getMessage());
                     }
 
-                    if(svarChefsStatus == null) {
-                        //Om sql-frågan inte finner att agenten är en områdeschef över något område redan
-                        String kollaAgentensOmrade = "SELECT Omrade FROM agent WHERE agent_id = " + nyOmradesChefID;
-                        String svarAgentensOmrade = idb.fetchSingle(kollaAgentensOmrade);
-
-                        if(svarAgentensOmrade != null) {
-                            //Fail-safe för att kunna uppdatera rätt agent till rätt område. Gör rimligt antagande att en agent i denna organisation inte kan bli områdeschef i ett annat område utan att först vara därifrån.
-                            String uppdateraOmradesChef = "UPDATE omradeschef SET agent_id = " + nyOmradesChefID + " WHERE omrade = " + svarAgentensOmrade;
-                            idb.update(uppdateraOmradesChef);
-                            JOptionPane.showMessageDialog(null, "Agenten befordrades till områdeschef");
-                        }
-
-                        else{
-                            //Ifall agenten för någon anledning inte har ett tilldelat område till sig.
-                            JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till områdeschef, befintligt område för agent finns ej.");
-                        }
-                    
-                } 
-                
-            } catch(InfException ex) {
-                //Vid oväntat fel, visa felmeddelande
-                    JOptionPane.showMessageDialog(null, "Något gick fel");
-                    System.out.println("Internt felmeddelande: " + ex.getMessage());
+                }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Agenten är redan chef över ett område.");
+                }
+            } catch (InfException ex) {
+                // Vid oväntat/internt fel, visa felmeddelande
+                JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till områdeschef. Kontrollera så att uppgifterna stämmer");
+                System.out.println("Internt felmeddelande: " + ex.getMessage());
             }
         }
     }//GEN-LAST:event_btnBytOmradesChefActionPerformed
@@ -575,16 +618,16 @@ public class AdminFonster extends javax.swing.JFrame {
                         String sqlKollaOmradesSvar = idb.fetchSingle(sqlKollaOmradesChef);
                         String sqlKollaKontorsSvar = idb.fetchSingle(sqlKollaKontorsChef);
                         
-                        // Eftersom man inte kan ta bort sig själv som chef så blir personen som tar bort användaren då (temporär) chef istället.
+                        // Eftersom ny chef skapas när man uppdaterar vem som är chef så tar vi bort fältet helt för tillfället
                         if(sqlKollaOmradesSvar != null) {
-                            String omradesChefsAndring = "UPDATE omradeschef SET agent_id = " + id + " WHERE agent_id = " + agentAttTaBort;
-                            idb.update(omradesChefsAndring);
+                            String omradesChefsBorttagning = "DELETE FROM omradeschef WHERE agent_id = " + agentAttTaBort;
+                            idb.delete(omradesChefsBorttagning);
                         }
                         
-                        // Eftersom man inte kan ta bort sig själv som chef så blir personen som tar bort användaren då (temporär) chef istället.
+                         // Eftersom ny chef skapas när man uppdaterar vem som är chef så tar vi bort fältet helt för tillfället
                         if(sqlKollaKontorsSvar != null) {
-                            String kontorsChefsAndring = "UPDATE kontorschef SET agent_id = " + id + " WHERE agent_id = " + agentAttTaBort;
-                            idb.update(kontorsChefsAndring);
+                            String kontorsChefsBorttagning = "DELETE FROM kontorschef WHERE agent_id = " + agentAttTaBort;
+                            idb.delete(kontorsChefsBorttagning);
                         }
                 
                         // Hämtar ut aliens ur databasen som har vår agent som ansvarig agent
@@ -636,52 +679,64 @@ public class AdminFonster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistreraAlienActionPerformed
 
     private void btnBytKontorsChefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytKontorsChefActionPerformed
-      if(Validering.kollaOmAgentFinns(txtBytKontorsChef)) {
-          try {
-              //Kollar om agenten vi vill befordra finns i systemet
-              String nyKontorsChefsID = txtBytKontorsChef.getText();
-                  
-                  String kollaAgentsChefStatus = "SELECT agent_id FROM kontorschef WHERE agent_id = " + nyKontorsChefsID;
-                  String svarAgentsChefStatus = idb.fetchSingle(kollaAgentsChefStatus);
-                  if(svarAgentsChefStatus == null) {
-                  //Kollar vilket område agenten tillhör, antagandet är att de som tillhör Svealand har Örebrokontoret, de som tillhör Götaland har Göteborgskontoret och de som tillhör Norrland har Kirunakontoret
-                  String kollaAgentensOmrade = "SELECT Omrade FROM agent WHERE agent_id = " + nyKontorsChefsID;
-                  String svarAgentensOmrade = idb.fetchSingle(kollaAgentensOmrade);
-                  
-                  if(svarAgentensOmrade != null) {
-                      String agentensKontor = "";
-                      agentensKontor = switch (svarAgentensOmrade) {
-                          case "1" -> "Örebrokontoret";
-                          case "2" -> "Göteborgskontoret";
-                          case "4" -> "Kirunakontoret";
-                          default -> "Okänt kontor";
-                      }; // Ska inte kunna användas men finns som failsafe.
-                      try{
-                          //Använder try då inte alla databaser har tilldelat agenter till "Göteborgskontoret" eller "Kirunakontoret" 
-                      String uppdateraKontorsChef = "UPDATE kontorschef SET agent_id = " + nyKontorsChefsID + " WHERE kontorsbeteckning = '" + agentensKontor +"'";
-                      idb.update(uppdateraKontorsChef);
-                      JOptionPane.showMessageDialog(null, "Agenten befordrades till kontorschef.");
-                      } catch(InfException ex) {
-                          //Vid oväntat/internt fel, visa felmeddelande
-                          JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till kontorschef. Kontrollera så att agenten tillhör ett kontor");
-                          System.out.println("Internt felmeddelande: " + ex.getMessage());
-                      }
-                  }
-                  else {
-                      //Om agenten saknar områdestilldelning, visa felmeddelande.
-                      JOptionPane.showMessageDialog(null, "Agenten är inte tilldelad ett område och kan därför inte bli kontorschef.");
-                  }
-              }
-                    else {
-                      //Är agenten redan chef för ett kontor, visa felmeddelande.
-                        JOptionPane.showMessageDialog(null, "Agenten är redan chef för ett kontor");
-                    }}    
-           catch(InfException ex) {
-               //Vid oväntat fel, visa felmeddelande
-              JOptionPane.showMessageDialog(null, "Något gick fel");
-              System.out.println("Internt felmeddelande: " + ex.getMessage());
-          }
-      }
+        if (Validering.kollaOmAgentFinns(txtBytKontorsChef)) {
+        // Hämtar ner valda kontoret från vår ComboBox
+        String valtKontor = (String) cbKontorForKontorsChef.getSelectedItem();
+        // Hämtar ner ID på nya kontorschefen till en sträng
+        String nyKontorsChefsID = txtBytKontorsChef.getText();
+        try {
+            // Kollar om agenten redan är chef för området vi försöker befordra den till. (pga primärnycklar)
+            String kollaKontorsChefsStatus = "SELECT agent_id FROM kontorschef WHERE agent_id = " + nyKontorsChefsID;
+            String svarKontorsChefsStatus = idb.fetchSingle(kollaKontorsChefsStatus);
+
+            // Fortsätter endast om personen ej är kontorschef för ett kontor
+            if (svarKontorsChefsStatus == null) {
+
+                // Failsafe ifall ComboBoxen på något vis skulle vara tom.
+                if (valtKontor != null) {
+                    String agentensKontor = "";
+                    // Switchcaset bestämmer vilket värde som ska matas in i databasen sen.
+                    agentensKontor = switch (valtKontor) {
+                        case "Örebrokontoret" -> "Örebrokontoret";
+                        case "Göteborgskontoret" -> "Göteborgskontoret";
+                        case "Kirunakontoret" -> "Kirunakontoret";
+                        default -> "Okänt kontor";
+                    };
+                     // defaultvärdet ska inte kunna användas men finns som failsafe.
+
+                    try {
+                        // Ifall att kontoren som väljs inte finns (vid ny databasuppkoppling eller borttagning av chef) så läggs de till i databasen med beteckning.
+                        String kollaOmKontorFinns = "SELECT kontorsbeteckning FROM kontorschef WHERE kontorsbeteckning = '" + valtKontor + "'";
+                        String svarOmKontorFinns = idb.fetchSingle(kollaOmKontorFinns);
+
+                        // Om svaret var null, dvs om kontorsbeteckningen inte hittades, skapa kontoret
+                        if (svarOmKontorFinns == null) {
+                            // Matar in värden av vår agent + kontorsbeteckningen från ComboBox in i databasen.
+                            String skapaKontoret = "INSERT INTO kontorschef(agent_id, kontorsbeteckning) VALUES(" + nyKontorsChefsID + ", '" + valtKontor + "');";
+                            idb.insert(skapaKontoret);
+                            JOptionPane.showMessageDialog(null, "Agenten befordrades till kontorschef över " + agentensKontor);
+                        } else {
+                            String uppdateraKontorsChef = "UPDATE kontorschef SET agent_id = " + nyKontorsChefsID + " WHERE kontorsbeteckning = '" + agentensKontor + "'";
+                            idb.update(uppdateraKontorsChef);
+                            JOptionPane.showMessageDialog(null, "Agenten befordrades till kontorschef över " + agentensKontor);
+                        }
+
+                    } catch (InfException ex) {
+                        // Vid oväntat/internt fel, visa felmeddelande
+                        JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till kontorschef. Kontrollera så att uppgifterna stämmer");
+                        System.out.println("Internt felmeddelande: " + ex.getMessage());
+                    }
+
+                }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Agenten är redan chef över ett kontor.");
+                }
+            } catch (InfException ex) {
+                // Vid oväntat/internt fel, visa felmeddelande
+                JOptionPane.showMessageDialog(null, "Gick inte att befordra agent till kontorschef. Kontrollera så att uppgifterna stämmer");
+                System.out.println("Internt felmeddelande: " + ex.getMessage());
+            }
+        }
     }//GEN-LAST:event_btnBytKontorsChefActionPerformed
 
     private void cbAgentInfoAttributActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAgentInfoAttributActionPerformed
@@ -753,7 +808,6 @@ public class AdminFonster extends javax.swing.JFrame {
                                 txtareaAgentInfo.setText(valdAgentInfo);
                             }
                     }
-                
             } catch (InfException ex) {
                 //Vid oväntat fel, visa felmeddelande
                 JOptionPane.showMessageDialog(null, "Något gick fel");
@@ -792,6 +846,8 @@ public class AdminFonster extends javax.swing.JFrame {
     private javax.swing.JButton btnTaBortAlien;
     private javax.swing.JButton btnTaBortUtrustning;
     private javax.swing.JComboBox<String> cbAgentInfoAttribut;
+    private javax.swing.JComboBox<String> cbKontorForKontorsChef;
+    private javax.swing.JComboBox<String> cbOmradeForOmradesChef;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAgentInfo;
     private javax.swing.JLabel lblAgentInfoAttribut;
@@ -803,6 +859,8 @@ public class AdminFonster extends javax.swing.JFrame {
     private javax.swing.JLabel lblTaBortAlien;
     private javax.swing.JLabel lblTaBortUtrustning;
     private javax.swing.JLabel lblValkommenAdmin;
+    private javax.swing.JLabel lblValtKontor;
+    private javax.swing.JLabel lblValtOmrade;
     private javax.swing.JTextField txtAgentInfoID;
     private javax.swing.JTextField txtBefordraAgentTillAdministrator;
     private javax.swing.JTextField txtBytKontorsChef;

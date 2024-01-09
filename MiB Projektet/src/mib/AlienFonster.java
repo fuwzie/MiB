@@ -30,13 +30,38 @@ public class AlienFonster extends javax.swing.JFrame {
          
         //Använder id:t som skapas under inloggningsprocessen för att hålla koll på vem som är inloggad
         try {
-            //Med hjälp av föregående id, ta reda på vem som är ansvarig agent för denna alien och hämta ut deras id
-             String omradesAnsvarigFraga = "SELECT ansvarig_agent FROM mibdb.alien WHERE alien_id =" + id;
-             String omradesAnsvarigSvar = idb.fetchSingle(omradesAnsvarigFraga);
-             //Använder id av den ansvariga agenten för att få tag på deras namn. Join sats hade funkat här också
-             String omradesAnsvarigNamnFraga = "SELECT namn FROM mibdb.agent WHERE agent_id=" + omradesAnsvarigSvar;
-             String omradesAnsvarigNamnSvar = idb.fetchSingle(omradesAnsvarigNamnFraga);
-                lblAnsvarig.setText("Din områdesansvariga är: "+omradesAnsvarigNamnSvar);
+            //Med hjälp av föregående id, ta reda på vilken plats som denna alien tillhör
+             String kollaPlatsFraga = "SELECT plats FROM alien WHERE alien_id = " + id;
+             String kollaPlatsSvar = idb.fetchSingle(kollaPlatsFraga);
+             // Tom sträng för att sedan mata in ansvarig områdeschef
+             String aliensOmradesChef = "";
+             
+             if(kollaPlatsSvar != null) {
+                 // Hämtar ut området från platstabellen
+             String kollaOmradeForPlats = "SELECT Finns_I FROM plats WHERE plats_id = " + kollaPlatsSvar;
+             String svarOmradeForPlats = idb.fetchSingle(kollaOmradeForPlats);
+             
+                if(svarOmradeForPlats != null) {
+                    // Hämtar ut id på agent som är ansvarig för ett område
+                String kollaOmradesChef = "SELECT agent_id FROM omradeschef WHERE omrade = " + svarOmradeForPlats;
+                String svarOmradesChef = idb.fetchSingle(kollaOmradesChef);
+                
+                    if(svarOmradesChef != null) {
+                        // Hämtar ut namnet på ansvarig agent
+                        String aliensOmradesChefFraga = "SELECT namn FROM agent WHERE agent_id = " + svarOmradesChef;
+                        aliensOmradesChef = idb.fetchSingle(aliensOmradesChefFraga);
+                    }
+                }
+             
+             }
+             // Om sista SQL frågan inte är tom
+             if(!aliensOmradesChef.isEmpty()) {
+                lblAnsvarig.setText("Din områdesansvariga är: "+aliensOmradesChef);
+             }
+             // Annars säg att ansvarig ej finns
+             else {
+                 lblAnsvarig.setText("Det finns ingen områdesansvarig just nu.");
+             }
         } catch (InfException ex) {
             //Om någon av frågorna resulterar i fel så säger programmet att den områdesansvarige inte kunde hittas och att man ska kontakta admin.
             JOptionPane.showMessageDialog(null, "Områdesansvarige fanns ej");
